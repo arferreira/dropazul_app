@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from atrix_landing import urls as atrix_landing_urls
+from atrix_landing import urls
 
 urlpatterns = [
     # root route
-    path('', include(atrix_landing_urls)),
+    path('', include(urls)),
     # admin django route
     path('admin/', admin.site.urls),
 ]

@@ -1,6 +1,15 @@
+# responses django
 from django.shortcuts import render, HttpResponse
 
-# Create your views here.
+# CBVs Django
+from django.views.generic.base import TemplateView
 
-def home(request):
-    return HttpResponse('Primeira view do atrix')
+
+class LandingPageView(TemplateView):
+    template_name = 'atrix_landing/index.html'
+
+
+
+
+
+
