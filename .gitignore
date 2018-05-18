@@ -1,0 +1,11 @@
+*.pyc
+atrixmob/settings.py
+media/*
+static/*
+.idea/*
+*.mo
+**/migrations/*[0-9].py
+.*swp
+env/
+.DS_Store
+.atrixmob
