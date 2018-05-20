@@ -1,7 +1,6 @@
 *.pyc
 venv/
 media/*
-static/*
 .idea/*
 *.mo
 **/migrations/*[0-9].py
