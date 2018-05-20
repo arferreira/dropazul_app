@@ -14,7 +14,7 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1']
 else:
-    ALLOWED_HOSTS = ['18.216.226.123', 'atrixmob.com.br']
+    ALLOWED_HOSTS = ['atrixmob.com.br']
 
 
 # DJANGO APPS
