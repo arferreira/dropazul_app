@@ -1,13 +1,25 @@
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>atrixmob - {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="{% static 'atrix_landing/image/favicon.png' %}" type="image/gif" sizes="16x16">
+	<link rel="stylesheet" type="text/css" href="{% static 'atrix_landing/css/vendor.bundle.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'atrix_landing/css/style.css' %}">
+	<!-- Re Captcha -->
+	<script src='https://www.google.com/recaptcha/api.js?hl=pt-BR'></script>
+	<!--Font awesome cdn-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
-<body>
+<body class="box-site" data-spy="scroll" data-target="#navbar" data-offset="70">
 
 {% block main %}
 {% endblock %}
+
+	<!-- scripts da landing page -->
+	<script src="{% static 'atrix_landing/js/vendor.bundle.js' %}"></script>
+	<script src="{% static 'atrix_landing/js/script.js' %}"></script>
 </body>
 </html>

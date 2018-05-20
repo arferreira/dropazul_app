@@ -1,7 +1,456 @@
 {% extends 'atrix_landing/base.html' %}
+{% load staticfiles %}
+
 
 {% block title %}Gestão de seu negócio{% endblock %}
 
 {% block main %}
-    <h1>Olá Visitante</h1>
+    	<div class="bg-body">
+		<div class="circle">
+			<span></span>
+		</div>
+	</div>
+
+	<!-- header -->
+	<header>
+		<!-- navbar -->
+		<nav id="navbar" class="navbar navbar-custom navbar-fixed-top" data-spy="affix" data-offset-top="70">
+			<div class="container">
+				<div class="row">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<i class="fa fa-bars"></i>
+						</button>
+						<a class="navbar-brand page-scroll logo-light" href="index.html"><img alt="" src="{% static 'atrix_landing/image/logo.png' %}"></a>
+						<a class="navbar-brand page-scroll logo-clr" href="index.html"><img alt="" src="{% static 'atrix_landing/image/logoinverter.png' %}"></a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<div class="right-nav text-right">
+							<ul class="nav navbar-nav menu">
+								<li>
+									<a href="">Sobre</a>
+								</li>
+								<li>
+									<a href="#overview">Porquê?</a>
+								</li>
+								<li>
+									<a href="#video">Funcionalidades</a>
+								</li>
+								<li>
+									<a href="#feature">Benefícios</a>
+								</li>
+								<li>
+									<a href="#faq">Download</a>
+								</li>
+							</ul>
+							<div class="nav-btn">
+								<a href="#" class="btn btn-grad rad-5">Acessar painel</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+			</div>
+		</nav>
+		<!-- End navbar -->
+
+		<!-- banner -->
+		<div id="home" class="hero">
+			<div class="container">
+				<div class="row">
+					<div class="hero-content">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="intro-text">
+									<h1>Gere vendas, notas fiscais, e controle o financeiro e atendimento ao cliente.</h1>
+									<p class="para-lg">Menos que R$ 4,00 por dia ;)</p>
+
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="img-pre">
+									<img class="jump-anim" alt="" src="{% static 'atrix_landing/image/img-a.png' %}">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Banner -->
+	</header>
+	<!-- End header -->
+
+	<!-- section -->
+	<section class="section" id="feature">
+		<div class="container">
+			<div class="row">
+				<div class="section-text text-center">
+					<h2>Porque utilizar o atrixmob em meu negócio?</h2>
+
+				</div>
+				<div class="col-content hover md text-center">
+					<div class="col-md-4 wow animated fadeIn" data-wow-delay=".2s">
+						<div class="box-bg hover-box">
+							<div class="box-content hover-content">
+								<div class="icon">
+									<img alt="" src="{% static 'atrix_landing/image/icon-1.png' %}">
+								</div>
+								<h5 class="mg-15">Sua apresentação online</h5>
+								<p>
+									Ao assinar o atrixmob, você ganha um site e um webapp somente seu,
+									<strong>totalmente personalizável</strong> com sua logo, identidade visual,
+									 e mídias sociais conectadas.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 wow animated fadeIn" data-wow-delay=".3s">
+						<div class="box-bg hover-box">
+							<div class="box-content hover-content">
+								<div class="icon">
+									<img alt="" src="{% static 'atrix_landing/image/icon-2.png' %}">
+								</div>
+								<h5 class="mg-15">Controle gerencial e negócios</h5>
+								<p>
+										É o primeiro passo para quem deseja melhorar sua gestão e aumentar seus resultados!
+										Você poderá trabalhar com as funcionalidades que mais precisa,
+										tanto online quanto offline, e tudo isso de seu computador, tablet ou celular!
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 wow animated fadeIn" data-wow-delay=".4s">
+						<div class="box-bg hover-box">
+							<div class="box-content hover-content">
+								<div class="icon">
+									<img alt="" src="{% static 'atrix_landing/image/icon-3.png' %}">
+								</div>
+								<h5 class="mg-15">Sua agenda automática online</h5>
+								<p>
+										Gerencie seus agendamentos de forma simples e moderna.
+										Gerencie sua agenda de forma rápida quando e onde estiver. Abra ou feche sua agenda em períodos determinados.
+										Diga adeus aos “caderninhos” riscados e confusos: você vai ter uma agenda que nunca fica sem páginas.
+
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End  -->
+
+	<section id="overview" class="sec-pad">
+		<div class="container">
+			<div class="row col-content">
+				<div class="flx-container align-flx-center flx-off-sm row res-center">
+					<div class="col-md-6">
+						<div class="img-set one">
+							<img alt="" src="{% static 'atrix_landing/image/a-img-part-1.png' %}">
+							<img class="animated wow fadeInRight" data-wow-delay=".1s" alt="" src="{% static 'atrix_landing/image/a-img-part-2.png' %}">
+							<img class="animated wow fadeInRight" data-wow-delay=".2s" alt="" src="{% static 'atrix_landing/image/a-img-part-3.png' %}">
+							<img class="animated wow fadeInRight" data-wow-delay=".3s" alt="" src="{% static 'atrix_landing/image/a-img-part-4.png' %}">
+						</div>
+					</div>
+					<div class="col-md-5 col-md-offset-1">
+						<div class="text">
+							<div class="icon icon-bg-md grdnt-blue">
+								<span class="ti-layers-alt"></span>
+							</div>
+							<h2>Controle financeiro completo.</h2>
+							<p class="para-lg">
+								Tenha total controle de seu negócio!
+								Com o atrixmob você consegue analisar e cruzar informações importantes para avaliar e acompanhar o crescimento do seu negócio de forma bem simples.
+							</p>
+							<div class="btn-holder">
+								<a class="btn rad-5 btn-outline" href="#">Começar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="row col-content">
+				<div class="overview flx-container align-flx-center flx-off-sm row res-center text-right">
+					<div class="col-md-5">
+						<div class="text">
+							<div class="icon icon-bg-md grdnt-blue pull-right">
+								<span class="ti-control-forward"></span>
+							</div>
+							<div class="clearfix"></div>
+							<h2>Relacionamento com seu clientes.</h2>
+							<p class="para-lg">
+								Fidelize seus clientes utilizando as nossas ferramentas de Relacionamento: lembre-os de datas comemorativas e importantes, e também seja lembrado!
+							</p>
+							<div class="btn-holder">
+								<a class="btn rad-5 btn-outline" href="#">Ver preços</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-md-offset-1">
+						<div class="img-set four">
+							<img alt="" src="{% static 'atrix_landing/image/img-d.png' %}">
+							<img class="animated wow fadeInLeft" data-wow-delay=".1s" alt="" src="{% static 'atrix_landing/image/img-d.png' %}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- -->
+	<section class="sec-pad" id="video">
+		<div class="container">
+			<div class="row">
+				<div class="bg-img overly grdnt-blue text-center">
+					<img alt="" src="{% static 'atrix_landing/image/video-img.jpg' %}">
+					<div class="content-over">
+						<h2>Como funciona?</h2>
+						<p><a class="btn-round video" href="https://www.youtube.com/watch?v=iaj8ktgL3BY"><i class="fa fa-play" aria-hidden="true"></i></a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end -->
+
+
+	<!-- Testimonial -->
+	<section class="section">
+		<div class="container-lg">
+			<div class="row">
+				<div class="section-text text-center">
+					<h2>Conheça alguns de nossos clientes</h2>
+
+				</div>
+				<div class="owl-carousel quote">
+					<div class="quote-item box-bg">
+						<div class="box-content">
+							<img alt="" src="{% static 'atrix_landing/image/quote-img-a.jpg' %}"/>
+							<div class="quote-text">
+								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
+								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
+								<div class="rating">
+									<ul class="rating-list">
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><p>(5)</p></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="quote-item box-bg">
+						<div class="box-content">
+							<img alt="" src="{% static 'atrix_landing/image/quote-img-a.jpg' %}"/>
+							<div class="quote-text">
+								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
+								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
+								<div class="rating">
+									<ul class="rating-list">
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><p>(5)</p></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="quote-item box-bg">
+						<div class="box-content">
+							<img alt="" src="{% static 'atrix_landing/image/quote-img-a.jpg' %}"/>
+							<div class="quote-text">
+								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
+								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
+								<div class="rating">
+									<ul class="rating-list">
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><p>(5)</p></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="quote-item box-bg">
+						<div class="box-content">
+							<img alt="" src="{% static 'atrix_landing/image/quote-img-a.jpg' %}"/>
+							<div class="quote-text">
+								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
+								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
+								<div class="rating">
+									<ul class="rating-list">
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><p>(5)</p></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="quote-item box-bg">
+						<div class="box-content">
+							<img alt="" src="{% static 'atrix_landing/image/quote-img-a.jpg' %}"/>
+							<div class="quote-text">
+								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
+								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
+								<div class="rating">
+									<ul class="rating-list">
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><i class="fa fa-star" aria-hidden="true"></i></li>
+										<li><p>(5)</p></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End -->
+
+	<!-- Faq section -->
+	<section class="section sec-pad" id="faq">
+		<div class="container">
+			<div class="row">
+				<div class="section-text text-center">
+					<div class="section-text text-center">
+						<h2>Como funciona?</h2>
+					</div>
+				</div>
+				<div class="faq col-md-8 col-md-offset-2">
+					<div class="wrapper center-block">
+						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+							<div class="panel panel-default">
+								<div class="panel-heading active" role="tab" id="headingOne">
+									<h5 class="panel-title">
+										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											How it works?
+										</a>
+									</h5>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingTwo">
+									<h4 class="panel-title">
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+											Is this refundable?
+										</a>
+									</h4>
+								</div>
+								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+									<div class="panel-body">
+										Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingThree">
+									<h4 class="panel-title">
+										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+											Can price reduced?
+										</a>
+									</h4>
+								</div>
+								<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+									<div class="panel-body">
+										Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End faq -->
+
+	<!-- -->
+	<section class="section">
+		<div class="container">
+			<div class="row">
+				<div class="grdnt-blue">
+					<div class="content-over text-center">
+						<div class="section-text text-center">
+							<h3>Teste o atrixmob, é gratuíto por 7 dias!</h3>
+						</div>
+						<div class="sub-input col-md-6 col-sm-8 col-sm-offset-2 col-md-offset-3 subscribe custom-form animated wow fadeInUp" data-wow-delay=".1s">
+							<form class="custom-form" role="form" action="" method="post">
+								<div class="form-group">
+									<label for="subscribe-email"></label>
+									<input type="text" name="name" placeholder="Seu nome" class="subscribe-email form-control" id="subscribe-name">
+								</div>
+								<div class="form-group">
+										<label for="subscribe-email"></label>
+										<input type="text" name="email" placeholder="Seu email" class="subscribe-email form-control" id="subscribe-email">
+									</div>
+
+								<div class="form-group">
+									<label for="subscribe-email"></label>
+									<input type="text" name="email" placeholder="Seu telefone" class="subscribe-email form-control" id="subscribe-telefone">
+								</div>
+								<div class="form-group">
+										<div class="g-recaptcha" data-sitekey="6Le-GVoUAAAAADnaERupkSsJhc5-5cM3dhR6slLS"></div>
+								</div>
+								<button type="submit" class="btn btn-outline rad-5">Enviar</button>
+							</form>
+							<div class="text-center light result-box">
+								<div class="success-message"></div>
+								<div class="error-message"></div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--Footer  -->
+	<footer class="footer-wrapper  sec-pad-sm">
+		<div class="container footer-content">
+			<div class="row">
+				<div class="social-holder text-center">
+					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+					<a  href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+				</div>
+				<div class="spce"></div>
+				<div class="copyright text-center">
+					© 2018 - Atrixmob. Todos os direitos reservados
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer -->
 {% endblock %}
