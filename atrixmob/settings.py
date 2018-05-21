@@ -5,11 +5,13 @@
 
 import os
 
+from decouple import config
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'b)$1z1$+k$m7!az4s!430j7i)1@g*mak++kl0pirw13kl0pirw13kl0pirw13&g@maf)'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1']

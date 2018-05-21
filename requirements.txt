@@ -8,4 +8,5 @@ neovim==0.2.6
 parso==0.2.0
 pycodestyle==2.3.1
 pyflakes==1.6.0
+python-decouple==3.1
 pytz==2018.4
