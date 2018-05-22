@@ -28,6 +28,8 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = ['atrixmob.com.br', 'www.atrixmob.com.br']
 
+# DEBUG TOOLBAR
+INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
 DATABASES = settings['DB']
@@ -44,6 +46,7 @@ DJANGO_APPS = [
 
 
 MIDDLEWARE = [
+    # Tenant schemas multi tenancy
     'tenant_schemas.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'atrixmob.urls'

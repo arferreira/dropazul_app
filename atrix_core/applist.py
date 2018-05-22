@@ -10,6 +10,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
 )
 
 LOCAL_APPS = (
@@ -32,5 +33,7 @@ TENANT_APPS = (
     'django.contrib.auth',
     'django.contrib.sessions',
 ) + LOCAL_APPS
+
+
 
 INSTALLED_APPS = BEFORE_DJANGO_APPS + DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
