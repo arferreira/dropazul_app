@@ -8,7 +8,7 @@ from atrixmob import settings
 
 urlpatterns = [
     # root route - Landing page
-    path('/', include(landing_urls, namespace='landing-page')),
+    path('', include(landing_urls, namespace='landing-page')),
     # admin django route
     path('admin/', admin.site.urls),
 ]
