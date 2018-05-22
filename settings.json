@@ -32,6 +32,11 @@
   "DEBUG": true,
   "URL_SERVER": "http://localhost:8000",
   "DEFAULT_URL_USERPROFILE": "/static/img/user-default.jpg",
+   "LOGGING": {
+    "DEBUG_PATH": "log/debug.log",
+    "ERROR_PATH": "log/error.log",
+    "ATRIXMOB_PATH": "log/atrixmob.log"
+  },
   "EMAIL": {
     "EMAIL_USE_TLS": true,
     "EMAIL_HOST": "smtp.gmail.com",

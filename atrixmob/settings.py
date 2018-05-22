@@ -12,7 +12,7 @@ from atrix_core.applist import *
 from atrix_core.json_settings import get_settings
 from atrix_core.databases import *
 from atrix_core.mail_server import *
-
+from atrix_core.logging import *
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
