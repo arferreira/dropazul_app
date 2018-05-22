@@ -10,11 +10,12 @@ from django.views.generic import View, ListView, DeleteView
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
-from tenant_schemas.utils import schema_exists, schema_context
+from tenant_schemas.utils import schema_exists, schema_context, connection
 
 # parse url
 from tld import get_tld
 from tld.utils import update_tld_names
+
 
 from atrix_tenant.forms import LoginForm
 from atrix_tenant.models import Client
@@ -36,9 +37,9 @@ class Login(View):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('flow:dashboard'))
+            return HttpResponseRedirect(reverse('dashboard:index'))
         else:
-            ctx = {'form': self.form}
+            ctx = {'form': self.form, 'tenant': connection.tenant}
             if 'next' in request.GET:
                 ctx['next'] = request.GET['next']
             return render(request, self.template_name, ctx)
@@ -51,14 +52,16 @@ class Login(View):
             if 'next' in request.POST:
                 return HttpResponseRedirect(request.POST['next'])
             else:
-                return HttpResponseRedirect(reverse_lazy('landing-page:home'))
+                return HttpResponseRedirect(reverse_lazy('dashboard:index'))
         else:
             ctx = {'form': form}
             return render(request, self.template_name, ctx)
 
 
+
+
 # ===================================================
-# Login de Inquilinos
+# Logout de Inquilinos
 # ===================================================
 
 class Logout(View):
@@ -90,12 +93,14 @@ class TenantRegisterView(View):
         tenant_name = request.POST.get('subdomain')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        name_fantasy = request.POST.get('name_fantasy')
         if schema_exists(tenant_name):
             kwargs['tenant_exist'] = True
         else:
             client = Client()
             client.domain_url = '{0}.{1}'.format(tenant_name, request.tenant.domain_url)
             client.name = tenant_name
+            client.name_fantasy = name_fantasy
             client.schema_name = 'atrix_' + tenant_name
             client.save()  # Executando as migrações
             with schema_context('atrix_' + tenant_name):

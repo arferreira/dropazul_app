@@ -43,11 +43,11 @@
 									<a href="#feature">Benefícios</a>
 								</li>
 								<li>
-									<a href="#faq">Download</a>
+									<a href="{% url 'tenant:register' %}">Registrar</a>
 								</li>
 							</ul>
 							<div class="nav-btn">
-								<a href="#" class="btn btn-grad rad-5">Acessar painel</a>
+								<a href="{% url 'tenant:login' %}" class="btn btn-grad rad-5">Acessar painel</a>
 							</div>
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="intro-text">
-									<h1>Gere vendas, notas fiscais, e controle o financeiro e atendimento ao cliente.</h1>
+									<h1>Automatize seu lava rápido, gere vendas, notas fiscais, financeiro e atendimento ao cliente.</h1>
 									<p class="para-lg">Menos que R$ 4,00 por dia ;)</p>
 
 								</div>

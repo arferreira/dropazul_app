@@ -10,7 +10,8 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Conecte-se para iniciar seu trabalho</p>
+      <p class="login-box-msg">{{ tenant.name_fantasy }}, seja bem vindo(a)!</p>
+      <p class="login-box-msg">Conecte-se para iniciar seu trabalho</p>
 
     <form action="." method="post">
         {% csrf_token %}

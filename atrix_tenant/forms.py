@@ -10,7 +10,7 @@ class LoginForm(forms.Form):
 
     email = forms.CharField(widget=forms.EmailInput(attrs=({'class': 'validate'})), required=True)
     password = forms.CharField(widget=forms.PasswordInput(render_value=False, attrs=({'class': 'validate'})), required=True)
-    my_user = None  # Si se logea un usuario correctamente entonces se almacena aquí la sesión.
+    my_user = None  # Se um usuário efetuar login corretamente, a sessão será armazenada aqui.
 
     def clean_password(self):
         from django.contrib.auth import authenticate
@@ -27,6 +27,6 @@ class LoginForm(forms.Form):
                 self.my_user = user_auth
                 pass
             else:
-                raise forms.ValidationError("Lo lamentamos, el usuario se encuentra deshabilitado")
+                raise forms.ValidationError("Desculpe, o usuário está desativado :(")
         else:
-            raise forms.ValidationError("Email y/o contraseña incorrecta")
+            raise forms.ValidationError("Email ou senha incorretos :(")
