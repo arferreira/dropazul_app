@@ -125,8 +125,3 @@ EMAIL_HOST_USER = 'antonio.eschola@gmail.com'
 EMAIL_HOST_PASSWORD = 'adsl5419'
 EMAIL_PORT = 587
 
-
-try:
-    from local_settings import *
-except ImportError:
-    pass
