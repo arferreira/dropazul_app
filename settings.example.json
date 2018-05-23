@@ -4,11 +4,11 @@
   "SECRET_KEY": "jcxw@ac_rkrm=r9pld6h7imz375wihv=7f+tm&u3^r02gk0dm!",
   "DB": {
     "default": {
-      "ENGINE": "django.db.backends.postgresql_psycopg2",
-      "HOST": "localhost",
-      "NAME": "atrixmob_core",
-      "USER": "admin",
-      "PASSWORD": "admin",
+      "ENGINE": "tenant_schemas.postgresql_backend",
+      "HOST": "atrixmobproduction.cccnbg3w8wpw.us-east-2.rds.amazonaws.com",
+      "NAME": "atrixmob_production",
+      "USER": "atrixmob_user",
+      "PASSWORD": "rub32912289",
       "PORT": 5432
     }
   },
@@ -25,20 +25,21 @@
   ],
   "SECURITY": {
     "ALLOWED_HOSTS": [
-      ".atrixmob.com.br"
+      ".atrixmob.com.br",
+      "mvlavajato.atrixmob.com.br"
     ]
   },
   "DEBUG": false,
-  "URL_SERVER": "http://www.atrixmob.com.br",
+  "URL_SERVER": "http://atrixmob.com.br",
   "DEFAULT_URL_USERPROFILE": "/static/img/user-default.jpg",
   "EMAIL": {
     "EMAIL_USE_TLS": true,
     "EMAIL_HOST": "smtp.gmail.com",
     "EMAIL_PORT": 587,
     "EMAIL_BACKEND": "django.core.mail.backends.smtp.EmailBackend",
-    "EMAIL_HOST_USER": "antonioricardoarfs@gmail.com",
-    "EMAIL_HOST_PASSWORD": "123456789",
-    "DEFAULT_FROM_EMAIL": "demo.server.com",
-    "CONTACT_EMAIL": "demo@demo.com"
+    "EMAIL_HOST_USER": "antonio.eschola@gmail.com",
+    "EMAIL_HOST_PASSWORD": "adsl5419",
+    "DEFAULT_FROM_EMAIL": "atrixmob.com.br",
+    "CONTACT_EMAIL": "contato@atrixmob.com.br"
   }
 }

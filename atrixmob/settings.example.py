@@ -12,7 +12,7 @@ from atrix_core.applist import *
 from atrix_core.json_settings import get_settings
 from atrix_core.databases import *
 from atrix_core.mail_server import *
-from atrix_core.logging import *
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,19 +26,25 @@ settings = get_settings()
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', '.localhost']
 else:
-    ALLOWED_HOSTS = ['.atrixmob.com.br', 'www.atrixmob.com.br']
+    ALLOWED_HOSTS = ['atrixmob.com.br', 'www.atrixmob.com.br', 'mvlavajato.atrixmob.com.br']
 
-# DEBUG TOOLBAR
-INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
 DATABASES = settings['DB']
 
+# DJANGO APPS
+DJANGO_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
 
 MIDDLEWARE = [
-    # Tenant schemas multi tenancy
     'tenant_schemas.middleware.TenantMiddleware',
-    'atrix_middleware.LandingPageMiddleware.tenant_midleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +55,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'atrixmob.urls'
-PUBLIC_SCHEMA_URLCONF  =  'atrixmob.urls_public'
 
 TEMPLATES = [
     {
@@ -105,7 +110,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
+
+
 
 try:
     from .local_settings import *
