@@ -1,6 +1,6 @@
-from .json_settings import get_settings
+from .json_settings import get_settings_production
 
-settings = get_settings()
+settings = get_settings_production()
 
 LANGUAGE_CODE = settings['LANGUAGE_CODE']
 TIME_ZONE = settings['TIME_ZONE']

@@ -9,7 +9,7 @@ from decouple import config
 
 from atrix_core.internationalization import *
 from atrix_core.applist import *
-from atrix_core.json_settings import get_settings
+from atrix_core.json_settings import get_settings_development, get_settings_production
 from atrix_core.databases import *
 from atrix_core.mail_server import *
 from atrix_core.logging import *
@@ -17,28 +17,31 @@ from atrix_core.logging import *
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-settings = get_settings()
+settings_development = get_settings_development()
+settings_production = get_settings_production()
+
+SECRET_KEY = settings_production['SECRET_KEY']
 
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', '.localhost']
 else:
     ALLOWED_HOSTS = ['.atrixmob.com.br', 'www.atrixmob.com.br']
 
+
+
 # DEBUG TOOLBAR
 INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
-DATABASES = settings['DB']
+DATABASES = settings_production['DB']
 
 
 MIDDLEWARE = [
     # Tenant schemas multi tenancy
     'tenant_schemas.middleware.TenantMiddleware',
-    'atrix_middleware.LandingPageMiddleware.tenant_midleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +50,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 ROOT_URLCONF = 'atrixmob.urls'
 PUBLIC_SCHEMA_URLCONF  =  'atrixmob.urls_public'
@@ -107,7 +113,14 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+
+
+# Email
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'antonio.eschola@gmail.com'
+EMAIL_HOST_PASSWORD = 'adsl5419'
+EMAIL_PORT = 587
+
+

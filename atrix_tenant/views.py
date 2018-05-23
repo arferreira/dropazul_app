@@ -27,14 +27,14 @@ from tld.utils import update_tld_names
 
 from atrix_tenant.forms import LoginForm
 from atrix_tenant.models import Client
-from atrix_core.json_settings import get_settings
+
 
 # parse url
 from atrix_tenant.tokens import account_activation_token
 
 update_tld_names()
 
-settings = get_settings()
+
 
 # ===================================================
 # Checar se o schema já existe

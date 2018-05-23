@@ -105,3 +105,4 @@ settings.json
 /media/
 /staticfiles/
 local_settings.py
+.env
