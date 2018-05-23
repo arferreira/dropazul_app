@@ -18,25 +18,28 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
 settings_development = get_settings_development()
 settings_production = get_settings_production()
 
 SECRET_KEY = settings_production['SECRET_KEY']
 
-if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1', '.localhost']
-else:
-    ALLOWED_HOSTS = ['.atrixmob.com.br', 'www.atrixmob.com.br']
 
+if DEBUG:
+    ALLOWED_HOSTS = settings_development['SECURITY']['ALLOWED_HOSTS']
+else:
+    ALLOWED_HOSTS = settings_production['SECURITY']['ALLOWED_HOSTS']
 
 
 # DEBUG TOOLBAR
 INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
-DATABASES = settings_production['DB']
+if DEBUG:
+    DATABASES = settings_development['DB']
+else:
+    DATABASES = settings_production['DB']
 
 
 MIDDLEWARE = [
@@ -49,10 +52,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-
-MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 ROOT_URLCONF = 'atrixmob.urls'
 PUBLIC_SCHEMA_URLCONF  =  'atrixmob.urls_public'
@@ -124,3 +126,7 @@ EMAIL_HOST_PASSWORD = 'adsl5419'
 EMAIL_PORT = 587
 
 
+try:
+    from local_settings import *
+except ImportError:
+    pass

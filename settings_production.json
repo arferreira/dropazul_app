@@ -29,7 +29,7 @@
       "mvlavajato.atrixmob.com.br"
     ]
   },
-  "DEBUG": false,
+  "DEBUG": true,
   "URL_SERVER": "http://atrixmob.com.br",
   "DEFAULT_URL_USERPROFILE": "/static/img/user-default.jpg",
   "EMAIL": {
