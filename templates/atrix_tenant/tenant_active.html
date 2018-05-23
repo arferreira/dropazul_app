@@ -1,0 +1,32 @@
+{% extends "atrix_tenant/base_tenant.html" %}
+{% load i18n static solo_tags %}
+
+{% block main %}
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="login.html">
+      <img src="{% static 'atrix_core/static/img/logologin.png' %}" alt=""/>
+    </a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Ativação de instância</p>
+       <div id="result">
+        <center><h3>{% trans 'Parabéns!' %}</h3></center>
+            <p>
+                {% trans 'Sua instância foi ativada com sucesso.' %}<br>
+                {% trans 'Clique no link abaixo para acessar seu painel de controle:' %}
+            </p>
+
+          <center><a href="{% url 'tenant:login' %}" class="btn btn-primary"> Painel de Controle</a> </center>
+
+    </div>
+
+    </div>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+{% endblock main %}

@@ -1,0 +1,5 @@
+{% autoescape off %}
+Olá {{ user.username }},
+Por favor, clique no link abaixo para ativar sua instância e seu usuário!
+http://{{ domain }}{% url 'tenant:activate' id=id token=token %}
+{% endautoescape %}

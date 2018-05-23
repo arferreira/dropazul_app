@@ -1,0 +1,29 @@
+{% extends "atrix_tenant/base_tenant.html" %}
+{% load i18n static solo_tags %}
+
+{% block main %}
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="login.html">
+      <img src="{% static 'atrix_core/static/img/logologin.png' %}" alt=""/>
+    </a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Ativação de instância</p>
+       <div id="result">
+        <center><h3>{% trans 'Ops!' %}</h3></center>
+            <p style="color:red; text-align:center;">
+                {% trans 'Sua instância não foi ativada com sucesso.' %}<br>
+                <center><a href="http://www.atrixmob.com.br" class="btn btn-primary"> Clique para voltar</a> </center>
+            </p>
+    </div>
+
+    </div>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+{% endblock main %}

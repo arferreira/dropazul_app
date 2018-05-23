@@ -42,9 +42,9 @@
     "EMAIL_HOST": "smtp.gmail.com",
     "EMAIL_PORT": 587,
     "EMAIL_BACKEND": "django.core.mail.backends.smtp.EmailBackend",
-    "EMAIL_HOST_USER": "demo@demo.com",
-    "EMAIL_HOST_PASSWORD": "password",
-    "DEFAULT_FROM_EMAIL": "demo.server.com",
-    "CONTACT_EMAIL": "demo@demo.com"
+    "EMAIL_HOST_USER": "antonio.eschola@gmail.com",
+    "EMAIL_HOST_PASSWORD": "rub32912289",
+    "DEFAULT_FROM_EMAIL": "atrixmob.com.br",
+    "CONTACT_EMAIL": "contato@atrixmob.com.br"
   }
 }

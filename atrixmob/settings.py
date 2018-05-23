@@ -34,20 +34,11 @@ INTERNAL_IPS = ['127.0.0.1']
 # Databases
 DATABASES = settings['DB']
 
-# DJANGO APPS
-DJANGO_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
-
 
 MIDDLEWARE = [
     # Tenant schemas multi tenancy
     'tenant_schemas.middleware.TenantMiddleware',
+    'atrix_middleware.LandingPageMiddleware.tenant_midleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,10 +46,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'atrixmob.urls'
+PUBLIC_SCHEMA_URLCONF  =  'atrixmob.urls_public'
 
 TEMPLATES = [
     {
