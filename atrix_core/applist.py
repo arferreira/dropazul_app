@@ -20,6 +20,7 @@ LOCAL_APPS = (
 
 THIRD_PARTY_APPS = (
     'solo',
+    'storages',
 )
 
 SHARED_APPS = (
