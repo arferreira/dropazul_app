@@ -12,7 +12,8 @@ from atrix_core.applist import *
 from atrix_core.json_settings import get_settings_development, get_settings_production
 from atrix_core.databases import *
 from atrix_core.mail_server import *
-from atrix_core.logging import *
+
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +21,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
 
-settings_development = get_settings_development()
-settings_production = get_settings_production()
+if DEBUG:
+    settings_development = get_settings_development()
+else:
+    settings_production = get_settings_production()
 
-SECRET_KEY = settings_production['SECRET_KEY']
+
+
+if DEBUG:
+    SECRET_KEY = settings_development['SECRET_KEY']
+else:
+    SECRET_KEY = settings_production['SECRET_KEY']
+
+
+
+
 
 
 if DEBUG:
@@ -141,3 +153,10 @@ EMAIL_HOST_USER = 'antonio.eschola@gmail.com'
 EMAIL_HOST_PASSWORD = 'adsl5419'
 EMAIL_PORT = 587
 
+
+# LOGGING do atrix
+
+if DEBUG:
+    from atrix_core.logging_development import LOGGING
+else:
+    from atrix_core.logging_production import LOGGING
