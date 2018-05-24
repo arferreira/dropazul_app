@@ -127,11 +127,13 @@ class TenantRegisterView(View):
         else:
             client = Client()
             client.domain_url = '{0}.{1}'.format(tenant_name, request.tenant.domain_url)
+
             client.name = tenant_name
             client.name_fantasy = name_fantasy
             client.is_active = True
             client.schema_name = 'atrix_' + tenant_name
             client.save()  # Executando as migrações
+            new_domain = client.domain_url
             with schema_context('atrix_' + tenant_name):
                 user = User()
                 user.email = email
@@ -141,19 +143,16 @@ class TenantRegisterView(View):
                 user.is_staff= False
                 user.is_superuser = False
                 user.save()
-                url_activate = "{0}.{1}".format(
-                    tenant_name, request.META['HTTP_HOST']
-                )
+                active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
 
-                mail_subject = 'Ative sua instância do atrixmob.'
-
+                print(active_url)
+                mail_subject = '[atrixmob] - Ative sua instância do atrixmob.'
                 message = render_to_string('atrix_tenant/tenant_active_email.html', {
                     'user': user,
-                    'domain': url_activate,
+                    'domain': active_url,
                     'id': user.pk,
                     'token': account_activation_token.make_token(user),
                 })
-
                 to_email = email
                 email = EmailMessage(
                     mail_subject, message, to=[to_email]

@@ -8,7 +8,7 @@ app_name="atrix_tenant"
 urlpatterns = [
     # root route
     path('register/', TenantRegisterView.as_view(), name='register'),
-    #  Requisições ajax
+    #  Requisições ajax de validação de instancia
     path('ajax/validate_tenant/', validate_tenant, name='validate_tenant'),
     # rota para ativação do tenant
     path('activate/<int:id>/<token>/', activate, name='activate'),
