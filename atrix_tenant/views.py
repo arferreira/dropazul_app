@@ -1,7 +1,7 @@
 import random, string
 
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth import login, logout
 from django.urls import reverse
@@ -114,7 +114,6 @@ class TenantRegisterView(View):
 
     def post(self, request):
         kwargs = {
-            'active_menu': self.active_menu,
             'url_login_new_schema': None,
             'form_data': request.POST
         }
@@ -137,7 +136,7 @@ class TenantRegisterView(View):
             with schema_context('atrix_' + tenant_name):
                 user = User()
                 user.email = email
-                user.username = email
+                user.username = name_fantasy
                 user.set_password(password)
                 user.is_active = False
                 user.is_staff= False
@@ -145,19 +144,29 @@ class TenantRegisterView(View):
                 user.save()
                 active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
 
-                print(active_url)
-                mail_subject = '[atrixmob] - Ative sua instância do atrixmob.'
-                message = render_to_string('atrix_tenant/tenant_active_email.html', {
+                mail_subject = '[atrixmob] - Inicie sua instância do atrixmob.'
+                to_email = email
+                plain_text = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
                     'user': user,
                     'domain': active_url,
                     'id': user.pk,
                     'token': account_activation_token.make_token(user),
                 })
-                to_email = email
-                email = EmailMessage(
-                    mail_subject, message, to=[to_email]
+                message_html = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
+                    'user': user,
+                    'domain': active_url,
+                    'id': user.pk,
+                    'token': account_activation_token.make_token(user),
+                })
+                # TODO: Refatorar envio de email para ativação de instancia e testsssss
+                send_mail(
+                    mail_subject,
+                    plain_text,
+                    'contato.atrixmob@atrixmob.com.br',
+                    [to_email],
+                    html_message=message_html,
+                    fail_silently=False,
                 )
-                email.send()
                 url_redirect = "{0}.{1}{2}".format(
                     tenant_name, request.META['HTTP_HOST'], reverse('tenant:register')
                 )

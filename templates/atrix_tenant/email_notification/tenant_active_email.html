@@ -1,0 +1,28 @@
+
+
+<body>
+
+
+<div class="login-box">
+  <div class="login-logo">
+    <a href="login.html">
+      <img src="https://atrixmobcore.s3.amazonaws.com/static/atrix_core/static/img/logoinverter.png" alt=""/>
+    </a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+      <p class="login-box-msg">Olá {{ user.username }},</p>
+      <p class="login-box-msg">Por favor, clique no link abaixo para iniciar sua instância e seu usuário!</p>
+
+
+
+    <!-- /.social-auth-links -->
+
+    <a href="http://{{ domain }}{% url 'tenant:activate' id=id token=token %}" class="text-green">Iniciar</a><br>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+
