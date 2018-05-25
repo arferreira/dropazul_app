@@ -2,7 +2,7 @@ from .json_settings import get_settings_production
 
 settings = get_settings_production()
 
-LOGGING = {
+LOGGING_PRODUCTION = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
@@ -21,21 +21,21 @@ LOGGING = {
             'level': 'DEBUG',
             'filters': ['tenant_context'],
             'class': 'logging.FileHandler',
-            'filename': settings["LOGGING_PRODUCTION"]["DEBUG_PATH"],
+            'filename': settings["LOGGING"]["DEBUG_PATH"],
             'formatter': 'tenant_context'
         },
         'error_file': {
             'level': 'ERROR',
             'filters': ['tenant_context'],
             'class': 'logging.FileHandler',
-            'filename': settings["LOGGING_PRODUCTION"]["ERROR_PATH"],
+            'filename': settings["LOGGING"]["ERROR_PATH"],
             'formatter': 'tenant_context'
         },
         'atrixmob_file': {
             'filters': ['tenant_context'],
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': settings["LOGGING_PRODUCTION"]["ATRIXMOB_PATH"],
+            'filename': settings["LOGGING"]["ATRIXMOB_PATH"],
             'formatter': 'tenant_context'
         },
         'console': {

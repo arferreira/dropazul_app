@@ -117,8 +117,7 @@ TENANT_MODEL = 'atrix_tenant.Client'
 # Arquivos estaticos
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# Static amazon s3
 
 
 AWS_ACCESS_KEY_ID = 'AKIAJMGGRT5DDWMHA4VQ'
@@ -156,7 +155,5 @@ EMAIL_PORT = 587
 
 # LOGGING do atrix
 
-if DEBUG:
-    from atrix_core.logging_development import LOGGING
-else:
-    from atrix_core.logging_production import LOGGING
+
+from atrix_core.logging_development import LOGGING

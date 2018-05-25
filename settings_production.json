@@ -25,6 +25,7 @@
   ],
   "SECURITY": {
     "ALLOWED_HOSTS": [
+      "localhost",
       ".atrixmob.com.br",
       "mvlavajato.atrixmob.com.br"
     ]
