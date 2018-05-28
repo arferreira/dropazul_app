@@ -1,7 +1,7 @@
 {
   "TIME_ZONE": "America/Sao_Paulo",
   "LANGUAGE_CODE": "pt-br",
-  "SECRET_KEY": "jcxw@ac_rkrm=kdmclekmclkemlcmlekdmclkedlckelkcmlekmdclkmeldc=7f+tm&u3^r02gk0dm!",
+  "SECRET_KEY": "jcxw@ac_rkrm=r9pld6h7imz375wihv=7f+tm&u3^r02gk0dm!",
   "DB": {
     "default": {
       "ENGINE": "tenant_schemas.postgresql_backend",
@@ -25,8 +25,8 @@
   ],
   "SECURITY": {
     "ALLOWED_HOSTS": [
-      "*",
-      "*"
+      ".atrixmob.com.br",
+      "mvlavajato.atrixmob.com.br"
     ]
   },
   "DEBUG": true,
