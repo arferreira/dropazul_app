@@ -18,3 +18,9 @@ superuser:clean
 
 tests:clean
 	python manage.py test
+
+static:clean
+	python manage.py collectstatic
+
+atrixmob_start:
+	sudo supervisorctl restart atrixmob_core

@@ -12,7 +12,8 @@ from atrix_core.applist import *
 from atrix_core.json_settings import get_settings_development, get_settings_production
 from atrix_core.databases import *
 from atrix_core.mail_server import *
-from atrix_core.logging import *
+
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +21,26 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
 
-settings_development = get_settings_development()
-settings_production = get_settings_production()
+ADMINS = [
+    ('Antonio Ricardo', 'antonioricardoarfs@atrixmob.com.br'),
+    ('Mariana Rosa', 'marianaarosa88@gmail.com'),
+]
 
-SECRET_KEY = settings_production['SECRET_KEY']
+if DEBUG:
+    settings_development = get_settings_development()
+else:
+    settings_production = get_settings_production()
+
+
+
+if DEBUG:
+    SECRET_KEY = settings_development['SECRET_KEY']
+else:
+    SECRET_KEY = settings_production['SECRET_KEY']
+
+
+
+
 
 
 if DEBUG:
@@ -105,8 +122,7 @@ TENANT_MODEL = 'atrix_tenant.Client'
 # Arquivos estaticos
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# Static amazon s3
 
 
 AWS_ACCESS_KEY_ID = 'AKIAJMGGRT5DDWMHA4VQ'
@@ -118,26 +134,44 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = 'static'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# static files
+if DEBUG:
+    STATIC_ROOT = 'staticfiles/'
+
+    STATIC_URL = '/static/'
+
+    STATICFILES_DIRS = (os.path.join('static'),)
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+
 
 
 # Media
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if DEBUG:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
+
 
 
 
 # Email
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'antonio.eschola@gmail.com'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'contato.atrixmob@atrixmob.com.br'
 EMAIL_HOST_PASSWORD = 'adsl5419'
 EMAIL_PORT = 587
 
+
+# LOGGING do atrix
+
+
+from atrix_core.logging_development import LOGGING
