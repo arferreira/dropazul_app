@@ -5,7 +5,7 @@
   "DB": {
     "default": {
       "ENGINE": "tenant_schemas.postgresql_backend",
-      "HOST": "178.62.66.183",
+      "HOST": "localhost",
       "NAME": "atrixmob_production",
       "USER": "atrixmob_user",
       "PASSWORD": "adsl5419",
