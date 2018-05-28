@@ -5,10 +5,10 @@
   "DB": {
     "default": {
       "ENGINE": "tenant_schemas.postgresql_backend",
-      "HOST": "atrixmobproduction.cccnbg3w8wpw.us-east-2.rds.amazonaws.com",
+      "HOST": "178.62.66.183",
       "NAME": "atrixmob_production",
       "USER": "atrixmob_user",
-      "PASSWORD": "rub32912289",
+      "PASSWORD": "adsl5419",
       "PORT": 5432
     }
   },
