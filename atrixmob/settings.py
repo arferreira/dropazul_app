@@ -156,6 +156,9 @@ else:
 if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
