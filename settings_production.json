@@ -25,7 +25,8 @@
   ],
   "SECURITY": {
     "ALLOWED_HOSTS": [
-      "*.atrixmob.com.br",
+      "*",
+      "*"
     ]
   },
   "DEBUG": true,
