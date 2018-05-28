@@ -25,7 +25,9 @@
   ],
   "SECURITY": {
     "ALLOWED_HOSTS": [
+      "178.62.66.183",
       ".atrixmob.com.br",
+      "mvlavajato.atrixmob.com.br"
     ]
   },
   "DEBUG": true,
