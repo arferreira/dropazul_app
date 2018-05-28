@@ -1,1 +1,184 @@
 {% extends "atrix_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[atrixmob] -  Painel de controle' %}{% endblock %}
+
+{% block main %}
+<section class="content">
+
+      <!-- Resumos do sistema -->
+        <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-user"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Pessoas</span>
+              <span class="info-box-number">70</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70 Clientes no sistema
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-briefcase"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Serviços</span>
+              <span class="info-box-number">20</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+                  <span class="progress-description">
+                    20 Serviços solicitados
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Agendamentos</span>
+              <span class="info-box-number">41</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 40%"></div>
+              </div>
+                  <span class="progress-description">
+                    41 agendamentos realizados
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-dollar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Contas a pagar</span>
+              <span class="info-box-number">R$ 987,89</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 90%"></div>
+              </div>
+                  <span class="progress-description">
+                    Despesas a pagar
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- / .Resumo do sistema-->
+      <div class="col-md-9">
+      <!-- Utilizar full calendar  -->
+
+      <div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Agenda do Dia</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="calendar"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+      </div>
+      <div class="col-md-3">
+      <!--Gráfico de fluxo de caixa-->
+      <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Fluxo de Caixa</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChart" style="height: 129px; width: 358px;"></canvas>
+                <canvas id="areaChart" style="width: 0px; height:0px"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- / .Fluxo de caixa grafico-->
+      <div class="col-md-12">
+      <!--Gráfico de fluxo de caixa-->
+      <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Cliente Top do mês</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-aqua-active">
+              <h3 class="widget-user-username">Mariana Rosa</h3>
+              <h5 class="widget-user-desc">(67) 99845-6920</h5>
+            </div>
+            <div class="widget-user-image">
+              <img class="img-circle" src="static/img/user1-128x128.jpg" alt="User Avatar">
+            </div>
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">500,00</h5>
+                    <span class="description-text">Reais gastos</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">15</h5>
+                    <span class="description-text">Serviços contratados</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+          </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- / .Fluxo de caixa grafico-->
+      </div> <!-- boxy da esquerda -->
+    </section>
+{% endblock main %}

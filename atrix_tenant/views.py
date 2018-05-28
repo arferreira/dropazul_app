@@ -192,8 +192,33 @@ def activate(request, id, token):
         user.is_staff = False
         user.is_superuser = True
         user.save()
-        login(request, user)
+        #login(request, user)
         # return redirect('home')
         return render(request, 'atrix_tenant/tenant_active.html')
     else:
         return render(request, 'atrix_tenant/tenant_invalid.html')
+
+
+
+# ===================================================
+# Perfil do Inquilino
+# ===================================================
+
+class TenantProfile(LoginRequiredMixin, View):
+    template_name = "atrix_tenant/tenant_profile.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        tenantprofile = request.user.profile
+        image_profile = request.FILES['image_profile'] if 'image_profile' in request.FILES else None
+        if image_profile:
+            tenantprofile.image_profile = image_profile
+            tenantprofile.save()
+        request.user.username = request.POST['email']
+        request.user.first_name = request.POST['first_name']
+        request.user.last_name = request.POST['last_name']
+        request.user.email = request.POST['email']
+        request.user.save()
+        return HttpResponseRedirect(reverse_lazy('dashboard:index'))
