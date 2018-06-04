@@ -165,11 +165,20 @@ DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
 
 
-# Email
+# Email Atrix
+#
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.zoho.com'
+# EMAIL_HOST_USER = 'contato.atrixmob@atrixmob.com.br'
+# EMAIL_HOST_PASSWORD = 'adsl5419'
+# EMAIL_PORT = 587
+
+
+# Email Gmail
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'contato.atrixmob@atrixmob.com.br'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'antonio.eschola@gmail.com'
 EMAIL_HOST_PASSWORD = 'adsl5419'
 EMAIL_PORT = 587
 
