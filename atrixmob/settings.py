@@ -19,7 +19,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ADMINS = [
     ('Antonio Ricardo', 'antonioricardoarfs@atrixmob.com.br'),
