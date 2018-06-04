@@ -43,10 +43,8 @@ else:
 
 
 
-if DEBUG:
-    ALLOWED_HOSTS = settings_development['SECURITY']['ALLOWED_HOSTS']
-else:
-    ALLOWED_HOSTS = settings_production['SECURITY']['ALLOWED_HOSTS']
+
+ALLOWED_HOSTS = settings_production['SECURITY']['ALLOWED_HOSTS']
 
 
 # DEBUG TOOLBAR
