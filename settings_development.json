@@ -6,9 +6,9 @@
     "default": {
       "ENGINE": "tenant_schemas.postgresql_backend",
       "HOST": "localhost",
-      "NAME": "atrixmob_development",
-      "USER": "antonioricardo",
-      "PASSWORD": "rub32912289",
+      "NAME": "atrixmob_production",
+      "USER": "atrixmob_user",
+      "PASSWORD": "adsl5419",
       "PORT": 5432
     }
   },
