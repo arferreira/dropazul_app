@@ -142,8 +142,8 @@ class TenantRegisterView(View):
                 user.is_staff= False
                 user.is_superuser = False
                 user.save()
+                # Montando estrutura de email
                 active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
-
                 mail_subject = '[atrixmob] - Inicie sua instância do atrixmob.'
                 to_email = email
                 plain_text = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
@@ -159,14 +159,18 @@ class TenantRegisterView(View):
                     'token': account_activation_token.make_token(user),
                 })
                 # TODO: Refatorar envio de email para ativação de instancia e testsssss
+
+                # Enviando email de criação da instancia
                 send_mail(
                     mail_subject,
                     plain_text,
                     'contato.atrixmob@atrixmob.com.br',
                     [to_email],
                     html_message=message_html,
-                    fail_silently=False,
+                    fail_silently=True,
                 )
+
+
                 url_redirect = "{0}.{1}{2}".format(
                     tenant_name, request.META['HTTP_HOST'], reverse('tenant:register')
                 )
