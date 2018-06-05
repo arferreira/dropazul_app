@@ -34,12 +34,12 @@
   "DEFAULT_URL_USERPROFILE": "/static/img/user-default.jpg",
   "EMAIL": {
     "EMAIL_USE_TLS": true,
-    "EMAIL_HOST": "smtp.gmail.com",
+    "EMAIL_HOST": "smtp.zoho.com",
     "EMAIL_PORT": 587,
     "EMAIL_BACKEND": "django.core.mail.backends.smtp.EmailBackend",
-    "EMAIL_HOST_USER": "antonio.eschola@gmail.com",
+    "EMAIL_HOST_USER": "contato.atrixmob@atrixmob.com.br",
     "EMAIL_HOST_PASSWORD": "adsl5419",
-    "DEFAULT_FROM_EMAIL": "atrixmob.com.br",
-    "CONTACT_EMAIL": "contato@atrixmob.com.br"
+    "DEFAULT_FROM_EMAIL": "atrixmob [contato.atrixmob@atrixmob.com.br]",
+    "CONTACT_EMAIL": "contato.atrixmob@atrixmob.com.br"
   }
 }
