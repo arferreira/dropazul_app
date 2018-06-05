@@ -122,8 +122,10 @@ class TenantRegisterView(View):
         password = request.POST.get('password', None)
         name_fantasy = request.POST.get('name_fantasy', None)
         if schema_exists(tenant_name):
+            print('O inquilino já foi criado!')
             kwargs['tenant_exist'] = True
         else:
+            print('Criando inquilino para o atrix')
             client = Client()
             client.domain_url = '{0}.{1}'.format(tenant_name, request.tenant.domain_url)
             client.name = tenant_name
@@ -133,6 +135,7 @@ class TenantRegisterView(View):
             client.save()
             # Executando as migrações
             with schema_context('atrix_' + tenant_name):
+                print('Rodando as migrações com o Cliente que foi criado!')
                 user = User()
                 user.email = email
                 user.username = name_fantasy
@@ -158,7 +161,7 @@ class TenantRegisterView(View):
                     'token': account_activation_token.make_token(user),
                 })
                 # TODO: Refatorar envio de email para ativação de instancia e testsssss
-
+                print('Enviando email para o cliente de ativação de instancia')
                 # Enviando email de criação da instancia
                 send_mail(
                     mail_subject,
@@ -177,6 +180,7 @@ class TenantRegisterView(View):
                 'tenant_exist': True,
                 'url_login_new_schema': url_redirect
             }
+            print('Criação finalizada!')
         return JsonResponse(response)
 
 
