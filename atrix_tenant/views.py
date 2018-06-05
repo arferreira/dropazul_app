@@ -126,13 +126,12 @@ class TenantRegisterView(View):
         else:
             client = Client()
             client.domain_url = '{0}.{1}'.format(tenant_name, request.tenant.domain_url)
-
             client.name = tenant_name
             client.name_fantasy = name_fantasy
             client.is_active = True
             client.schema_name = 'atrix_' + tenant_name
-            client.save()  # Executando as migrações
-            new_domain = client.domain_url
+            client.save()
+            # Executando as migrações
             with schema_context('atrix_' + tenant_name):
                 user = User()
                 user.email = email
@@ -167,7 +166,6 @@ class TenantRegisterView(View):
                     'contato.atrixmob@atrixmob.com.br',
                     [to_email],
                     html_message=message_html,
-                    fail_silently=True,
                 )
 
 
