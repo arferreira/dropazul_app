@@ -16,7 +16,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.http import JsonResponse
-from smtplib import SMTPException
+
 
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
@@ -164,6 +164,7 @@ class TenantRegisterView(View):
                 # TODO: Refatorar envio de email para ativação de instancia e testsssss
                 print('Enviando email para o cliente de ativação de instancia')
                 # Enviando email de criação da instancia
+                import smtplib
                 try:
                     send_mail(
                         mail_subject,
@@ -172,7 +173,7 @@ class TenantRegisterView(View):
                         [to_email],
                         html_message=message_html,
                     )
-                except SMTPException as e:
+                except smtplib.SMTPException as e:
                     print('O email não foi enviado, erro: ', e)
 
 
