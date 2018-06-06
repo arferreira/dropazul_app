@@ -173,7 +173,7 @@ class TenantRegisterView(View):
                         [to_email],
                         html_message=message_html,
                     )
-                except smtplib.SMTPException as e:
+                except Exception as e:
                     print('O email não foi enviado, erro: ', e)
 
 
