@@ -147,6 +147,7 @@ class TenantRegisterView(View):
                 user.save()
                 # Montando estrutura de email
                 active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
+                active_url = active_url.replace("www.", "")
                 mail_subject = '[atrixmob] - Inicie sua instância do atrixmob.'
                 to_email = email
                 plain_text = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
