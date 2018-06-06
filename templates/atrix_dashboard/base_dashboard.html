@@ -126,7 +126,7 @@
                 {% if not user.profile.image_profile %}
                   <i style="color:white;" class="fa fa-user pull-right fa-2x"></i>
                 {% else %}
-                    <img src="{{ user.profile.image_profile.url }}" class="img-circle" alt="Imagem do Usuário">
+                    <img src="/media/{{ request.tenant.domain_url }}/{{ user.profile.image_profile }}" class="img-circle" alt="Imagem do Usuário">
                 {% endif %}
 
                 <p>
@@ -164,7 +164,7 @@
           {% if not user.profile.image_profile %}
             <i style="color:white;" class="fa fa-user pull-right fa-2x"></i>
           {% else %}
-              <img src="{{ user.profile.image_profile.url }}" class="img-circle" alt="Imagem do Usuário">
+              <img src="/media/{{ request.tenant.domain_url }}/{{ user.profile.image_profile }}" class="img-circle" alt="Imagem do Usuário">
           {% endif %}
 
         </div>
