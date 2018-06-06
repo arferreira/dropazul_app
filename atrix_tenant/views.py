@@ -1,7 +1,7 @@
 import random, string
 
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage, send_mail, mail_admins
 from django.template.loader import render_to_string
 from django.contrib.auth import login, logout
 from django.urls import reverse
@@ -177,7 +177,11 @@ class TenantRegisterView(View):
                 except Exception as e:
                     print('O email não foi enviado, erro: ', e)
 
-
+                mail_admins(
+                    'Notificação - Você possui um novo contratante do sistema',
+                    '%s criou cadastro agora no atrixmob.' % active_url,
+                    fail_silently=False
+                )
                 url_redirect = "{0}.{1}{2}".format(
                     tenant_name, request.META['HTTP_HOST'], reverse('tenant:register')
                 )
