@@ -172,6 +172,7 @@ class TenantRegisterView(View):
                         'contato.atrixmob@atrixmob.com.br',
                         [to_email],
                         html_message=message_html,
+                        fail_silently=False
                     )
                 except Exception as e:
                     print('O email não foi enviado, erro: ', e)
