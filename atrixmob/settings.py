@@ -7,9 +7,8 @@ import os
 
 from decouple import config
 
-from atrix_core.internationalization import *
 from atrix_core.applist import *
-from atrix_core.json_settings import get_settings_development, get_settings_production
+from atrix_core.json_settings import get_settings
 from atrix_core.databases import *
 from atrix_core.mail_server import *
 
@@ -19,44 +18,24 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-DEBUG = config('DEBUG', cast=bool)
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ADMINS = [
     ('Antonio Ricardo', 'antonioricardoarfs@atrixmob.com.br'),
     ('Mariana Rosa', 'marianaarosa88@gmail.com'),
 ]
+settings = get_settings()
 
-if DEBUG:
-    settings_development = get_settings_development()
-else:
-    settings_production = get_settings_production()
-
-
-
-if DEBUG:
-    SECRET_KEY = settings_development['SECRET_KEY']
-else:
-    SECRET_KEY = settings_production['SECRET_KEY']
-
-
-
-
-
-
-if DEBUG:
-    ALLOWED_HOSTS = settings_development['SECURITY']['ALLOWED_HOSTS']
-else:
-    ALLOWED_HOSTS = settings_production['SECURITY']['ALLOWED_HOSTS']
+ALLOWED_HOSTS = settings['SECURITY']['ALLOWED_HOSTS']
 
 
 # DEBUG TOOLBAR
 INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
-if DEBUG:
-    DATABASES = settings_development['DB']
-else:
-    DATABASES = settings_production['DB']
+DATABASES = settings['DB']
 
 
 MIDDLEWARE = [
@@ -135,30 +114,17 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_LOCATION = 'static'
 
 # static files
-if DEBUG:
-    STATIC_ROOT = 'staticfiles/'
+STATIC_ROOT = 'staticfiles/'
 
-    STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
-    STATICFILES_DIRS = (os.path.join('static'),)
-else:
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-    ]
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
+STATICFILES_DIRS = (os.path.join('static'),)
 
 
 
 # Media
-if DEBUG:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-else:
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
@@ -167,5 +133,15 @@ DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
 # LOGGING do atrix
 
+from atrix_core.logging import LOGGING
 
-from atrix_core.logging_development import LOGGING
+
+# EMAIL SMTP
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER = "antonio.eschola@gmail.com"
+EMAIL_HOST_PASSWORD = "adsl5419"
+DEFAULT_FROM_EMAIL = "atrixmob.com.br"
+CONTACT_EMAIL = "contato@atrixmob.com.br"

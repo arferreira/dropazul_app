@@ -1,8 +1,8 @@
-from .json_settings import get_settings_production
+from .json_settings import get_settings
 
-settings = get_settings_production()
+settings = get_settings()
 
-LOGGING_PRODUCTION = {
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {

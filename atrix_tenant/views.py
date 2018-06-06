@@ -164,7 +164,7 @@ class TenantRegisterView(View):
                 # TODO: Refatorar envio de email para ativação de instancia e testsssss
                 print('Enviando email para o cliente de ativação de instancia')
                 # Enviando email de criação da instancia
-                import smtplib
+
                 try:
                     send_mail(
                         mail_subject,
