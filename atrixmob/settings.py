@@ -151,11 +151,11 @@ from atrix_core.logging import LOGGING
 
 # EMAIL SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_PORT = 587
 EMAIL_HOST_USER = "postmaster@mg.atrixmob.com.br"
 EMAIL_HOST_PASSWORD = "1ef3d0eac06689079e8d057b35f9c9ff-b892f62e-ca36ad6d"
-DEFAULT_FROM_EMAIL = "contato@atrixmob.com.br"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CONTACT_EMAIL = "contato@atrixmob.com.br"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 EMAIL_SUBJECT_PREFIX = '[atrixmob]'
