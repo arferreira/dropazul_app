@@ -27,8 +27,7 @@ from tld.utils import update_tld_names
 
 
 from atrix_tenant.forms import LoginForm
-from atrix_tenant.models import Client
-
+from atrix_tenant.models import Client, Plan
 
 # parse url
 from atrix_tenant.tokens import account_activation_token
@@ -108,9 +107,10 @@ class Logout(View):
 class TenantRegisterView(View):
     template_name = "atrix_tenant/register_tenant.html"
     active_menu = "register"
+    plans = Plan.objects.all()
 
     def get(self, request):
-        return render(request, self.template_name, {'active_menu': self.active_menu})
+        return render(request, self.template_name, {'active_menu': self.active_menu, 'plans': self.plans})
 
 
     def post(self, request):
@@ -121,6 +121,7 @@ class TenantRegisterView(View):
         tenant_name = request.POST.get('tenant_name', None)
         email = request.POST.get('email', None)
         password = request.POST.get('password', None)
+        plan = request.POST.get('plan', None)
         name_fantasy = request.POST.get('name_fantasy', None)
         if schema_exists(tenant_name):
             print('O inquilino já foi criado!')

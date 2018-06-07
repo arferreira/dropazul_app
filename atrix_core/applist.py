@@ -11,6 +11,7 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'pagseguro',
 )
 
 LOCAL_APPS = (

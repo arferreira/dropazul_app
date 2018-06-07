@@ -103,35 +103,35 @@ TENANT_MODEL = 'atrix_tenant.Client'
 
 # Static amazon s3
 
-
-AWS_ACCESS_KEY_ID = 'AKIAJMGGRT5DDWMHA4VQ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'atrixmobcore'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-
-
-
-# static files
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# STATIC_ROOT = 'staticfiles/'
 #
-# STATIC_URL = '/static/'
+# AWS_ACCESS_KEY_ID = 'AKIAJMGGRT5DDWMHA4VQ'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'atrixmobcore'
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'static'
 #
-# STATICFILES_DIRS = (os.path.join('static'),)
+#
+#
+# # static files
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'static'
+#
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
+# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATIC_ROOT = 'staticfiles/'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join('static'),)
 
 
 
@@ -142,7 +142,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 
 
-
+# LOCALE
+LANGUAGE_CODE = 'pt-br'
+TIME_ZONE = "America/Sao_Paulo"
 
 # LOGGING do atrix
 
@@ -159,3 +161,10 @@ CONTACT_EMAIL = "contato@atrixmob.com.br"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 2525
 EMAIL_SUBJECT_PREFIX = '[atrixmob]'
+
+
+# Pagamento
+PAGSEGURO_EMAIL = 'antonioricardo_ferreira@hotmail.com'
+PAGSEGURO_TOKEN = '51E3688E0039466ABF8FEDDA8BD9A687'
+PAGSEGURO_SANDBOX = True # se o valor for True, as requisições a api serão feitas usando o PagSeguro Sandbox.
+PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações vão ser logadas no database.

@@ -28,6 +28,8 @@ urlpatterns = [
     path('dashboard/', include(dashboard_urls, namespace='dashboard')),
     # admin django route
     path('admin/', admin.site.urls),
+    # routes para pagamento
+    path('retorno/pagseguro/', include('pagseguro.urls')),
 ]
 
 
