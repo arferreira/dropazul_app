@@ -286,7 +286,8 @@ class TenantSignatureView(RedirectView):
         else:
             print('Criando inquilino para o atrix')
             client = Client()
-            client.domain_url = '{0}.{1}'.format(tenant_name, request.tenant.domain_url)
+            site_url = request.tenant.domain_url.replace('www.', '')
+            client.domain_url = '{0}.{1}'.format(tenant_name, site_url)
             client.name = tenant_name
             client.name_fantasy = name_fantasy
             client.is_active = False
