@@ -115,12 +115,14 @@ class Purchase(models.Model):
                 plain_text = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
                     'user': user,
                     'domain': self.active_url,
+                    'schema_name': client.schema_name,
                     'id': user.pk,
                     'token': account_activation_token.make_token(user),
                 })
                 message_html = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
                     'user': user,
                     'domain': self.active_url,
+                    'schema_name': client.schema_name,
                     'id': user.pk,
                     'token': account_activation_token.make_token(user),
                 })

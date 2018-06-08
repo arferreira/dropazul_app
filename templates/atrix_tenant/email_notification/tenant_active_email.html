@@ -18,7 +18,10 @@
 
     <!-- /.social-auth-links -->
 
-    <a href="http://atrixmob.com.br/{% url 'tenant:activate' id=id token=token %}" class="text-green">Iniciar instância</a><br>
+    <a href="http://{{doamin}}{% url 'tenant:activate' id=id token=token schema_name=schema_name %}" class="text-green">
+        Iniciar instância
+    </a>
+      <br>
 
   </div>
   <!-- /.login-box-body -->
