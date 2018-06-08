@@ -297,9 +297,7 @@ class TenantSignatureView(RedirectView):
             purchase = Purchase()
             purchase.plan = Plan.objects.get(pk=plan)
             purchase.client = client
-            url_activation = '{0}.{1}'.format(tenant_name, get_current_site(request))
-            purchase.active_url = url_activation.replace("www.", "")
-            active_url = url_activation.replace("www.", "")
+            purchase.active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
             purchase.save()
 
             # Executando as migrações
@@ -313,11 +311,7 @@ class TenantSignatureView(RedirectView):
                 user.is_staff= False
                 user.is_superuser = False
                 user.save()
-
-
-
                 # Lógica para o pagamento do plano e assinatura
-
                 config = {'sandbox': settings.PAGSEGURO_SANDBOX, 'USE_SHIPPING': False}
                 pg = PagSeguro(email=settings.PAGSEGURO_EMAIL, token=settings.PAGSEGURO_TOKEN, config=config)
                 pg.sender = {
@@ -337,12 +331,6 @@ class TenantSignatureView(RedirectView):
                 pg.notification_url = self.request.build_absolute_uri(
                     reverse('tenant:pagseguro_notification')
                 )
-                # response = {
-                #                 'exist': True,
-                #                 'tenant_exist': True
-                #             }
-
-
 
                 mail_admins(
                     'Notificação - Nova contratação do sistema',

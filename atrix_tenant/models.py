@@ -1,7 +1,11 @@
 import os
+from datetime import timedelta
 
-from django.core.mail import mail_admins
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import mail_admins, send_mail
 from django.db import models, connection
+from django.template.loader import render_to_string
+from django.utils.datetime_safe import datetime
 from django.utils.text import slugify
 from tenant_schemas.models import TenantMixin
 from django.conf import settings
@@ -9,6 +13,9 @@ from django.contrib.auth.models import User
 from django.db.models import Manager
 
 
+from tenant_schemas.utils import schema_exists, schema_context, connection
+
+from atrix_tenant.tokens import account_activation_token
 
 
 class Plan(models.Model):
@@ -81,10 +88,10 @@ class Purchase(models.Model):
         'Situação', choices=PURCHASE_STATUS_CHOICES, default=0, blank=True
     )
     active_url = models.CharField(max_length=500, verbose_name='URL de ativação')
-    pagseguro_redirect_url = models.URLField('url do pagseguro', max_length=255, blank=True)
 
     created_on = models.DateField(auto_now_add=True, verbose_name='Criado em')
     modified_on = models.DateTimeField('Modificado em', auto_now=True)
+    validate_on = models.DateTimeField(default=datetime.now()+timedelta(days=30), verbose_name='Valido até')
 
     def __str__(self):
         return self.client.name
@@ -99,11 +106,43 @@ class Purchase(models.Model):
         if status == '3':
             self.status = 1
             print('Status de compra alterado')
-            mail_admins(
-                'Notificação - Houve alteração em registro de pagamento',
-                'O sistema acabou de receber uma atualização de pagamento',
-                fail_silently=False
-            )
+            client = Client.objects.get(pk=self.client.pk) # recuperando o tenant para notificação.
+            # preparando para disparar a notificação
+            with schema_context(client.schema_name):
+                mail_subject = '[atrixmob] - Bem-vindo ao AtrixMob! Segue seus dados de acesso.'
+                tenant_name = client.schema_name.replace('atrix_', '')
+                active_url = '{0}.{1}'.format(tenant_name)
+                active_url = active_url.replace("www.", "")
+                user = User.objects.last()
+                to_email = user.email
+                plain_text = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
+                    'user': user,
+                    'domain': active_url,
+                    'id': user.pk,
+                    'token': account_activation_token.make_token(user),
+                })
+                message_html = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
+                    'user': user,
+                    'domain': active_url,
+                    'id': user.pk,
+                    'token': account_activation_token.make_token(user),
+                })
+                try:
+                    send_mail(
+                        mail_subject,
+                        plain_text,
+                        'contato.atrixmob@atrixmob.com.br',
+                        [to_email],
+                        html_message=message_html,
+                        fail_silently=False
+                    )
+                except Exception as e:
+                    print('O email não foi enviado, erro: ', e)
+                mail_admins(
+                    'Notificação - Houve alteração em registro de pagamento',
+                    'O sistema acabou de receber uma atualização de pagamento do:  %s' % client,
+                    fail_silently=False
+                )
         elif status == '7':
             print('Status de compra alterado')
             mail_admins(
@@ -113,6 +152,8 @@ class Purchase(models.Model):
             )
             self.status = 2
         self.save()
+
+
 
 
 

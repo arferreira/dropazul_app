@@ -17,8 +17,8 @@ class ClientAdmin(admin.ModelAdmin):
 
 class PurchaseAdmin(admin.ModelAdmin):
     search_fields = ('client',)
-    list_display = ('client', 'plan', 'active_url', 'pagseguro_redirect_url', 'modified_on', 'created_on', 'status',)
-    list_filter = ('created_on',)
+    list_display = ('client', 'plan', 'active_url', 'modified_on', 'created_on', 'validate_on', 'status',)
+    list_filter = ('created_on', 'validate_on',)
 
 class PlanAdmin(admin.ModelAdmin):
     search_fields = ('name',)
