@@ -110,20 +110,17 @@ class Purchase(models.Model):
             # preparando para disparar a notificação
             with schema_context(client.schema_name):
                 mail_subject = '[atrixmob] - Bem-vindo ao AtrixMob! Segue seus dados de acesso.'
-                tenant_name = client.schema_name.replace('atrix_', '')
-                active_url = '{0}.{1}'.format(tenant_name, self.active_url)
-                active_url = active_url.replace("www.", "")
                 user = User.objects.last()
                 to_email = user.email
                 plain_text = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
                     'user': user,
-                    'domain': active_url,
+                    'domain': self.active_url,
                     'id': user.pk,
                     'token': account_activation_token.make_token(user),
                 })
                 message_html = render_to_string('atrix_tenant/email_notification/tenant_active_email.html', {
                     'user': user,
-                    'domain': active_url,
+                    'domain': self.active_url,
                     'id': user.pk,
                     'token': account_activation_token.make_token(user),
                 })
