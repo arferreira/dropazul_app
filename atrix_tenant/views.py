@@ -11,12 +11,16 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.views.generic import View, ListView, DeleteView
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View, ListView, DeleteView, RedirectView
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.http import JsonResponse
+from atrixmob import settings
 
+
+from pagseguro import PagSeguro
 
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
@@ -27,7 +31,7 @@ from tld.utils import update_tld_names
 
 
 from atrix_tenant.forms import LoginForm
-from atrix_tenant.models import Client, Plan
+from atrix_tenant.models import Client, Plan, Purchase
 
 # parse url
 from atrix_tenant.tokens import account_activation_token
@@ -42,14 +46,16 @@ update_tld_names()
 
 def validate_tenant(request):
     tenant_name = request.GET.get('subdomain', None);
-    print(tenant_name)
+    tenant_name = tenant_name.lower().replace(' ', '')
     if schema_exists(tenant_name):
         data = {
-            'exist': True
+            'exist': True,
+            'tenant_name': tenant_name.replace('atrix_', '')
         }
     else:
         data = {
-            'exist': False
+            'exist': False,
+            'tenant_name': tenant_name.replace('atrix_', '')
         }
 
     return JsonResponse(data)
@@ -240,3 +246,130 @@ class TenantProfile(LoginRequiredMixin, View):
         request.user.email = request.POST['email']
         request.user.save()
         return HttpResponseRedirect(reverse_lazy('dashboard:index'))
+
+
+
+# ===================================================
+# Assinatura de Inquilinos
+# ===================================================
+
+
+class TenantSignatureView(RedirectView):
+    template_name = "atrix_tenant/signature_tenant.html"
+    active_menu = "register"
+    plans = Plan.objects.all()
+
+    def get(self, request):
+        return render(request, self.template_name, {'active_menu': self.active_menu, 'plans': self.plans})
+
+
+    def post(self, request):
+        kwargs = {
+            'url_login_new_schema': None,
+            'form_data': request.POST
+        }
+
+        tenant_name = request.POST.get('subdomain', None)
+        name_fantasy = request.POST.get('name_fantasy', None)
+        email = request.POST.get('email', None)
+        phone_number = request.POST.get('phone_number', None)
+        area_code = phone_number[1:3]
+        phone = phone_number[5:15]
+        phone = phone.replace('-', '')
+        password = request.POST.get('password', None)
+        plan = request.POST.get('plan', None)
+
+
+        if schema_exists(tenant_name):
+            print('O inquilino já foi criado!')
+            kwargs['tenant_exist'] = True
+        else:
+            print('Criando inquilino para o atrix')
+            client = Client()
+            client.domain_url = '{0}.{1}'.format(tenant_name, request.tenant.domain_url)
+            client.name = tenant_name
+            client.name_fantasy = name_fantasy
+            client.is_active = False
+            client.schema_name = 'atrix_' + tenant_name
+            client.save()
+
+            # Criando a compra para o cliente
+            purchase = Purchase()
+            purchase.plan = Plan.objects.get(pk=plan)
+            purchase.client = client
+            url_activation = '{0}.{1}'.format(tenant_name, get_current_site(request))
+            purchase.active_url = url_activation.replace("www.", "")
+            active_url = url_activation.replace("www.", "")
+            purchase.save()
+
+            # Executando as migrações
+            with schema_context('atrix_' + tenant_name):
+                print('Rodando as migrações com o Cliente que foi criado!')
+                user = User()
+                user.email = email
+                user.username = name_fantasy
+                user.set_password(password)
+                user.is_active = False
+                user.is_staff= False
+                user.is_superuser = False
+                user.save()
+
+
+
+                # Lógica para o pagamento do plano e assinatura
+
+                config = {'sandbox': settings.PAGSEGURO_SANDBOX, 'USE_SHIPPING': False}
+                pg = PagSeguro(email=settings.PAGSEGURO_EMAIL, token=settings.PAGSEGURO_TOKEN, config=config)
+                pg.sender = {
+                    "name": name_fantasy,
+                    "area_code": area_code,
+                    "phone": phone,
+                    "email": email
+                }
+                pg.reference_prefix = None
+                pg.shipping = None
+                pg.reference = purchase.pk
+                pg.add_item(id=purchase.plan.pk, description=purchase.plan.description,
+                            amount=purchase.plan.amount, quantity=1)
+                pg.redirect_url = self.request.build_absolute_uri(
+                    reverse('tenant:signature')
+                )
+                pg.notification_url = self.request.build_absolute_uri(
+                    reverse('tenant:pagseguro_notification')
+                )
+                # response = {
+                #                 'exist': True,
+                #                 'tenant_exist': True
+                #             }
+
+
+
+                mail_admins(
+                    'Notificação - Nova contratação do sistema',
+                    'O sistema acabou de criar e aguarda pagamento da instancia: %s' % tenant_name,
+                    fail_silently=False
+                )
+                response = pg.checkout()
+            print('Criação finalizada!')
+        return HttpResponseRedirect(response.payment_url)
+
+
+@csrf_exempt
+def pagseguro_notification(request):
+    notification_code = request.POST.get('notificationCode', None)
+    if notification_code:
+        pg = PagSeguro(
+            email=settings.PAGSEGURO_EMAIL, token=settings.PAGSEGURO_TOKEN,
+            config={'sandbox': settings.PAGSEGURO_SANDBOX}
+        )
+        notification_data = pg.check_notification(notification_code)
+        status = notification_data.status
+        reference = notification_data.reference
+
+        try:
+            purchase = Purchase.objects.get(pk=reference)
+        except Purchase.DoesNotExist:
+            pass
+        else:
+            purchase.pagseguro_update_status(status)
+    return HttpResponse('Pagamento atualizado!')

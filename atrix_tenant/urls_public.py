@@ -1,17 +1,20 @@
 from django.urls import path, re_path
 from django.conf.urls import url
 
-from atrix_tenant.views import (TenantRegisterView, Login, Logout, validate_tenant, activate)
+from atrix_tenant.views import (TenantRegisterView, TenantSignatureView, Login, Logout,
+                                validate_tenant, activate, pagseguro_notification)
 
 app_name="atrix_tenant"
 
 urlpatterns = [
     # root route
-    path('register/', TenantRegisterView.as_view(), name='register'),
+    path('assinatura/', TenantSignatureView.as_view(), name='signature'),
+    # atualizando status de pagamento de planos
+    path('assinatura/retorno/', pagseguro_notification, name='pagseguro_notification'),
     #  Requisições ajax de validação de instancia
-    path('ajax/validate_tenant/', validate_tenant, name='validate_tenant'),
+    path('ajax/validando_cliente/', validate_tenant, name='validate_tenant'),
     # rota para ativação do tenant
-    path('activate/<int:id>/<token>/', activate, name='activate'),
-    path('login/', Login.as_view(), name='login'),
-    path('logout/', Logout.as_view(), name="logout"),
+    path('ativar/<int:id>/<token>/', activate, name='activate'),
+    path('entrar/', Login.as_view(), name='login'),
+    path('sair/', Logout.as_view(), name="logout"),
 ]

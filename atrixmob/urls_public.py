@@ -23,13 +23,13 @@ urlpatterns = [
     # root route - site page
     path('site/', include(site_urls, namespace='site')),
     # rota para tenants
-    path('tenant/', include(tenant_urls, namespace='tenant')),
+    path('cliente/', include(tenant_urls, namespace='tenant')),
     # rota para dashboard
     path('dashboard/', include(dashboard_urls, namespace='dashboard')),
     # admin django route
-    path('admin/', admin.site.urls),
+    path('manage/', admin.site.urls),
     # routes para pagamento
-    path('retorno/pagseguro/', include('pagseguro.urls')),
+    #path('retorno/pagseguro/', include('pagseguro.urls')),
 ]
 
 

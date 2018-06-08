@@ -1,0 +1,327 @@
+{% extends "atrix_landing/base.html" %}
+{% load i18n static solo_tags %}
+{% block javascript %}
+<script type="text/javascript">
+
+$(function() {
+    function minus(z){
+        v = z.value.toLowerCase();
+        z.value = v;
+    }
+    $("#id_phone_number").mask("(99) 99999-9999");
+    $("#id_zipcode").mask("99999-999");
+    $('#result').hide();
+
+
+    // Enviando criação da instancia
+    $('#create_instancee').on('submit', function(event){
+        event.preventDefault();
+        var tenant_name = $('#id_subdomain').val();
+        var email = $('#id_email').val();
+        var password = $('#id_password').val();
+        var name_fantasy = $('#id_name_fantasy').val();
+        var document = $('#id_name_fantasy').val();
+        $.ajax({
+        type: "POST",
+        url: '{% url "tenant:signature" %}',
+        beforeSend: function () {
+            // chamada para o loader
+            $("#loader").show();
+            $(".overlay").css("background-image",
+                "url(https://i.stack.imgur.com/8t6P3.gif)",
+                );
+         },
+        data: {
+          'tenant_name': tenant_name,
+          'email': email,
+          'password': password,
+          'name_fantasy': name_fantasy,
+          'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        dataType: 'json',
+        success: function (response) {
+          $("#loader").hide();
+          if (response.tenant_exist == true) {
+            $('#create_instance').hide('slow');
+            $('#result').show().fadeIn(500).delay(5000);
+          }
+          else{
+            $("#loader").hide();
+            $('#create_instance').show();
+            $('#result').hide();
+            $('#response_get_subdomin').css('color', 'blue');
+            $('#response_get_subdomin').html('<strong>Ocorreu algo estranho ao buscar seu domínio, por favor confirme!</strong>');
+          }
+        }
+      });
+    });
+
+
+    // Busca Endereço
+    $('#id_zipcode').blur(function() {
+      getAddress();
+    });
+
+    // Busca subdomain
+    $("#loader").hide();
+    $("#id_subdomain").change(function () {
+      var subdomain = "atrix_" + $(this).val();
+      $.ajax({
+        url: '{% url "tenant:validate_tenant" %}',
+        beforeSend: function () {
+            // chamada para o loader
+            $("#loader").show();
+            $(".overlay").css("background-image",
+                "url(https://i.stack.imgur.com/8t6P3.gif)",
+                );
+         },
+        data: {
+          'subdomain': subdomain
+        },
+        dataType: 'json',
+        success: function (data) {
+          $("#loader").hide();
+          if (data.exist == true) {
+            $('#response_get_subdomin').css('color', 'red');
+            subdomain = subdomain.toLowerCase().replace(/ /g, '-');
+            $('#id_subdomain').val(data.tenant_name);
+            $('#response_get_subdomin').html('<strong>Este dominío já existe. Por favor escolha outro endereço!</strong>');
+          }else if(data.exist == false){
+            $('#response_get_subdomin').css('color', 'green');
+            $('#id_subdomain').val(data.tenant_name);
+            $('#response_get_subdomin').html('<strong>Domínio disponível para uso!</strong>');
+          }
+          else{
+            $('#response_get_subdomin').css('color', 'blue');
+            $('#id_subdomain').val(data.tenant_name);
+            $('#response_get_subdomin').html('<strong>Ocorreu algo estranho ao buscar seu domínio, por favor confirme!</strong>');
+          }
+        }
+      });
+    });
+    });
+  </script>
+
+{% endblock %}
+{% block main %}
+
+  	<div class="bg-body">
+		<div class="circle">
+			<span></span>
+		</div>
+	</div>
+
+	<!-- header -->
+	<header>
+		<!-- navbar -->
+		<nav id="navbar" class="navbar navbar-custom navbar-fixed-top" data-spy="affix" data-offset-top="70">
+			<div class="container">
+				<div class="row">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<i class="fa fa-bars"></i>
+						</button>
+						<a class="navbar-brand page-scroll logo-light" href="index.html"><img alt="" src="{% static 'atrix_landing/image/logo.png' %}"></a>
+						<a class="navbar-brand page-scroll logo-clr" href="index.html"><img alt="" src="{% static 'atrix_landing/image/logoinverter.png' %}"></a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<div class="right-nav text-right">
+							<ul class="nav navbar-nav menu">
+
+								<li>
+									<a href="#video">Funcionalidades</a>
+								</li>
+								<li>
+									<a href="{% url 'tenant:login' %}">Planos</a>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+			</div>
+		</nav>
+		<!-- End navbar -->
+
+		<!-- banner -->
+		<div id="home" class="hero">
+			<div class="container">
+				<div class="row">
+					<div class="hero-content">
+						<div class="row">
+							<div class="col-sm-12">
+								<div id="loader" class="overlay"></div>
+                                    <div style="background:white; padding:30px;">
+
+                                      <!-- /.login-logo -->
+                                      <div >
+                                          <!-- Form dispara criação do inquilino -->
+
+                                        <form action="." id="create_instance" method="post" style="color: #00AF5D;">
+                                        {% csrf_token %}
+                                            {% if tenant_exist %}
+                                            <div class="alert alert-danger" role="alert">
+                                                {% trans 'Este dominío já existe. Por favor escolha outro endereço!' %}
+                                            </div>
+                                            {% endif %}
+                                            <div class="row">
+                                                <legend>Dados da instância</legend>
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_subdomain">Subdomínio</label>
+                                                    <input autofocus required class="form-control" style="text-transform:downcase;"  name="subdomain" id="id_subdomain" placeholder="" value="{{ form_data.subdomain }}">
+                                                    <small id="response_get_subdomin" style="color: #202E33">* {% trans 'Nome sem caracteres especiais e espaço' %}</small>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_plan">Selecione seu plano</label>
+                                                    <select class="form-control" id="plan" name="plan">
+                                                        {% for plan in plans %}
+                                                            <option value="{{ plan.pk }}">{{ plan.name }} - {{ plan.amount }} R$</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_name_fantasy">Nome do seu negócio</label>
+                                                    <input autofocus required class="form-control" name="name_fantasy" id="id_name_fantasy" placeholder="" value="{{ form_data.name_fantasy }}">
+                                                    <small style="color: #202E33">* {% trans 'Informe aqui o nome de fantasia do seu negócio' %}</small>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <legend>Contratante</legend>
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_name_fantasy">Documento</label>
+                                                    <input autofocus required class="form-control" name="document" id="id_document" placeholder="" value="{{ form_data.document }}">
+                                                    <small style="color: #202E33">* {% trans 'Informe aqui o seu CPF ou CNPJ sem pontos traços ou espaços' %}</small>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_email">Email para acesso e contato</label>
+                                                    <input required class="form-control" type="email" name="email" id="id_email" value="{{ form_data.email }}">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_email">Telefone para contato</label>
+                                                    <input required class="form-control" type="text" data-format="(dd) dddd-dddd" name="phone_number" id="id_phone_number" value="{{ form_data.phone_number }}">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_password">Senha</label>
+                                                    <input required class="form-control" type="password" name="password" id="id_password">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <legend>Endereço</legend>
+                                                <div class="col-lg-6 col-md-6 col-xs-5">
+                                                    <label for="id_name_fantasy">CEP</label>
+                                                    <input autofocus required class="form-control" name="zipcode" id="id_zipcode" placeholder="" value="{{ form_data.zipcode }}">
+                                                    <small style="color: #202E33">* {% trans 'Informe o seu CEP' %}</small>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-xs-5">
+                                                    <label for="id_name_fantasy">Endereço</label>
+                                                    <input autofocus required class="form-control" name="address" id="id_address" placeholder="" value="{{ form_data.address }}">
+
+                                                </div>
+                                                </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-3">
+                                                    <label for="id_name_fantasy">Número</label>
+                                                    <input autofocus required class="form-control" name="address_number" id="id_address_number" placeholder="" value="{{ form_data.address_number }}">
+
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-xs-5">
+                                                    <label for="id_name_fantasy">Bairro</label>
+                                                    <input autofocus required class="form-control" name="neighborhood" id="id_neighborhood" placeholder="" value="{{ form_data.neighborhood }}">
+
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-3 col-xs-10">
+                                                    <label for="id_name_fantasy">Estado</label>
+                                                    <input autofocus required class="form-control" name="province" id="id_province" placeholder="" value="{{ form_data.province }}">
+
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <label for="id_name_fantasy">Cidade</label>
+                                                    <input autofocus required class="form-control" name="city" id="id_city" placeholder="" value="{{ form_data.city }}">
+
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <br><br><br>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-xs-10">
+                                                    <input autofocus required type="checkbox" name="acceptance" id="id_acceptance" placeholder="" value="{{ form_data.acceptance }}">
+                                                    <label for="id_acceptance"><span style="color: #202E33;">Declaro que li e estou de acordo com a <a target="blank" href="https://maestrus.com/privacidade">Política de privacidade</a>, os <a target="blank" href="https://maestrus.com/termos">Termos de Uso</a> e o <a target="blank" href="https://maestrus.com/contrato">Contrato de Prestação de Serviços</a>.</span></label>
+
+
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class=" col-lg-12 text-right">
+                                                    <a href="/" class="btn btn-warning pull-left" style="background: #f0ad4e;">Voltar</a>
+                                                <input class="btn btn-primary" style="background: #202E33" type="submit" value="Assinar">
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                       <div id="result">
+                                        <h3>{% trans 'Parabéns!' %}</h3>
+                                        <p>
+                                            {% trans 'Sua conta foi criada com sucesso.' %}<br>
+                                            {% trans 'Acesse seu email para ativar sua instância e comece a aproveitar os benefícios do atrixmob' %}
+                                        </p>
+                                        </div>
+
+                                        </div>
+
+                                      </div>
+                                      <!-- /.login-box-body -->
+                                    </div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Banner -->
+	</header>
+	<!-- End header -->
+
+
+<!-- /.login-box -->
+<!--Footer  -->
+	<footer class="footer-wrapper  sec-pad-sm">
+		<div class="container footer-content">
+			<div class="row">
+				<div class="social-holder text-center">
+					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+					<a  href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+				</div>
+				<div class="spce"></div>
+				<div class="copyright text-center">
+					© 2018 - Atrixmob. Todos os direitos reservados
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- End Footer -->
+{% endblock main %}

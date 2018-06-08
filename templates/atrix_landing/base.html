@@ -45,7 +45,11 @@
 {% endblock %}
 
 	<!-- scripts da landing page -->
+	<script src="{% static 'atrix_core/bower_components/jquery/dist/jquery.min.js' %}"></script>
 	<script src="{% static 'atrix_landing/js/vendor.bundle.js' %}"></script>
+	<script src="{% static 'atrix_landing/js/maskedinput.js' %}"></script>
+	<script src="{% static 'atrix_landing/js/searchcep.js' %}"></script>
 	<script src="{% static 'atrix_landing/js/script.js' %}"></script>
+{% block javascript %}{% endblock %}
 </body>
 </html>

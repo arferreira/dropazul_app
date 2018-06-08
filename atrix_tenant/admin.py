@@ -11,10 +11,20 @@ admin.site.index_title = "atrixmob - [Administração]"
 
 # Custom itens
 class ClientAdmin(admin.ModelAdmin):
-    search_fields = ('name', 'name_fantasy', 'plan',)
-    list_display = ('name', 'name_fantasy', 'plan', 'is_active',)
+    search_fields = ('name', 'name_fantasy',)
+    list_display = ('name', 'name_fantasy', 'is_active',)
     list_filter = ('is_active',)
 
+class PurchaseAdmin(admin.ModelAdmin):
+    search_fields = ('client',)
+    list_display = ('client', 'plan', 'active_url', 'pagseguro_redirect_url', 'modified_on', 'created_on', 'status',)
+    list_filter = ('created_on',)
+
+class PlanAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    list_display = ('name', 'description', 'amount', 'is_active',)
+    list_filter = ('created_on',)
+
 admin.site.register(Client, ClientAdmin)
-admin.site.register(Plan)
-admin.site.register(Purchase)
+admin.site.register(Plan, PlanAdmin)
+admin.site.register(Purchase, PurchaseAdmin)
