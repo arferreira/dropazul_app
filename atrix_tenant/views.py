@@ -298,7 +298,7 @@ class TenantSignatureView(RedirectView):
             purchase = Purchase()
             purchase.plan = Plan.objects.get(pk=plan)
             purchase.client = client
-            purchase.active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
+            purchase.active_url = '{0}.{1}'.format(tenant_name, site_url)
             purchase.save()
 
             # Executando as migrações

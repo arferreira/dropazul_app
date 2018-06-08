@@ -111,7 +111,7 @@ class Purchase(models.Model):
             with schema_context(client.schema_name):
                 mail_subject = '[atrixmob] - Bem-vindo ao AtrixMob! Segue seus dados de acesso.'
                 tenant_name = client.schema_name.replace('atrix_', '')
-                active_url = '{0}.{1}'.format(tenant_name)
+                active_url = '{0}.{1}'.format(tenant_name, self.active_url)
                 active_url = active_url.replace("www.", "")
                 user = User.objects.last()
                 to_email = user.email
