@@ -14,7 +14,7 @@ urlpatterns = [
     #  Requisições ajax de validação de instancia
     path('ajax/validando_cliente/', validate_tenant, name='validate_tenant'),
     # rota para ativação do tenant
-    path('ativar/<int:id>/<token>/', activate, name='activate'),
+    path('ativar/<int:id>/<token>/<schema_name>', activate, name='activate'),
     path('entrar/', Login.as_view(), name='login'),
     path('sair/', Logout.as_view(), name="logout"),
 ]
