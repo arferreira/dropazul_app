@@ -257,11 +257,10 @@ class TenantProfile(LoginRequiredMixin, View):
 
 class TenantSignatureView(RedirectView):
     template_name = "atrix_tenant/signature_tenant.html"
-    active_menu = "register"
     plans = Plan.objects.all()
 
     def get(self, request):
-        return render(request, self.template_name, {'active_menu': self.active_menu, 'plans': self.plans})
+        return render(request, self.template_name, {'plans': self.plans})
 
 
     def post(self, request):
