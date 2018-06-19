@@ -1,7 +1,12 @@
 {% extends "atrix_dashboard/base_dashboard.html" %}
 {% load i18n static %}
 {% block title %}{% trans '[atrixmob] -  Painel de controle' %}{% endblock %}
-
+{% block breadcrumb %}
+<h1>
+Bem-vindo ao atrixmob
+<small>Gerencie o seu negócio até sem internet</small>
+</h1>
+{% endblock breadcrumb %}
 {% block main %}
 <section class="content">
 
@@ -182,3 +187,7 @@
       </div> <!-- boxy da esquerda -->
     </section>
 {% endblock main %}
+{% block javascript %}
+    <!-- Script para grafico de barras -->
+<script src="{% static 'atrix_core/static/js/barchart.js' %}"></script>
+{% endblock javascript %}

@@ -16,11 +16,16 @@
   <!-- fullCalendar -->
   <link rel="stylesheet" href="{% static 'atrix_core/bower_components/fullcalendar/dist/fullcalendar.min.css' %}">
   <link rel="stylesheet" href="{% static 'atrix_core/bower_components/fullcalendar/dist/fullcalendar.print.min.css' %}" media="print">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static 'atrix_core/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{% static 'atrix_core/static/css/AdminLTE.min.css' %}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{% static 'atrix_core/static/css/skins/skin-green.min.css' %}">
+  <link rel="stylesheet" href="{% static 'atrix_core/static/css/sweetalert.css' %}">
+    <!-- Flash messages com toastr -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,7 +79,7 @@
                   <li><!-- Início mensagem -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="static/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <!--<img src="static/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
                       </div>
                       <h4>
                         Agendamento realizado
@@ -184,7 +189,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pessoas.html"><i class="fa fa-circle-o"></i> Pessoas</a></li>
+            <li><a href="{% url 'dashboard:customers' %}"><i class="fa fa-circle-o"></i> Clientes</a></li>
             <li><a href="fornecedores.html"><i class="fa fa-circle-o"></i> Fornecedores</a></li>
             <li><a href="produtos.html"><i class="fa fa-circle-o"></i> Produtos</a></li>
             <li><a href="servicos.html"><i class="fa fa-circle-o"></i> Serviços</a></li>
@@ -199,14 +204,9 @@
 <div class="content-wrapper">
  <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Bem-vindo ao atrixmob
-        <small>Gerencie o seu negócio até sem internet</small>
-      </h1>
-
+      {% block breadcrumb %}{% endblock breadcrumb %}
     </section>
     {% block main %}
-
     <!-- Conteúdo principal -->
     {% endblock main %}
     <!-- /.content -->
@@ -228,6 +228,9 @@
 <script src="{% static 'atrix_core/bower_components/jquery/dist/jquery.min.js' %}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{% static 'atrix_core/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<!-- DataTables -->
+<script src="{% static 'atrix_core/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'atrix_core/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{% static 'atrix_core/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
 <!-- SlimScroll -->
@@ -243,9 +246,50 @@
 <script src="{% static 'atrix_core/static/js/adminlte.min.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{% static 'atrix_core/static/js/demo.js' %}"></script>
-<!-- Script para grafico de barras -->
-<script src="{% static 'atrix_core/static/js/barchart.js' %}"></script>
+
+<!--Flash messages com toastr -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <!-- Script para calendario geral -->
 <script src="{% static 'atrix_core/static/js/calendarscript.js' %}"></script>
+<script src="{% static 'atrix_landing/js/maskedinput.js' %}"></script>
+<script src="{% static 'atrix_landing/js/searchcep.js' %}"></script>
+<script src="{% static 'atrix_core/static/js/toastr.js' %}"></script>
+<!-- Alertas -->
+<script src="{% static 'atrix_core/static/js/sweetalert.min.js' %}"></script>
+<!--Mensagens e Notificações-->
+{% if messages %}
+			<script>
+				toastr.options = {
+				  "closeButton": false,
+				  "debug": false,
+				  "newestOnTop": false,
+				  "progressBar": false,
+				  "positionClass": "toast-bottom-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+			</script>
+			{% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <script>toastr.success('','{{ message }}');</script>
+                {% elif message.tags == 'warning' %}
+                    <script>toastr.warning('','{{ message }}');</script>
+                {% elif message.tags == 'error' %}
+                    <script>toastr.error('','{{ message }}');</script>
+                {% elif message.tags == 'info' %}
+                    <script>toastr.info('','{{ message }}');</script>
+                {% endif %}
+            {% endfor %}
+		{% endif %}
+{% block javascript %}
+{% endblock javascript %}
 </body>
 </html>

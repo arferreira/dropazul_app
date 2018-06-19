@@ -10,6 +10,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'debug_toolbar',
     'pagseguro',
 )
@@ -17,6 +18,7 @@ DJANGO_APPS = (
 LOCAL_APPS = (
     'atrix_tenant',
     'atrix_landing',
+    'atrix_dashboard',
 )
 
 THIRD_PARTY_APPS = (
@@ -35,7 +37,5 @@ TENANT_APPS = (
     'django.contrib.auth',
     'django.contrib.sessions',
 ) + LOCAL_APPS
-
-
 
 INSTALLED_APPS = BEFORE_DJANGO_APPS + DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
