@@ -2,14 +2,19 @@ from django.db import models
 
 
 
-KIND_CUSTOMER = (
+KIND_PERSON = (
     (1, 'Pessoa Física'),
     (2, 'Pessoa Jurídica'),
 )
 
-# Modelo para clientes
-class Customer(models.Model):
-    kind = models.IntegerField(default=1, choices=KIND_CUSTOMER, verbose_name='Tipo de cliente',
+STATUS_PERSON = (
+    (True, 'Ativo'),
+    (False, 'Inativo'),
+)
+
+# Modelo para Pessoa
+class Person(models.Model):
+    kind = models.IntegerField(default=1, choices=KIND_PERSON, verbose_name='Tipo de pessoa',
                                blank=False, null=False)
     # Pessoa Física
     name_social_name = models.CharField(blank=False, null=False, verbose_name='Nome / Razão Social',
@@ -43,13 +48,29 @@ class Customer(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Modificado em')
-
+    status = models.BooleanField(verbose_name='Situação', default=True, choices=STATUS_PERSON)
 
     class Meta:
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
+        abstract = True
+
 
 
     def __str__(self):
         return self.name_social_name
 
+
+
+
+# Modelo referente a clientes
+class Customer(Person):
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+
+
+
+# Modelo referente a Fornecedor
+class Provider(Person):
+    class Meta:
+        verbose_name = 'Fornecedor'
+        verbose_name_plural = 'Fornecedores'

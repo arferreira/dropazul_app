@@ -1,0 +1,213 @@
+{% extends "atrix_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% load widget_tweaks %}
+{% block title %}{% trans '[atrixmob] -  Editar Fornecedor' %}{% endblock %}
+{% block breadcrumb %}
+<h1>
+Clientes
+<small>Editando fornecedor</small>
+</h1>
+<a href="{% url 'dashboard:providers' %}" class="btn bg-purple margin pull-right">VOLTAR</a>
+{% endblock breadcrumb %}
+{% block main %}
+  <!-- Conteúdo principal -->
+    <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+
+            <div class="box box-info">
+            <div class="box-header">
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                    <form class="form" action="" method="post">
+                        {% csrf_token %}
+                      <div class="box-body">
+                        <legend> Tipo de Fornecedor</legend>
+                          <span>Selecione o tipo de fornecedor</span>
+                            {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                            <strong>Ocorreu um erro no preenchimento do formulário!</strong>
+                                            <br>
+                                            <strong>Fique atento aos itens obrigatórios!</strong>
+                                    </div>
+                            {% endif %}
+                          <div class="form-group">
+                              <div class="col-sm-12">
+                                  {{ form.kind|add_class:'form-control kind' }}
+                                  <strong style="color:red;">{{ form.errors.kind }}</strong>
+                              </div>
+                          </div>
+                          <!-- Formulário pessoa física (Cliente) -->
+                          <div class="pessoa-fisica">
+                              <div class="row">
+                                  <br><br>
+                                  <legend>Dados Pessoais</legend>
+                                  <div class="form-group">
+                                      <div class="col-xs-6">
+                                          <label for="name_social_name">Nome completo:</label>
+                                          {{ form.name_social_name|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.name_social_name }}</strong>
+                                      </div>
+                                      <div class="col-xs-6 cpf">
+                                        <label for="cpf">CPF:</label>
+                                          {% render_field form.cpf class="form-control" id="cpf" %}
+                                          <strong style="color:red;">{{ form.errors.cpf }}</strong>
+                                      </div>
+                                      <div class="col-xs-6 cnpj">
+                                        <label for="cpf">CNPJ:</label>
+                                          {% render_field form.cnpj class="form-control" id="cnpj" %}
+                                          <strong style="color:red;">{{ form.errors.cnpj }}</strong>
+                                      </div>
+                                      <div class="col-xs-6 rg">
+                                        <label for="rg">RG:</label>
+                                        {% render_field form.rg class="form-control" id="rg" %}
+                                        <strong style="color:red;">{{ form.errors.rg }}</strong>
+                                      </div>
+                                      <div class="col-xs-6 name_fantasy">
+                                        <label for="name_fantasy">Nome de Fantasia:</label>
+                                        {% render_field form.name_fantasy class="form-control" id="rg" %}
+                                        <strong style="color:red;">{{ form.errors.name_fantasy }}</strong>
+                                      </div>
+                                      <div class="col-xs-6 responsible">
+                                        <label for="responsible">Responsável:</label>
+                                        {% render_field form.responsible class="form-control" id="responsible" %}
+                                        <strong style="color:red;">{{ form.errors.responsible }}</strong>
+                                      </div>
+                                      <div class="col-xs-6 born_date">
+                                        <label for="born_date">Data de nascimento:</label>
+                                          {% render_field form.born_date class="form-control" id="born_date" type="date" %}
+                                          <strong style="color:red;">{{ form.errors.born_date }}</strong>
+                                      </div>
+                                      <div class="col-xs-6">
+                                        <label for="born_date">Email:</label>
+                                        {% render_field form.email class="form-control" id="email" %}
+                                         <strong style="color:red;">{{ form.errors.email }}</strong>
+                                      </div>
+                                      <div class="col-xs-6">
+                                        <label for="phone_number">Telefone para contato:</label>
+                                        {% render_field form.phone_number class="form-control" id="phone_number" %}
+                                        <strong style="color:red;">{{ form.errors.phone_number }}</strong>
+                                      </div>
+                                  </div>
+                                  <br><br><br>
+                                  <legend>Endereço</legend>
+                                  <div class="form-group">
+                                    <div class="col-xs-3">
+                                          <label for="zipcode">CEP:</label>
+                                          {% render_field form.zipcode class="form-control" id="id_zipcode" %}
+                                          <strong style="color:red;">{{ form.errors.zipcode }}</strong>
+                                    </div>
+                                    <div class="col-xs-9">
+                                          <label for="zipcode">Endereço:</label>
+                                          {% render_field form.address class="form-control" id="id_address" %}
+                                          <strong style="color:red;">{{ form.errors.address }}</strong>
+                                    </div>
+                                    <div class="col-xs-3">
+                                          <label for="address_number">Número:</label>
+                                          {% render_field form.address_number class="form-control" id="id_address_number" %}
+                                          <strong style="color:red;">{{ form.errors.address_number }}</strong>
+                                    </div>
+                                    <div class="col-xs-9">
+                                          <label for="neighborhood">Bairro:</label>
+                                          {% render_field form.neighborhood class="form-control" id="id_neighborhood" %}
+                                          <strong style="color:red;">{{ form.errors.neighborhood }}</strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <label for="city">Cidade:</label>
+                                          {% render_field form.city class="form-control" id="id_city" %}
+                                          <strong style="color:red;">{{ form.errors.city }}</strong>
+                                    </div>
+                                    <div class="col-xs-6">
+                                          <label for="province">Estado:</label>
+                                          {% render_field form.province class="form-control" id="id_province" %}
+                                          <strong style="color:red;">{{ form.errors.province }}</strong>
+                                    </div>
+
+                                  </div>
+                                  <br><br><br>
+                                  <legend>Informações</legend>
+                                  <div class="form-group">
+                                      <div class="col-xs-12">
+                                          <label for="aditional_information">Informações adicionais</label>
+                                          {% render_field form.aditional_information class="form-control" id="id_aditional_information" %}
+                                          <strong style="color:red;">{{ form.errors.aditional_information }}</strong>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+
+                          <!-- Formulário pessoa juridica (Cliente / Empresa)  -->
+
+
+                      </div>
+                      <!-- /.box-body -->
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-info pull-right">Atualizar</button>
+                      </div>
+                      <!-- /.box-footer -->
+                    </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+{% endblock main %}
+
+<!-- Bloco de scripts js -->
+{% block javascript %}
+<script>
+    // mascaras
+    $("#cpf").mask("999.999.999-99");
+    $("#cnpj").mask("99.999.999/9999-99");
+    $("#id_zipcode").mask("99999-999");
+    $("#phone_number").mask("(99) 99999-9999");
+
+    // Busca Endereço
+    $('#id_zipcode').blur(function() {
+      getAddress();
+    });
+    var type_person = $('.kind').val();
+    if(type_person == 1){
+        $('.cnpj').hide();
+        $('.name_fantasy').hide();
+        $('.responsible').hide();
+        $('.rg').show();
+        $('.born_date').show();
+    }
+    if(type_person == 2){
+        $('.cpf').hide();
+        $('.name_fantasy').show();
+        $('.responsible').show();
+        $('.rg').hide();
+        $('.born_date').hide();
+    }
+    // pegar seleção de pessoa fisica ou juridica
+    $('select').on('change', function() {
+            if(this.value == 1){
+                $('.cnpj').hide();
+                $('.cpf').show();
+                $('.rg').show();
+                $('.born_date').show();
+                $('.name_fantasy').hide();
+                $('.responsible').hide();
+            }
+            if(this.value == 2){
+                $('.cpf').hide();
+                $('.cnpj').show();
+                $('.name_fantasy').show();
+                $('.responsible').show();
+                $('.rg').hide();
+                $('.born_date').hide();
+            }
+
+    })
+
+
+</script>
+{% endblock javascript %}

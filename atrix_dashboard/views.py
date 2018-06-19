@@ -17,15 +17,21 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
 # Dashboard (Painel do cliente)
-from atrix_dashboard.models import Customer
+from atrix_dashboard.models import (Customer, Provider)
 # Form Customer
 from atrix_dashboard.forms import CustomerForm
 
-
+# Tela Inicial do Dashboard
 class IndexView(LoginRequiredMixin, TemplateView):
     login_url = '/tenant/login/'
     template_name = 'atrix_dashboard/index_dashboard.html'
 
+
+u"""
+
+    Informações relativas ao Cliente
+
+"""
 
 # Listagem de clientes de cada tenant
 class CustomerListView(LoginRequiredMixin, ListView):
@@ -70,11 +76,55 @@ def customer_delete(request, customer_id):
         raise Http404()
 
 
+u"""
+
+    Informações relativas ao Fornecedor
+
+"""
 
 
 
+# Listagem de fornecedores de cada tenant
+class ProviderListView(LoginRequiredMixin, ListView):
+    model = Provider
+    context_object_name = 'providers'
+    template_name = 'atrix_dashboard/providers/provider_list.html'
 
 
+# Criando um novo cliente
+class ProviderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Provider
+    fields = '__all__'
+    template_name = 'atrix_dashboard/providers/provider_form.html'
+    success_url = reverse_lazy('dashboard:providers')
+    success_message = "Fornecedor %(name_social_name)s foi inserido com sucesso!"
+
+
+
+# Editando um cliente
+class ProviderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Provider
+    fields = '__all__'
+    template_name = 'atrix_dashboard/providers/provider_update_form.html'
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('dashboard:providers')
+    success_message = "Fornecedor %(name_social_name)s foi atualizado com sucesso!"
+
+
+# Deletando um fornecedor
+@login_required
+@csrf_exempt
+def provider_delete(request, provider_id):
+    try:
+        provider = Provider.objects.get(pk=provider_id)
+    except Provider.DoesNotExist:
+        raise Http404()
+    if request.method == 'GET':
+        provider.delete()
+        messages.success(request, 'Fornecedor excluído com sucesso!')
+        return HttpResponseRedirect(reverse('dashboard:providers'))
+    else:
+        raise Http404()
 
 
 

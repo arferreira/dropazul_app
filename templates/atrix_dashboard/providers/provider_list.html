@@ -1,12 +1,12 @@
 {% extends "atrix_dashboard/base_dashboard.html" %}
 {% load i18n static %}
-{% block title %}{% trans '[atrixmob] -  Seus clientes' %}{% endblock %}
+{% block title %}{% trans '[atrixmob] -  Seus fornecedores' %}{% endblock %}
 {% block breadcrumb %}
 <h1>
-Clientes
-<small>Gerencie os seus clientes</small>
+Fornecedores
+<small>Gerencie os seus fornecedores</small>
 </h1>
-<a href="{% url 'dashboard:new_customer' %}" class="btn bg-purple margin pull-right">ADICIONAR</a>
+<a href="{% url 'dashboard:new_provider' %}" class="btn bg-purple margin pull-right">ADICIONAR</a>
 {% endblock breadcrumb %}
 {% block main %}
   <!-- Conteúdo principal -->
@@ -19,8 +19,8 @@ Clientes
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              {% if customers.count > 0 %}
-              <table id="customers" class="table table-bordered table-striped dataTable">
+              {% if providers.count > 0 %}
+              <table id="providers" class="table table-bordered table-striped dataTable">
                 <thead>
                 <tr>
                   <th>Nome</th>
@@ -32,32 +32,32 @@ Clientes
                 </tr>
                 </thead>
                 <tbody>
-                {% for customer in customers %}
+                {% for provider in providers %}
                 <tr>
-                  <td><a href="{% url 'dashboard:update_customer' customer.pk %}" class="link-datatable">{{ customer.name_social_name }}</a></td>
+                  <td><a href="{% url 'dashboard:update_provider' provider.pk %}" class="link-datatable">{{ provider.name_social_name }}</a></td>
                   <td>
-                    {% if customer.kind == 1 %}
+                    {% if provider.kind == 1 %}
                         Pessoa Física
                     {% else %}
                         Pessoa Jurídica
                     {% endif %}
                   </td>
-                    {% if customer.kind == 1 %}
-                        <td>{{ customer.cpf }}</td>
+                    {% if provider.kind == 1 %}
+                        <td>{{ provider.cpf }}</td>
                     {% else %}
-                        <td>{{ customer.cnpj }}</td>
+                        <td>{{ provider.cnpj }}</td>
                     {% endif %}
-                  <td>{{ customer.phone_number }}</td>
-                  <td style="{% if customer.status %} color:green;{% else %} color:red; {% endif %}">
-                      {% if customer.status %}
+                  <td>{{ provider.phone_number }}</td>
+                  <td style="{% if provider.status %} color:green;{% else %} color:red; {% endif %}">
+                      {% if provider.status %}
                         Ativo
                       {% else %}
                         Inativo
                       {% endif %}
                   </td>
                   <td>
-                      <a href="{% url 'dashboard:update_customer' customer.pk %}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a href="#" class="btn btn-danger btn-xs delete-customer" data-toggle="tooltip" data-title="Excluir Cliente" data-url="{% url 'dashboard:delete_customer' customer.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                      <a href="{% url 'dashboard:update_provider' provider.pk %}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                      <a href="#" class="btn btn-danger btn-xs delete-provider" data-toggle="tooltip" data-title="Excluir Fornecedor" data-url="{% url 'dashboard:delete_provider' provider.id %}"><span class="glyphicon glyphicon-trash"></span></a>
                   </td>
                 </tr>
                 {% endfor %}
@@ -76,7 +76,7 @@ Clientes
               </table>
                 {% else %}
 
-                    <center><h4>Você ainda não possui clientes cadastrados no sistema!</h4></center>
+                    <center><h4>Você ainda não possui fornecedores cadastrados no sistema!</h4></center>
 
                 {% endif %}
 
@@ -94,14 +94,14 @@ Clientes
 {% block javascript %}
 <script type="text/javascript">
 $(function () {
-    $('#customers').DataTable( {
+    $('#providers').DataTable( {
          "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
             }
     } );
 
 
-    $("#customers").on("click", ".delete-customer", function () {
+    $("#providers").on("click", ".delete-provider", function () {
 				var url = $(this).attr("data-url");
 				deleteQuestion(url);
 			});
@@ -109,7 +109,7 @@ $(function () {
 			function deleteQuestion(url) {
 				swal({
 					title: "Tem certeza?",
-					text: "Você irá excluir esse cliente e tudo relacionado a ele será apagado!",
+					text: "Você irá excluir esse fornecedor e tudo relacionado a ele será apagado!",
 					type: "warning",
 					showCancelButton: true,
 					cancelButtonText: "Cancelar",
