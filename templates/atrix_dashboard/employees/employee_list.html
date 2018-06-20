@@ -1,0 +1,130 @@
+{% extends "atrix_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[atrixmob] -  Seus colaboradores' %}{% endblock %}
+{% block breadcrumb %}
+<h1>
+Colaboradores
+<small>Gerencie os seus colaboradores</small>
+</h1>
+<a href="{% url 'dashboard:new_employee' %}" class="btn bg-purple margin pull-right">ADICIONAR</a>
+{% endblock breadcrumb %}
+{% block main %}
+  <!-- Conteúdo principal -->
+    <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+
+            <div class="box">
+            <div class="box-header">
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              {% if employees.count > 0 %}
+              <table id="employees" class="table table-bordered table-striped dataTable">
+                <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Tipo</th>
+                  <th>CPF/CNPJ</th>
+                  <th>Telefone</th>
+                  <th>Situação</th>
+                  <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for employee in employees %}
+                <tr>
+                  <td><a href="{% url 'dashboard:update_employee' employee.pk %}" class="link-datatable">{{ employee.name_social_name }}</a></td>
+                  <td>
+                    {% if employee.kind == 1 %}
+                        Pessoa Física
+                    {% else %}
+                        employee Jurídica
+                    {% endif %}
+                  </td>
+                    {% if employee.kind == 1 %}
+                        <td>{{ employee.cpf }}</td>
+                    {% else %}
+                        <td>{{ employee.cnpj }}</td>
+                    {% endif %}
+                  <td>{{ employee.phone_number }}</td>
+                  <td style="{% if employee.status %} color:green;{% else %} color:red; {% endif %}">
+                      {% if employee.status %}
+                        Ativo
+                      {% else %}
+                        Inativo
+                      {% endif %}
+                  </td>
+                  <td>
+                      <a href="{% url 'dashboard:update_employee' employee.pk %}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                      <a href="#" class="btn btn-danger btn-xs delete-employee" data-toggle="tooltip" data-title="Excluir Colaborador" data-url="{% url 'dashboard:delete_employee' employee.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Nome</th>
+                  <th>Tipo</th>
+                  <th>CPF/CNPJ</th>
+                  <th>Telefone</th>
+                  <th>Situação</th>
+                  <th>Ações</th>
+                </tr>
+                </tfoot>
+              </table>
+                {% else %}
+
+                    <center><h4>Você ainda não possui colaboradores cadastrados no sistema!</h4></center>
+
+                {% endif %}
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+{% endblock main %}
+{% block javascript %}
+<script type="text/javascript">
+$(function () {
+    $('#employees').DataTable( {
+         "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+            }
+    } );
+
+
+    $("#employees").on("click", ".delete-employee", function () {
+				var url = $(this).attr("data-url");
+				deleteQuestion(url);
+			});
+
+			function deleteQuestion(url) {
+				swal({
+					title: "Tem certeza?",
+					text: "Você irá excluir esse colaborador e tudo relacionado a ele será apagado!",
+					type: "warning",
+					showCancelButton: true,
+					cancelButtonText: "Cancelar",
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Sim, excluir!",
+					closeOnConfirm: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						window.location.href = url;
+					}
+				});
+	};
+
+
+})
+</script>
+{% endblock javascript %}

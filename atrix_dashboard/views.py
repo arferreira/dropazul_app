@@ -17,7 +17,7 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
 # Dashboard (Painel do cliente)
-from atrix_dashboard.models import (Customer, Provider)
+from atrix_dashboard.models import (Customer, Provider, Employee)
 # Form Customer
 from atrix_dashboard.forms import CustomerForm
 
@@ -91,7 +91,7 @@ class ProviderListView(LoginRequiredMixin, ListView):
     template_name = 'atrix_dashboard/providers/provider_list.html'
 
 
-# Criando um novo cliente
+# Criando um novo fornecedor
 class ProviderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Provider
     fields = '__all__'
@@ -101,7 +101,7 @@ class ProviderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 
-# Editando um cliente
+# Editando um fornecedor
 class ProviderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Provider
     fields = '__all__'
@@ -128,5 +128,53 @@ def provider_delete(request, provider_id):
 
 
 
+u"""
 
+    Informações relativas ao Colaborador
+
+"""
+
+
+
+# Listagem de funcionarios de cada tenant
+class EmployeeListView(LoginRequiredMixin, ListView):
+    model = Employee
+    context_object_name = 'employees'
+    template_name = 'atrix_dashboard/employees/employee_list.html'
+
+
+# Criando um novo funcionario
+class EmployeeCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'atrix_dashboard/employees/employee_form.html'
+    success_url = reverse_lazy('dashboard:employees')
+    success_message = "Colaborador %(name_social_name)s foi inserido com sucesso!"
+
+
+
+# Editando um funcionario
+class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Employee
+    fields = '__all__'
+    template_name = 'atrix_dashboard/employees/employee_update_form.html'
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('dashboard:employees')
+    success_message = "Colaborador %(name_social_name)s foi atualizado com sucesso!"
+
+
+# Deletando um funcionario
+@login_required
+@csrf_exempt
+def employee_delete(request, employee_id):
+    try:
+        employee = Employee.objects.get(pk=employee_id)
+    except Employee.DoesNotExist:
+        raise Http404()
+    if request.method == 'GET':
+        employee.delete()
+        messages.success(request, 'Colaborador excluído com sucesso!')
+        return HttpResponseRedirect(reverse('dashboard:employees'))
+    else:
+        raise Http404()
 

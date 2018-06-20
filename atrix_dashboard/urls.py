@@ -2,7 +2,9 @@ from django.urls import path, include
 
 from atrix_dashboard.views import (IndexView, CustomerListView, CustomerCreateView,
                                    CustomerUpdateView, customer_delete, ProviderListView,
-                                   ProviderCreateView, ProviderUpdateView, provider_delete)
+                                   ProviderCreateView, ProviderUpdateView, provider_delete,
+                                   EmployeeListView, EmployeeCreateView, EmployeeUpdateView,
+                                   employee_delete)
 
 app_name="atrix_dashboard"
 
@@ -19,5 +21,11 @@ urlpatterns = [
     path('fornecedor/novo', ProviderCreateView.as_view(), name='new_provider'),
     path('fornecedor/editar/<int:pk>', ProviderUpdateView.as_view(), name='update_provider'),
     path('fornecedor/excluir/<int:provider_id>', provider_delete, name='delete_provider'),
+
+    # Fornecedores
+    path('colaboradores/', EmployeeListView.as_view(), name='employees'),
+    path('colaborador/novo', EmployeeCreateView.as_view(), name='new_employee'),
+    path('colaborador/editar/<int:pk>', EmployeeUpdateView.as_view(), name='update_employee'),
+    path('colaborador/excluir/<int:employee_id>', employee_delete, name='delete_employee'),
 
 ]

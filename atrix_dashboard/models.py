@@ -74,3 +74,10 @@ class Provider(Person):
     class Meta:
         verbose_name = 'Fornecedor'
         verbose_name_plural = 'Fornecedores'
+
+
+# Modelo referente a Colaborador
+class Employee(Person):
+    class Meta:
+        verbose_name = 'Colaborador'
+        verbose_name_plural = 'Colaboradores'
