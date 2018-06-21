@@ -6,7 +6,7 @@
     "default": {
       "ENGINE": "tenant_schemas.postgresql_backend",
       "HOST": "localhost",
-      "NAME": "atrixmob_development",
+      "NAME": "provarme_development",
       "USER": "antonioricardo",
       "PASSWORD": "rub32912289",
       "PORT": 5432
@@ -27,7 +27,7 @@
     "ALLOWED_HOSTS": [
       "127.0.0.1",
       ".localhost",
-      ".atrixmob.com.br",
+      ".provar.me",
       "178.62.66.183"
     ]
   },
@@ -37,7 +37,7 @@
    "LOGGING": {
     "DEBUG_PATH": "log/debug.log",
     "ERROR_PATH": "log/error.log",
-    "ATRIXMOB_PATH": "log/atrixmob.log"
+    "ATRIXMOB_PATH": "log/provarme.log"
   },
   "EMAIL": {
     "EMAIL_USE_TLS": true,

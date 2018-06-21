@@ -1,6 +1,6 @@
-# Atrix Core (WEB)
+# provarme (WEB)
 
-App em Django para prover o modelo de negócio do Atrixmob
+App em Django para prover o modelo de negócio do provarme
 
 ## Getting Started
 
@@ -74,7 +74,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Antonio Ricardo** - *Initial work* - [Antonio Ricardo](https://github.com/arferreira)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
