@@ -170,6 +170,9 @@ PAGSEGURO_SANDBOX = True # se o valor for True, as requisições a api serão fe
 PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações vão ser logadas no database.
 
 
+
+# Carregamento de dados inicial
+# Lembrar de utilizar o tenant_command e passar o schema especifico
 FIXTURE_DIRS = [
     os.path.join(BASE_DIR, 'fixtures'),
 ]
