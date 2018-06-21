@@ -1,0 +1,98 @@
+[
+  {
+    "model": "employee.employee",
+    "pk": 2,
+    "fields": {
+      "kind": 1,
+      "name_social_name": "Colaborador demo 1",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "colaboradordemo1@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Colaborador Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "Atrix Mob",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  },
+  {
+    "model": "employee.employee",
+    "pk": 3,
+    "fields": {
+      "kind": 2,
+      "name_social_name": "Colaborador demo 2",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "colaboradordemo2@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Colaborador Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "Atrix Mob",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  },
+  {
+    "model": "employee.employee",
+    "pk": 4,
+    "fields": {
+      "kind": 1,
+      "name_social_name": "Colaborador demo 3",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "colaboradordemo3@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Colaborador Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "Atrix Mob",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  },
+  {
+    "model": "employee.employee",
+    "pk": 5,
+    "fields": {
+      "kind": 2,
+      "name_social_name": "Colaborador demo 4",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "colaboradordemo4@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Colaborador Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "Atrix Mob",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  }
+]

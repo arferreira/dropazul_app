@@ -19,6 +19,12 @@ LOCAL_APPS = (
     'atrix_tenant',
     'atrix_landing',
     'atrix_dashboard',
+    'atrix_dashboard.customer',
+    'atrix_dashboard.employee',
+    'atrix_dashboard.person',
+    'atrix_dashboard.product',
+    'atrix_dashboard.provider',
+    'atrix_dashboard.service',
 )
 
 THIRD_PARTY_APPS = (

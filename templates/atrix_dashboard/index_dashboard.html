@@ -4,7 +4,7 @@
 {% block breadcrumb %}
 <h1>
 Bem-vindo ao atrixmob
-<small>Gerencie o seu negócio até sem internet</small>
+<small>Gerencie o seu lava jato de forma rápida e fácil</small>
 </h1>
 {% endblock breadcrumb %}
 {% block main %}
@@ -17,14 +17,14 @@ Bem-vindo ao atrixmob
             <span class="info-box-icon"><i class="fa fa-user"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Pessoas</span>
-              <span class="info-box-number">70</span>
+              <span class="info-box-text">Clientes</span>
+              <span class="info-box-number">{{ customers.count }}</span>
 
               <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
+                <div class="progress-bar" style="width: {{ customers.count }}%"></div>
               </div>
                   <span class="progress-description">
-                    70 Clientes no sistema
+                    {{ customers.count }} Clientes no sistema
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -150,11 +150,11 @@ Bem-vindo ao atrixmob
               <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
-              <h3 class="widget-user-username">Mariana Rosa</h3>
+              <h3 class="widget-user-username">João Batista</h3>
               <h5 class="widget-user-desc">(67) 99845-6920</h5>
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" src="static/img/user1-128x128.jpg" alt="User Avatar">
+              <img class="img-circle" src="{% static 'atrix_core/static/img/user1-128x128.jpg' %}" alt="User Avatar">
             </div>
             <div class="box-footer">
               <div class="row">

@@ -16,15 +16,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
-# Dashboard (Painel do cliente)
-from atrix_dashboard.models import (Customer, Provider, Employee)
-# Form Customer
-from atrix_dashboard.forms import CustomerForm
+# Importação dos modelos
+from atrix_dashboard.customer.models import Customer
+from atrix_dashboard.provider.models import Provider
+from atrix_dashboard.employee.models import Employee
 
-# Tela Inicial do Dashboard
-class IndexView(LoginRequiredMixin, TemplateView):
-    login_url = '/tenant/login/'
-    template_name = 'atrix_dashboard/index_dashboard.html'
+
 
 
 u"""

@@ -1,11 +1,11 @@
 {% extends "atrix_dashboard/base_dashboard.html" %}
 {% load i18n static %}
 {% load widget_tweaks %}
-{% block title %}{% trans '[atrixmob] -  Novo colaborador' %}{% endblock %}
+{% block title %}{% trans '[atrixmob] -  Editar Colaborador' %}{% endblock %}
 {% block breadcrumb %}
 <h1>
 Colaboradores
-<small>Adicione um novo colaborador</small>
+<small>Editando colaborador</small>
 </h1>
 <a href="{% url 'dashboard:employees' %}" class="btn bg-purple margin pull-right">VOLTAR</a>
 {% endblock breadcrumb %}
@@ -18,8 +18,15 @@ Colaboradores
             <div class="box box-info">
             <div class="box-header">
             </div>
+            <div class="nav-tabs-custom">
             <!-- /.box-header -->
             <div class="box-body">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#register" data-toggle="tab" aria-expanded="true">Informações Gerais</a></li>
+                  <li class="pull-right"><a href="" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                <div class="tab-pane active" id="register">
                     <form class="form" action="" method="post">
                         {% csrf_token %}
                       <div class="box-body">
@@ -139,10 +146,15 @@ Colaboradores
                           </div>
 
                           <!-- Formulário pessoa juridica (Cliente / Empresa)  -->
-
-
                       </div>
+                      </div>
+
+
+              </div>
+
+
                       <!-- /.box-body -->
+
                       <div class="box-footer">
                         <button type="submit" class="btn btn-info pull-right">Salvar</button>
                       </div>
@@ -180,6 +192,13 @@ Colaboradores
         $('.rg').show();
         $('.born_date').show();
     }
+    if(type_person == 2){
+        $('.cpf').hide();
+        $('.name_fantasy').show();
+        $('.responsible').show();
+        $('.rg').hide();
+        $('.born_date').hide();
+    }
     // pegar seleção de pessoa fisica ou juridica
     $('select').on('change', function() {
             if(this.value == 1){
@@ -192,11 +211,11 @@ Colaboradores
             }
             if(this.value == 2){
                 $('.cpf').hide();
-                $('.rg').hide();
-                $('.born_date').hide();
                 $('.cnpj').show();
                 $('.name_fantasy').show();
                 $('.responsible').show();
+                $('.rg').hide();
+                $('.born_date').hide();
             }
 
     })

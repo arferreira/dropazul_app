@@ -18,8 +18,15 @@ Colaboradores
             <div class="box box-info">
             <div class="box-header">
             </div>
+            <div class="nav-tabs-custom">
             <!-- /.box-header -->
             <div class="box-body">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#register" data-toggle="tab" aria-expanded="true">Informações Gerais</a></li>
+                  <li class="pull-right"><a href="" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                </ul>
+                <div class="tab-content">
+                <div class="tab-pane active" id="register">
                     <form class="form" action="" method="post">
                         {% csrf_token %}
                       <div class="box-body">
@@ -139,10 +146,16 @@ Colaboradores
                           </div>
 
                           <!-- Formulário pessoa juridica (Cliente / Empresa)  -->
-
-
                       </div>
+                      </div>
+
+
+
+              </div>
+
+
                       <!-- /.box-body -->
+
                       <div class="box-footer">
                         <button type="submit" class="btn btn-info pull-right">Atualizar</button>
                       </div>

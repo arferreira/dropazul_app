@@ -1,0 +1,13 @@
+[
+  {
+    "model": "atrix_tenant.plan",
+    "pk": 1,
+    "fields": {
+      "name": "Plano 100",
+      "description": "Plano de 100 cruzeiros",
+      "amount": 100.00,
+      "is_active": true,
+      "created_on": "2018-06-21"
+    }
+  }
+]

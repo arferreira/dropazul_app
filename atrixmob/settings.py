@@ -168,3 +168,8 @@ PAGSEGURO_EMAIL = 'antonioricardo_ferreira@hotmail.com'
 PAGSEGURO_TOKEN = '51E3688E0039466ABF8FEDDA8BD9A687'
 PAGSEGURO_SANDBOX = True # se o valor for True, as requisições a api serão feitas usando o PagSeguro Sandbox.
 PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações vão ser logadas no database.
+
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures'),
+]
