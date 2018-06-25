@@ -1,0 +1,104 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[atrixmob] -  Painel de controle' %}{% endblock %}
+{% block breadcrumb %}
+<h1>
+Bem-vindo ao provar.me
+<small>Gerencie os seus simulados e testes de forma rápida e fácil</small>
+</h1>
+{% endblock breadcrumb %}
+{% block main %}
+<section class="content">
+
+      <!-- Resumos do sistema -->
+        <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-user"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Alunos</span>
+              <span class="info-box-number">{{ customers.count }}</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: {{ customers.count }}%"></div>
+              </div>
+                  <span class="progress-description">
+                    {{ customers.count }} alunos no sistema
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-briefcase"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Simulados</span>
+              <span class="info-box-number">20</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 20%"></div>
+              </div>
+                  <span class="progress-description">
+                    20 Simulados cadastrados
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Testes</span>
+              <span class="info-box-number">41</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 40%"></div>
+              </div>
+                  <span class="progress-description">
+                    41 testes agendados
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-dollar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Financeiro</span>
+              <span class="info-box-number">R$ 987,89</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 90%"></div>
+              </div>
+                  <span class="progress-description">
+                    Simulados monetizados
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- / .Resumo do sistema-->
+
+
+    </section>
+{% endblock main %}
+{% block javascript %}
+    <!-- Script para grafico de barras -->
+<script src="{% static 'atrix_core/static/js/barchart.js' %}"></script>
+{% endblock javascript %}

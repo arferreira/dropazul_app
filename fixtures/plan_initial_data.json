@@ -1,6 +1,6 @@
 [
   {
-    "model": "atrix_tenant.plan",
+    "model": "provarme_tenant.plan",
     "pk": 1,
     "fields": {
       "name": "Plano 100",

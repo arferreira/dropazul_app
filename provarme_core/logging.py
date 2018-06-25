@@ -31,11 +31,11 @@ LOGGING = {
             'filename': settings["LOGGING"]["ERROR_PATH"],
             'formatter': 'tenant_context'
         },
-        'atrixmob_file': {
+        'provarme_file': {
             'filters': ['tenant_context'],
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': settings["LOGGING"]["ATRIXMOB_PATH"],
+            'filename': settings["LOGGING"]["PROVARME_PATH"],
             'formatter': 'tenant_context'
         },
         'console': {
@@ -55,8 +55,8 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
-        'provarme_core': {
-            'handlers': ['console', 'atrixmob_file'],
+        'provarme': {
+            'handlers': ['console', 'provarme_file'],
             'level': 'DEBUG',
             'propagate': True,
         }

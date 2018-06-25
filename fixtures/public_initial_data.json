@@ -1,0 +1,25 @@
+[
+  {
+    "model": "provarme_tenant.client",
+    "pk": 1,
+    "fields": {
+      "domain_url": "localhost",
+      "schema_name": "public",
+      "name": "Provar.me",
+      "name_fantasy": "Provar.me",
+      "document": "020.214.191-85",
+      "phone_number": "(67) 99845-6920",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorothéia",
+      "acceptance": true,
+      "is_active": true,
+      "display_site": true,
+      "display_landing": true,
+      "created_on": "2018-06-21"
+    }
+  }
+]

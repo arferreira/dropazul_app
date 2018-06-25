@@ -23,8 +23,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ADMINS = [
-    ('Antonio Ricardo', 'antonioricardoarfs@provarme_core.com.br'),
-    ('Mariana Rosa', 'mariana.souza@provarme_core.com.br'),
+    ('Antonio Ricardo', 'antonioricardoarfs@provar.me'),
 ]
 settings = get_settings()
 
@@ -52,8 +51,8 @@ MIDDLEWARE = [
 ]
 
 
-ROOT_URLCONF = 'provarme_core.urls'
-PUBLIC_SCHEMA_URLCONF  =  'provarme_core.urls_public'
+ROOT_URLCONF = 'provarme.urls'
+PUBLIC_SCHEMA_URLCONF  =  'provarme.urls_public'
 
 TEMPLATES = [
     {
@@ -71,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'provarme_core.wsgi.application'
+WSGI_APPLICATION = 'provarme.wsgi.application'
 
 
 
@@ -106,7 +105,7 @@ TENANT_MODEL = 'provarme_tenant.Client'
 
 # AWS_ACCESS_KEY_ID = 'AKIAJMGGRT5DDWMHA4VQ'
 # AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'atrixmobcore'
+# AWS_STORAGE_BUCKET_NAME = 'provarmecore'
 # AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 # AWS_S3_OBJECT_PARAMETERS = {
 #     'CacheControl': 'max-age=86400',
@@ -146,21 +145,21 @@ DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = "America/Sao_Paulo"
 
-# LOGGING do atrix
+# LOGGING do provarme
 
-from provarme_core.logging import LOGGING
+#from provarme_core.logging import LOGGING
 
 
 # EMAIL SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_HOST_USER = "postmaster@mg.provarme_core.com.br"
+EMAIL_HOST_USER = "postmaster@mg.atrixmob.com.br"
 EMAIL_HOST_PASSWORD = "1ef3d0eac06689079e8d057b35f9c9ff-b892f62e-ca36ad6d"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-CONTACT_EMAIL = "contato@provarme_core.com.br"
+CONTACT_EMAIL = "contato@provarme.com.br"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 2525
-EMAIL_SUBJECT_PREFIX = '[provarme_core]'
+EMAIL_SUBJECT_PREFIX = '[provar.me]'
 
 
 # Pagamento
