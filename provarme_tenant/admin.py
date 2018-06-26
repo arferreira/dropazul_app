@@ -4,9 +4,9 @@ from provarme_tenant.models import Client, Plan, Purchase
 
 
 # Custom django admin
-admin.site.site_header = "provarme_core"
-admin.site.site_title = "provarme_core - [Administração]"
-admin.site.index_title = "provarme_core - [Administração]"
+admin.site.site_header = "provar.me"
+admin.site.site_title = "provar.me - [Administração]"
+admin.site.index_title = "provar.me - [Administração]"
 
 
 # Custom itens

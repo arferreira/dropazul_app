@@ -1,11 +1,33 @@
 [
   {
     "model": "provarme_tenant.plan",
+    "pk": 3,
+    "fields": {
+      "name": "Plano básico",
+      "description": "Crie seu primeiro simulado online ",
+      "amount": 399.00,
+      "is_active": true,
+      "created_on": "2018-06-21"
+    }
+  },
+  {
+    "model": "provarme_tenant.plan",
+    "pk": 2,
+    "fields": {
+      "name": "Plano profissional",
+      "description": "Nosso plano mais contratado ",
+      "amount": 599.00,
+      "is_active": true,
+      "created_on": "2018-06-21"
+    }
+  },
+  {
+    "model": "provarme_tenant.plan",
     "pk": 1,
     "fields": {
-      "name": "Plano 100",
-      "description": "Plano de 100 cruzeiros",
-      "amount": 100.00,
+      "name": "Alto volume",
+      "description": "Experimente o melhor do provar.me ",
+      "amount": 999.00,
       "is_active": true,
       "created_on": "2018-06-21"
     }
