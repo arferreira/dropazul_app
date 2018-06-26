@@ -25,9 +25,7 @@ from pagseguro import PagSeguro
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
-# parse url
-from tld import get_tld
-from tld.utils import update_tld_names
+
 
 
 from provarme_tenant.forms import LoginForm
@@ -36,7 +34,7 @@ from provarme_tenant.models import Client, Plan, Purchase
 # parse url
 from provarme_tenant.tokens import account_activation_token
 
-update_tld_names()
+
 
 
 
@@ -50,12 +48,12 @@ def validate_tenant(request):
     if schema_exists(tenant_name):
         data = {
             'exist': True,
-            'tenant_name': tenant_name.replace('atrix_', '')
+            'tenant_name': tenant_name.replace('provarme_', '')
         }
     else:
         data = {
             'exist': False,
-            'tenant_name': tenant_name.replace('atrix_', '')
+            'tenant_name': tenant_name.replace('provarme_', '')
         }
 
     return JsonResponse(data)
