@@ -23,7 +23,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ADMINS = [
-    ('Antonio Ricardo', 'antonioricardos@provar.me'),
+    ('Antonio Ricardo', 'antonioricardo@provar.me'),
 ]
 settings = get_settings()
 
