@@ -27,7 +27,7 @@ ADMINS = [
 ]
 settings = get_settings()
 
-ALLOWED_HOSTS = settings['SECURITY']['ALLOWED_HOSTS']
+ALLOWED_HOSTS = ['*']
 
 
 # DEBUG TOOLBAR
