@@ -282,14 +282,14 @@ class TenantSignatureView(RedirectView):
             print('O inquilino já foi criado!')
             kwargs['tenant_exist'] = True
         else:
-            print('Criando inquilino para o atrix')
+            print('Criando inquilino para o provarme')
             client = Client()
             site_url = request.tenant.domain_url.replace('www.', '')
             client.domain_url = '{0}.{1}'.format(tenant_name, site_url)
             client.name = tenant_name
             client.name_fantasy = name_fantasy
             client.is_active = False
-            client.schema_name = 'atrix_' + tenant_name
+            client.schema_name = 'provarme_' + tenant_name
             client.save()
 
             # Criando a compra para o cliente
@@ -300,7 +300,7 @@ class TenantSignatureView(RedirectView):
             purchase.save()
 
             # Executando as migrações
-            with schema_context('atrix_' + tenant_name):
+            with schema_context('provarme_' + tenant_name):
                 print('Rodando as migrações com o Cliente que foi criado!')
                 user = User()
                 user.email = email
