@@ -4,6 +4,7 @@ from provarme.settings import BASE_DIR
 from .json_settings import get_settings
 from django.conf import settings
 
+
 settings = get_settings()
 
 LOGGING = {
@@ -35,14 +36,12 @@ LOGGING = {
             'filename': settings["LOGGING"]["ERROR_PATH"],
             'formatter': 'tenant_context'
         },
-        'logfile': {
-            'level':'DEBUG',
+        'djflow_file': {
             'filters': ['tenant_context'],
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'django.log'),
-            'maxBytes': 1024*1024*5, # 5MB
-            'backupCount': 0,
-            'formatter': 'tenant_context',
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': settings["LOGGING"]["PROVARME_PATH"],
+            'formatter': 'tenant_context'
         },
         'console': {
             'level': 'DEBUG',
@@ -62,7 +61,7 @@ LOGGING = {
             'propagate': True,
         },
         'provarme': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['console', 'provarme_file'],
             'level': 'DEBUG',
             'propagate': True,
         }
