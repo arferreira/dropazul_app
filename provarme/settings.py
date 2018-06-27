@@ -147,7 +147,7 @@ TIME_ZONE = "America/Sao_Paulo"
 
 # LOGGING do provarme
 
-#from provarme_core.logging import LOGGING
+from provarme_core.logging import LOGGING
 
 
 # EMAIL SMTP (Mailgun)
