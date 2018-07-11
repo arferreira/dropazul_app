@@ -1,5 +1,26 @@
+a.paginate_button {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #7b01e9;
+    border-color: #7b01e9;
+}
+a.paginate_button:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #7b01e9;
+    border-color: #7b01e9;
+}
+a.paginate_button.current {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #7b01e9;
+    border-color: #7b01e9;
+}
 .login-page, .register-page {
-    background: #451891;
+    background: #7b01e9;
 }
 .login-logo a, .register-logo a {
     color: #FFFFFF;

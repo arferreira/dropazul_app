@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+	<link type="text/css" rel="stylesheet" href="{% static 'assets/vendors/summernote/summernote.css' %}"/>
+
+	<link type="text/css" rel="stylesheet" href="{% static 'assets/css/theme-default/libs/select2/select2.css' %}"/>
+{% endblock styles %}
+{% block content %}
+	<!-- BEGIN CONTENT-->
+	<div id="content">
+		<section>
+			<div class="section-header ">
+				<ol class="breadcrumb">
+					<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+					<li><a href="{% url 'question_list' %}">Banco de Questões</a></li>
+					{% if form.instance.pk %}
+						<li class="active">Editar Questão</li>
+					{% else %}
+						<li class="active">Nova Questão</li>
+					{% endif %}
+				</ol>
+			</div>
+			<div class="section-body contain-xl">
+
+				<!-- BEGIN VERTICAL FORM -->
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form" method="POST" novalidate>
+							{% csrf_token %}
+							<div class="card">
+								<div class="card-head style-primary">
+									{% if form.instance.pk %}
+										<header>Editar Questão</header>
+									{% else %}
+										<header>Nova Questão</header>
+									{% endif %}
+								</div>
+								<div class="card-body floating-label">
+								<div class="card-actionbar">
+									<div class="card-actionbar-row">
+										<button type="submit" class="btn btn-flat btn-primary ink-reaction" name="save-new"><i class="fa fa-plus"></i> Salvar e Novo</button>
+										<button type="submit" class="btn btn-flat btn-primary ink-reaction"><i class="fa fa-check"></i> Salvar Questão</button>
+										<a href="{% url 'question_list' %}" class="btn btn-flat btn-danger ink-reaction"><i class="fa fa-close"></i> Cancelar</a>
+									</div>
+								</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="id_wording" style="position: relative;">Enunciado</label>
+												{{ form.wording }}
+											</div>
+											{{ form.errors.wording }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="id_wording" style="position: relative;">Categoria</label>
+												{{ form.categories }}
+											</div><!--end .form-group -->
+											{{ form.errors.categories }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="id_wording" style="position: relative;">Tags</label>
+												{{ form.tags }}
+											</div><!--end .form-group -->
+											{{ form.errors.tags }}
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="id_wording" style="position: relative;">Dica</label>
+												{{ form.hint }}
+											</div>
+											{{ form.errors.hint }}
+										</div>
+									</div>
+									<div class="row" id="options_row">
+										<div class="col-md-12">
+											<div class="card card-outlined style-primary">
+												<div class="card-head">
+													<header>Alternativas</header>
+												</div><!--end .card-head -->
+												<div class="card-body">
+													{{ formset.management_form }}
+													<table class="table table-hover">
+														<thead>
+															<tr>
+																<th width="60%">Texto</th>
+																<th width="10%"></th>
+																<th width="30%" class="text-right">
+																	<button type="button" class="btn btn-xs btn-flat btn-primary ink-reaction" id="toggle-alternatives-summernote"><i class="fa fa-code"></i> Ativar summernote</button>
+																	<button type="button" class="btn btn-xs btn-flat btn-primary ink-reaction" id="addAlternative"><i class="fa fa-plus"></i> Adicionar alternativa</button>
+																</th>
+															</tr>
+														</thead>
+														<tbody class="alternatives">
+															{% for alternative_form in formset.forms %}
+																<tr class="alternative">
+																	<td>
+																		{% for hidden_field in alternative_form.hidden_fields %}
+																			{{ hidden_field }}
+																		{% endfor %}
+																		{{ alternative_form.text }}
+																		{{ form.errors.text }}
+																		<!-- <textarea class="form-control autosize" name="" id="" cols="30" rows="1" style="height: 38px !important;"></textarea> -->
+																	</td>
+																	<td>
+																		<div class="checkbox checkbox-styled">
+																			<label>
+																				{{ alternative_form.correct }}
+																				<!-- <input type="checkbox" value=""> -->
+																				<span>Alternativa Correta?</span>
+																			</label>
+																		</div>
+																	</td>
+																	<td class="text-right">
+																		<!-- <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Adicionar Alternativa"><i class="fa fa-plus"></i></button> -->
+																		<label class="checkbox-inline checkbox-styled checkbox-danger">
+																			<!-- <input type="checkbox" value="option2" checked><span>Excluir?</span> -->
+																			{{ alternative_form.DELETE }} <span>Excluir?</span>
+																		</label>
+																		<!-- <button type="button" class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Excluir Alternativa"><i class="fa fa-trash-o"></i></button> -->
+																	</td>
+																</tr>
+															{% endfor %}
+														</tbody>
+													</table>
+												</div><!--end .card-body -->
+											</div><!--end .card -->
+										</div><!--end .col -->
+									</div><!--end .row -->
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="id_wording" style="position: relative;">Comentário</label>
+												{{ form.comment }}
+											</div>
+											{{ form.errors.comment }}
+										</div>
+									</div>
+								</div><!--end .card-body -->
+								<div class="card-actionbar">
+									<div class="card-actionbar-row">
+										<button type="submit" class="btn btn-flat btn-primary ink-reaction" name="save-new"><i class="fa fa-plus"></i> Salvar e Novo</button>
+										<button type="submit" class="btn btn-flat btn-primary ink-reaction"><i class="fa fa-check"></i> Salvar Questão</button>
+										<a href="{% url 'question_list' %}" class="btn btn-flat btn-danger ink-reaction"><i class="fa fa-close"></i> Cancelar</a>
+									</div>
+								</div>
+							</div><!--end .card -->
+						</form>
+					</div><!--end .col -->
+				</div><!--end .row -->
+				<!-- END VERTICAL FORM -->
+
+			</div>
+		</section>
+	</div><!--end #content-->
+	<!-- END CONTENT -->
+{% endblock content %}
+{% block scripts %}
+	<script src="{% static 'assets/js/libs/select2/select2.min.js' %}"></script>
+
+	<script src="{% static 'assets/vendors/summernote/summernote.min.js' %}"></script>
+
+	<script src="{% static 'assets/js/libs/autosize/autosize.min.js' %}"></script>
+
+	<script>
+        if($('#hint').val() == '<p><b></p>'){
+            $('#hint').val('');
+        }
+		$('.summernote').summernote({
+			'height': '150px'
+		});
+		$('.select2').select2({
+			placeholder: '',
+			allowClear: true
+		});
+		$(document).ready(function () {
+			$("#addAlternative").on("click", function (event) {
+				var html = $(".alternatives tr:last").clone(true).find("textarea").val("").end();
+
+				var total_forms = $("#id_alternative_set-TOTAL_FORMS");
+
+				html.children().find('input')[0].id = 'id_alternative_set-' + total_forms.val() + '-question';
+
+				html.children().find('input')[0].name = 'alternative_set-' + total_forms.val() + '-question';
+
+				html.children().find('input')[1].id = 'id_alternative_set-' + total_forms.val() + '-id';
+
+				html.children().find('input')[1].name = 'alternative_set-' + total_forms.val() + '-id';
+
+				html.children().find('textarea')[0].id = 'id_alternative_set-' + total_forms.val() + '-text';
+
+				html.children().find('textarea')[0].name = 'alternative_set-' + total_forms.val() + '-text';
+
+				total_forms.val(parseInt(total_forms.val()) + 1);
+
+				html.insertAfter($("tr:last"));
+
+				// $(".alternatives").append(html);
+			});
+
+			$("#toggle-alternatives-summernote").click(function (e) {
+				e.preventDefault();
+				$(this).toggleClass("active");
+				if ($(this).hasClass("active")) {
+					$(".alternatives textarea.form-control").each(function () {
+						$(this).summernote();
+					});
+				} else {
+					$(".alternatives textarea.form-control").each(function () {
+						$(this).summernote('destroy');
+						if ($(this).val() == '<p><br></p>'){
+							$(this).val('');
+						}
+					});
+				}
+
+			})
+		});
+	</script>
+{% endblock scripts %}

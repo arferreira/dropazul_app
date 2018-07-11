@@ -1,0 +1,112 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[provar.me] -  Suas questões' %}{% endblock %}
+{% block breadcrumb %}
+<h1>
+Questões
+<small>As questões do Banco de Questões podem ser utilizadas pelo administrador para criar provas e simulados.</small>
+</h1>
+<a href="{% url 'dashboard:new_question' %}" class="btn bg-purple margin pull-right">ADICIONAR</a>
+{% endblock breadcrumb %}
+{% block main %}
+  <!-- Conteúdo principal -->
+    <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+
+            <div class="box">
+            <div class="box-header">
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              {% if questions.count > 0 %}
+              <table id="questions" class="table table-bordered table-striped dataTable">
+                <thead>
+                <tr>
+                  <th>Enunciado</th>
+                  <th>Categorias</th>
+                  <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for question in questions %}
+                <tr>
+                  <td><a href="{% url 'dashboard:update_question' question.pk %}" class="link-datatable">{{ question.wording|safe|truncatechars_html:"80" }}</a></td>
+                    <td>
+                     {% for category in question.categories.all  %}
+                     <span class="label label-success">
+                     {{ category }}
+                     </span>
+                     {% endfor  %}
+                    </td>
+
+                  <td>
+                      <a href="{% url 'dashboard:update_question' question.pk %}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                      <a href="#" class="btn btn-danger btn-xs delete-question" data-toggle="tooltip" data-title="Excluir Questão" data-url="{% url 'dashboard:delete_question' question.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Enunciado</th>
+                  <th>Categorias</th>
+                  <th>Ações</th>
+                </tr>
+                </tfoot>
+              </table>
+                {% else %}
+
+                    <center><h4>Você ainda não possui questões cadastradas no aplicativo!</h4></center>
+
+                {% endif %}
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+{% endblock main %}
+{% block javascript %}
+<script type="text/javascript">
+$(function () {
+    $('#questions').DataTable( {
+         "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+            }
+    } );
+
+
+    $("#categories").on("click", ".delete-category", function () {
+				var url = $(this).attr("data-url");
+				deleteQuestion(url);
+			});
+
+			function deleteQuestion(url) {
+				swal({
+					title: "Tem certeza?",
+					text: "Você irá excluir essa questão e tudo relacionado a ela será apagado!",
+					type: "warning",
+					showCancelButton: true,
+					cancelButtonText: "Cancelar",
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Sim, excluir!",
+					closeOnConfirm: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						window.location.href = url;
+					}
+				});
+	};
+
+
+})
+</script>
+{% endblock javascript %}

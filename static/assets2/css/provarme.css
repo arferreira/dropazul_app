@@ -1,0 +1,39 @@
+/* CUSTOM CSS FOR PROVAR.ME */
+.errorlist{
+	list-style: none;
+	padding-left: 0px;
+	margin-top: -20px;
+}
+.errorlist li {
+	color: #f44336;
+}
+.errorlist.nonfield {
+	background-color: #fff;
+	padding: 8px;
+	webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+}
+.label {
+	margin-right: 4px;
+}
+
+.question-alternative:parent{
+	margin-bottom: 10px;
+}
+.question-alternative-letter {
+	font-size: 20px;
+	position: absolute;
+	top: 1.5px;
+}
+.question-alternative-text {
+	margin-left: 20px;
+}
+
+.card-head.style-primary > .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	color: #fff;
+	border-bottom-color: #fff;
+}
+
+.ms-container {
+	width: 100% !important;
+}

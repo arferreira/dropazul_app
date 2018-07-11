@@ -1,0 +1,110 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[provar.me] -  Suas Categorias' %}{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Categorias</li>
+{% endblock breadcrumb %}
+{% block main %}
+
+
+  <!-- Conteúdo principal -->
+
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- /.box-header -->
+            <div class="card">
+            <div class="card-body">
+              <h1 class="card-title">Categorias</h1>
+              <h3 class="card-subtitle">Gerencie suas categorias</h3>
+              {% if categories.count > 0 %}
+              <table id="categories" class="table table-bordered table-striped dataTable">
+                <thead>
+                <tr>
+                  <th>Descrição</th>
+                  <th>Situação</th>
+                  <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                <tr>
+                  <td>{{ category|truncatechars:100 }}</td>
+                  <td style="{% if category.status %} color:green;{% else %} color:red; {% endif %}">
+                      {% if category.status %}
+                        <center><span class="fa fa-check"></span></center>
+                      {% else %}
+                        <center><span class="fa fa-times"></span></center>
+                      {% endif %}
+                  </td>
+                  <td>
+                      <a href="{% url 'dashboard:update_category' category.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                      <a href="#" class="btn btn-primary  btn-xs delete-category"  data-toggle="tooltip" data-title="Excluir Categoria" data-url="{% url 'dashboard:delete_category' category.id %}"><span class="fa fa-trash"></span></a>
+                  </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                 <th>Descrição</th>
+                  <th>Situação</th>
+                  <th>Ações</th>
+                </tr>
+                </tfoot>
+              </table>
+                {% else %}
+
+                    <center><h4>Você ainda não possui categorias cadastradas no sistema!</h4></center>
+
+                {% endif %}
+
+
+              <br><br>
+            <a href="{% url 'dashboard:new_category' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">ADICIONAR</a>
+
+
+            </div>
+            <!-- /.box-body -->
+              </div>
+          </div>
+          </div>
+
+    <!-- /.content -->
+{% endblock main %}
+{% block javascript %}
+<script type="text/javascript">
+$(function () {
+    $('#categories').DataTable( {
+         "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+            }
+    } );
+
+
+    $("#categories").on("click", ".delete-category", function () {
+				var url = $(this).attr("data-url");
+				deleteQuestion(url);
+			});
+
+			function deleteQuestion(url) {
+				swal({
+					title: "Tem certeza?",
+					text: "Você irá excluir essa categoria e tudo relacionado a ela será apagado!",
+					type: "warning",
+					showCancelButton: true,
+					cancelButtonText: "Cancelar",
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Sim, excluir!",
+					closeOnConfirm: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						window.location.href = url;
+					}
+				});
+	};
+
+
+})
+</script>
+{% endblock javascript %}

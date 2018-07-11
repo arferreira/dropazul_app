@@ -1,37 +1,28 @@
-{% extends "atrix_dashboard/base_dashboard.html" %}
+{% extends "provarme_dashboard/base_dashboard.html" %}
 {% load i18n static %}
 {% load widget_tweaks %}
-{% block title %}{% trans '[atrixmob] -  Editar Colaborador' %}{% endblock %}
+{% block title %}{% trans '[provar.me] -  Novo professor' %}{% endblock %}
 {% block breadcrumb %}
-<h1>
-Colaboradores
-<small>Editando colaborador</small>
-</h1>
-<a href="{% url 'dashboard:employees' %}" class="btn bg-purple margin pull-right">VOLTAR</a>
+<li class="breadcrumb-item active">Novo Professor</li>
 {% endblock breadcrumb %}
 {% block main %}
   <!-- Conteúdo principal -->
-    <section class="content">
-        <div class="row">
-          <div class="col-xs-12">
 
-            <div class="box box-info">
-            <div class="box-header">
-            </div>
-            <div class="nav-tabs-custom">
+        <div class="row">
+          <div class="col-12">
+
+            <div class="card">
+            <!--<h4 class="card-title">Alunos</h4>-->
+                <!--<h6 class="card-subtitle">Novo Aluno</h6>-->
             <!-- /.box-header -->
-            <div class="box-body">
-                <ul class="nav nav-tabs">
-                  <li class="active"><a href="#register" data-toggle="tab" aria-expanded="true">Informações Gerais</a></li>
-                  <li class="pull-right"><a href="" class="text-muted"><i class="fa fa-gear"></i></a></li>
-                </ul>
-                <div class="tab-content">
-                <div class="tab-pane active" id="register">
+            <div class="card-body">
+
                     <form class="form" action="" method="post">
                         {% csrf_token %}
-                      <div class="box-body">
-                        <legend> Tipo de Colaborador</legend>
-                          <span>Selecione o tipo de colaborador</span>
+
+                        <h3 class="card-title m-t-15">Tipo de Professor</h3>
+                        <hr>
+
                             {% if form.errors %}
                                     <div class="alert alert-danger">
                                             <strong>Ocorreu um erro no preenchimento do formulário!</strong>
@@ -47,93 +38,133 @@ Colaboradores
                           </div>
                           <!-- Formulário pessoa física (Cliente) -->
                           <div class="pessoa-fisica">
-                              <div class="row">
-                                  <br><br>
-                                  <legend>Dados Pessoais</legend>
-                                  <div class="form-group">
-                                      <div class="col-xs-6">
+
+
+                              <h3 class="card-title m-t-15">Informações Pessoais</h3>
+                              <hr>
+                              <div class="row p-t-20">
+
+                                      <div class="col-md-12">
+                                          <div class="form-group">
                                           <label for="name_social_name">Nome completo:</label>
                                           {{ form.name_social_name|add_class:'form-control' }}
                                           <strong style="color:red;">{{ form.errors.name_social_name }}</strong>
+                                          </div>
                                       </div>
-                                      <div class="col-xs-6 cpf">
+                                      <div class="col-md-6 cpf">
+                                          <div class="form-group">
                                         <label for="cpf">CPF:</label>
                                           {% render_field form.cpf class="form-control" id="cpf" %}
                                           <strong style="color:red;">{{ form.errors.cpf }}</strong>
-                                      </div>
-                                      <div class="col-xs-6 cnpj">
-                                        <label for="cpf">CNPJ:</label>
-                                          {% render_field form.cnpj class="form-control" id="cnpj" %}
-                                          <strong style="color:red;">{{ form.errors.cnpj }}</strong>
-                                      </div>
-                                      <div class="col-xs-6 rg">
+                                          </div>
+
+                                    </div>
+                                    <div class="col-md-6 rg">
+                                       <div class="form-group">
                                         <label for="rg">RG:</label>
                                         {% render_field form.rg class="form-control" id="rg" %}
                                         <strong style="color:red;">{{ form.errors.rg }}</strong>
+                                       </div>
                                       </div>
-                                      <div class="col-xs-6 name_fantasy">
+                              </div>
+
+                              <div class="row p-t-20">
+                                      <div class="col-md-6 cnpj">
+                                        <div class="form-group">
+                                        <label for="cpf">CNPJ:</label>
+                                          {% render_field form.cnpj class="form-control" id="cnpj" %}
+                                          <strong style="color:red;">{{ form.errors.cnpj }}</strong>
+                                        </div>
+                                      </div>
+                               <div class="col-md-6 name_fantasy">
+                                       <div class="form-group">
                                         <label for="name_fantasy">Nome de Fantasia:</label>
                                         {% render_field form.name_fantasy class="form-control" id="rg" %}
                                         <strong style="color:red;">{{ form.errors.name_fantasy }}</strong>
+                                       </div>
                                       </div>
-                                      <div class="col-xs-6 responsible">
+
+                              </div>
+                              <div class="row p-t-20">
+                                      <div class="col-md-6 responsible">
+                                       <div class="form-group">
                                         <label for="responsible">Responsável:</label>
                                         {% render_field form.responsible class="form-control" id="responsible" %}
                                         <strong style="color:red;">{{ form.errors.responsible }}</strong>
+                                       </div>
                                       </div>
-                                      <div class="col-xs-6 born_date">
+                              </div>
+                              <div class="row p-t-20">
+                                      <div class="col-md-6 born_date">
+                                      <div class="form-group">
                                         <label for="born_date">Data de nascimento:</label>
                                           {% render_field form.born_date class="form-control" id="born_date" type="date" %}
                                           <strong style="color:red;">{{ form.errors.born_date }}</strong>
                                       </div>
-                                      <div class="col-xs-6">
+                                      </div>
+
+                               </div>
+                              <div class="row p-t-20">
+                                   <div class="col-md-6">
+                                      <div class="form-group">
                                         <label for="born_date">Email:</label>
                                         {% render_field form.email class="form-control" id="email" %}
                                          <strong style="color:red;">{{ form.errors.email }}</strong>
                                       </div>
-                                      <div class="col-xs-6">
+                                      </div>
+                                      <div class="col-md-6">
+                                       <div class="form-group">
                                         <label for="phone_number">Telefone para contato:</label>
                                         {% render_field form.phone_number class="form-control" id="phone_number" %}
                                         <strong style="color:red;">{{ form.errors.phone_number }}</strong>
+                                       </div>
                                       </div>
-                                  </div>
-                                  <br><br><br>
-                                  <legend>Endereço</legend>
-                                  <div class="form-group">
-                                    <div class="col-xs-3">
+                              </div>
+
+
+                                  <h3 class="card-title m-t-15">Endereço</h3>
+                                  <hr>
+                                    <div class="row p-t-20">
+                                    <div class="col-md-3">
                                           <label for="zipcode">CEP:</label>
                                           {% render_field form.zipcode class="form-control" id="id_zipcode" %}
                                           <strong style="color:red;">{{ form.errors.zipcode }}</strong>
                                     </div>
-                                    <div class="col-xs-9">
+                                    <div class="col-md-9">
                                           <label for="zipcode">Endereço:</label>
                                           {% render_field form.address class="form-control" id="id_address" %}
                                           <strong style="color:red;">{{ form.errors.address }}</strong>
                                     </div>
-                                    <div class="col-xs-3">
+                                    </div>
+                                    <div class="row p-t-20">
+                                    <div class="col-md-3">
                                           <label for="address_number">Número:</label>
                                           {% render_field form.address_number class="form-control" id="id_address_number" %}
                                           <strong style="color:red;">{{ form.errors.address_number }}</strong>
                                     </div>
-                                    <div class="col-xs-9">
+                                    <div class="col-md-9">
                                           <label for="neighborhood">Bairro:</label>
                                           {% render_field form.neighborhood class="form-control" id="id_neighborhood" %}
                                           <strong style="color:red;">{{ form.errors.neighborhood }}</strong>
                                     </div>
-                                    <div class="col-xs-6">
+                                    </div>
+                                    <div class="row p-t-20">
+                                    <div class="col-md-6">
                                           <label for="city">Cidade:</label>
                                           {% render_field form.city class="form-control" id="id_city" %}
                                           <strong style="color:red;">{{ form.errors.city }}</strong>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="col-md-6">
                                           <label for="province">Estado:</label>
                                           {% render_field form.province class="form-control" id="id_province" %}
                                           <strong style="color:red;">{{ form.errors.province }}</strong>
                                     </div>
+                                    </div>
 
-                                  </div>
+
                                   <br><br><br>
-                                  <legend>Informações</legend>
+                                  <h3 class="card-title m-t-15">Informações</h3>
+                                  <hr>
                                   <div class="form-group">
                                       <div class="col-xs-12">
                                           <label for="aditional_information">Informações adicionais</label>
@@ -143,21 +174,8 @@ Colaboradores
                                   </div>
 
                               </div>
-                          </div>
+                        <button type="submit" class="btn btn-primary pull-right">Salvar</button>
 
-                          <!-- Formulário pessoa juridica (Cliente / Empresa)  -->
-                      </div>
-                      </div>
-
-
-              </div>
-
-
-                      <!-- /.box-body -->
-
-                      <div class="box-footer">
-                        <button type="submit" class="btn btn-info pull-right">Salvar</button>
-                      </div>
                       <!-- /.box-footer -->
                     </form>
             </div>
@@ -167,7 +185,6 @@ Colaboradores
           </div>
         </div>
 
-    </section>
     <!-- /.content -->
 {% endblock main %}
 
@@ -192,13 +209,6 @@ Colaboradores
         $('.rg').show();
         $('.born_date').show();
     }
-    if(type_person == 2){
-        $('.cpf').hide();
-        $('.name_fantasy').show();
-        $('.responsible').show();
-        $('.rg').hide();
-        $('.born_date').hide();
-    }
     // pegar seleção de pessoa fisica ou juridica
     $('select').on('change', function() {
             if(this.value == 1){
@@ -211,11 +221,11 @@ Colaboradores
             }
             if(this.value == 2){
                 $('.cpf').hide();
+                $('.rg').hide();
+                $('.born_date').hide();
                 $('.cnpj').show();
                 $('.name_fantasy').show();
                 $('.responsible').show();
-                $('.rg').hide();
-                $('.born_date').hide();
             }
 
     })

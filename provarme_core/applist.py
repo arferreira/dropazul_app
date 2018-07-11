@@ -22,9 +22,8 @@ LOCAL_APPS = (
     'provarme_dashboard.customer',
     'provarme_dashboard.employee',
     'provarme_dashboard.person',
-    'provarme_dashboard.product',
     'provarme_dashboard.provider',
-    'provarme_dashboard.service',
+    'provarme_dashboard.question',
 )
 
 THIRD_PARTY_APPS = (

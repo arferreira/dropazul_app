@@ -16,41 +16,33 @@ urlpatterns = [
     # Rota principal do dashboard
     path('', dashboard_index.as_view(), name='index'),
 
-    # Clientes
-    path('clientes/', CustomerListView.as_view(), name='customers'),
-    path('cliente/novo', CustomerCreateView.as_view(), name='new_customer'),
-    path('cliente/editar/<int:pk>', CustomerUpdateView.as_view(), name='update_customer'),
-    path('cliente/excluir/<int:customer_id>', customer_delete, name='delete_customer'),
-    # Fornecedores
-    path('fornecedores/', ProviderListView.as_view(), name='providers'),
-    path('fornecedor/novo', ProviderCreateView.as_view(), name='new_provider'),
-    path('fornecedor/editar/<int:pk>', ProviderUpdateView.as_view(), name='update_provider'),
-    path('fornecedor/excluir/<int:provider_id>', provider_delete, name='delete_provider'),
-
-    # Funcionarios
-    path('colaboradores/', EmployeeListView.as_view(), name='employees'),
-    path('colaborador/novo', EmployeeCreateView.as_view(), name='new_employee'),
-    path('colaborador/editar/<int:pk>', EmployeeUpdateView.as_view(), name='update_employee'),
-    path('colaborador/excluir/<int:employee_id>', employee_delete, name='delete_employee'),
+    # Alunos
+    path('alunos/', CustomerListView.as_view(), name='customers'),
+    path('aluno/novo', CustomerCreateView.as_view(), name='new_customer'),
+    path('aluno/editar/<int:pk>', CustomerUpdateView.as_view(), name='update_customer'),
+    path('aluno/excluir/<int:customer_id>', customer_delete, name='delete_customer'),
 
 
-    # Expedientes
-    path('expedientes/', EmployeeListView.as_view(), name='office_hours'),
-    path('expediente/novo', EmployeeCreateView.as_view(), name='new_office_hour'),
-    path('expediente/editar/<int:pk>', EmployeeUpdateView.as_view(), name='update_office_hours'),
-    path('expediente/excluir/<int:office_id>', employee_delete, name='delete_office_hours'),
+    # professores
+    path('professores/', EmployeeListView.as_view(), name='employees'),
+    path('professor/novo', EmployeeCreateView.as_view(), name='new_employee'),
+    path('professor/editar/<int:pk>', EmployeeUpdateView.as_view(), name='update_employee'),
+    path('professor/excluir/<int:employee_id>', employee_delete, name='delete_employee'),
 
 
     # Categorias
-    # path('categorias/', CategoryListView.as_view(), name='categories'),
-    # path('categoria/novo/', CategoryCreateView.as_view(), name='new_category'),
-    # path('categoria/editar/<int:pk>', CategoryUpdateView.as_view(), name='update_category'),
+    path('categorias/', CategoryListView.as_view(), name='categories'),
+    path('categoria/nova/', CategoryCreateView.as_view(), name='new_category'),
+    path('categoria/editar/<int:pk>', CategoryUpdateView.as_view(), name='update_category'),
+    path('categoria/excluir/<int:category_id>', category_delete, name='delete_category'),
 
-    # # Produtos
-    # url(r'produto/novo/$', AddProductView.as_view(), name='new_product'),
-    # url(r'produtos/$', ProductListView.as_view(), name='products'),
-    # url(r'produtos/baixoestoque/$', ProductLowStockListView.as_view(), name='products_lowstock'),
-    # url(r'produto/editar/(?P<pk>[0-9]+)/$', UpdateProductView.as_view(), name='update_product'),
-    # url(r'^estoque/', include('provarme_dashboard.stock.urls')),
+
+    # Questões
+    path('questoes/', QuestionListView.as_view(), name='questions'),
+    path('questao/nova/', QuestionCreateView.as_view(), name='new_question'),
+    path('questao/editar/<int:pk>', QuestionUpdateView.as_view(), name='update_question'),
+    path('questao/excluir/<int:question_id>', question_delete, name='delete_question'),
+
+
 
 ]

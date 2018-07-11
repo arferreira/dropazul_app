@@ -1,0 +1,98 @@
+[
+  {
+    "model": "customer.customer",
+    "pk": 2,
+    "fields": {
+      "kind": 1,
+      "name_social_name": "Aluno demo 1",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "alunodemo1@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Aluno Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "provar.me",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  },
+  {
+    "model": "customer.customer",
+    "pk": 3,
+    "fields": {
+      "kind": 2,
+      "name_social_name": "Aluno demo 2",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "alunodemo2@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Aluno Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "provar.me",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  },
+  {
+    "model": "customer.customer",
+    "pk": 4,
+    "fields": {
+      "kind": 1,
+      "name_social_name": "Aluno demo 3",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "alunodemo3@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Aluno Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "provar.me",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  },
+  {
+    "model": "customer.customer",
+    "pk": 5,
+    "fields": {
+      "kind": 2,
+      "name_social_name": "Aluno demo 4",
+      "cpf": "000.000.000-00",
+      "born_date": "1988-05-05",
+      "email": "alunodemo4@atrixmob.com.br",
+      "phone_number": "(67) 99845-6920",
+      "name_fantasy": "Aluno Demonstração",
+      "cnpj": "00.000.000/0001-00",
+      "responsible": "provar.me",
+      "zipcode": "79004-060",
+      "city": "Campo Grande",
+      "province": "MS",
+      "address": "Rua Dr. Anibal de Toledo",
+      "address_number": "722",
+      "neighborhood": "Vila Santa Dorotheia",
+      "created_at": "2013-03-16T17:41:28+00:00",
+      "updated_at": "2013-03-16T17:41:28+00:00",
+      "status": true
+    }
+  }
+]

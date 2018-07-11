@@ -1,11 +1,11 @@
-{% extends "atrix_dashboard/base_dashboard.html" %}
+{% extends "provarme_dashboard/base_dashboard.html" %}
 {% load i18n static %}
 {% load widget_tweaks %}
-{% block title %}{% trans '[atrixmob] -  Editar Colaborador' %}{% endblock %}
+{% block title %}{% trans '[atrixmob] -  Editar Professor' %}{% endblock %}
 {% block breadcrumb %}
 <h1>
-Colaboradores
-<small>Editando colaborador</small>
+Professores
+<small>Editando professor</small>
 </h1>
 <a href="{% url 'dashboard:employees' %}" class="btn bg-purple margin pull-right">VOLTAR</a>
 {% endblock breadcrumb %}
@@ -30,8 +30,8 @@ Colaboradores
                     <form class="form" action="" method="post">
                         {% csrf_token %}
                       <div class="box-body">
-                        <legend> Tipo de Colaborador</legend>
-                          <span>Selecione o tipo de colaborador</span>
+                        <legend> Tipo de Professor</legend>
+                          <span>Selecione o tipo de professor</span>
                             {% if form.errors %}
                                     <div class="alert alert-danger">
                                             <strong>Ocorreu um erro no preenchimento do formulário!</strong>

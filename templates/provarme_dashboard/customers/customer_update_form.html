@@ -1,11 +1,11 @@
-{% extends "atrix_dashboard/base_dashboard.html" %}
+{% extends "provarme_dashboard/base_dashboard.html" %}
 {% load i18n static %}
 {% load widget_tweaks %}
-{% block title %}{% trans '[atrixmob] -  Novo cliente' %}{% endblock %}
+{% block title %}{% trans '[provar.me] -  Novo aluno' %}{% endblock %}
 {% block breadcrumb %}
 <h1>
-Clientes
-<small>Adicione um novo cliente</small>
+Alunos
+<small>Adicione um novo aluno</small>
 </h1>
 <a href="{% url 'dashboard:customers' %}" class="btn bg-purple margin pull-right">VOLTAR</a>
 {% endblock breadcrumb %}
@@ -23,8 +23,8 @@ Clientes
                     <form class="form" action="" method="post">
                         {% csrf_token %}
                       <div class="box-body">
-                        <legend> Tipo de Cliente</legend>
-                          <span>Selecione o tipo de cliente</span>
+                        <legend> Tipo de Aluno</legend>
+                          <span>Selecione o tipo de aluno</span>
                             {% if form.errors %}
                                     <div class="alert alert-danger">
                                             <strong>Ocorreu um erro no preenchimento do formulário!</strong>

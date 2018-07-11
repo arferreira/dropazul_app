@@ -20,44 +20,46 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 from provarme_dashboard.customer.models import Customer
 from provarme_dashboard.provider.models import Provider
 from provarme_dashboard.employee.models import Employee
+from provarme_dashboard.question.models import Category
+from provarme_dashboard.question.models import Question
 
-
-
+# Importação dos forms
+from provarme_dashboard.question.forms import CategoryForm
+#from provarme_dashboard.question_old.forms import QuestionForm
 
 u"""
 
-    Informações relativas ao Cliente
+    Informações relativas ao Aluno
 
 """
 
-# Listagem de clientes de cada tenant
+# Listagem de alunos de cada tenant
 class CustomerListView(LoginRequiredMixin, ListView):
     model = Customer
     context_object_name = 'customers'
     template_name = 'provarme_dashboard/customers/customer_list.html'
 
 
-# Criando um novo cliente
+# Criando um novo aluno
 class CustomerCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Customer
     fields = '__all__'
     template_name = 'provarme_dashboard/customers/customer_form.html'
     success_url = reverse_lazy('dashboard:customers')
-    success_message = "Cliente %(name_social_name)s foi inserido com sucesso!"
+    success_message = "Aluno %(name_social_name)s foi inserido com sucesso!"
 
 
 
-# Editando um cliente
+# Editando um aluno
 class CustomerUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Customer
     fields = '__all__'
-    template_name = 'provarme_dashboard/customers/customer_update_form.html'
-    template_name_suffix = '_update_form'
+    template_name = 'provarme_dashboard/customers/customer_form.html'
     success_url = reverse_lazy('dashboard:customers')
-    success_message = "Cliente %(name_social_name)s foi atualizado com sucesso!"
+    success_message = "Aluno %(name_social_name)s foi atualizado com sucesso!"
 
 
-# Deletando um cliente
+# Deletando um aluno
 @login_required
 @csrf_exempt
 def customer_delete(request, customer_id):
@@ -67,100 +69,54 @@ def customer_delete(request, customer_id):
         raise Http404()
     if request.method == 'GET':
         customer.delete()
-        messages.success(request, 'Cliente excluído com sucesso!')
+        messages.success(request, 'Aluno excluído com sucesso!')
         return HttpResponseRedirect(reverse('dashboard:customers'))
     else:
         raise Http404()
 
 
+
 u"""
 
-    Informações relativas ao Fornecedor
+    Informações relativas ao Professor
 
 """
 
 
 
-# Listagem de fornecedores de cada tenant
-class ProviderListView(LoginRequiredMixin, ListView):
-    model = Provider
-    context_object_name = 'providers'
-    template_name = 'provarme_dashboard/providers/provider_list.html'
-
-
-# Criando um novo fornecedor
-class ProviderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Provider
-    fields = '__all__'
-    template_name = 'provarme_dashboard/providers/provider_form.html'
-    success_url = reverse_lazy('dashboard:providers')
-    success_message = "Fornecedor %(name_social_name)s foi inserido com sucesso!"
-
-
-
-# Editando um fornecedor
-class ProviderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Provider
-    fields = '__all__'
-    template_name = 'provarme_dashboard/providers/provider_update_form.html'
-    template_name_suffix = '_update_form'
-    success_url = reverse_lazy('dashboard:providers')
-    success_message = "Fornecedor %(name_social_name)s foi atualizado com sucesso!"
-
-
-# Deletando um fornecedor
-@login_required
-@csrf_exempt
-def provider_delete(request, provider_id):
-    try:
-        provider = Provider.objects.get(pk=provider_id)
-    except Provider.DoesNotExist:
-        raise Http404()
-    if request.method == 'GET':
-        provider.delete()
-        messages.success(request, 'Fornecedor excluído com sucesso!')
-        return HttpResponseRedirect(reverse('dashboard:providers'))
-    else:
-        raise Http404()
-
-
-
-u"""
-
-    Informações relativas ao Colaborador
-
-"""
-
-
-
-# Listagem de funcionarios de cada tenant
+# Listagem de professores de cada tenant
 class EmployeeListView(LoginRequiredMixin, ListView):
     model = Employee
-    context_object_name = 'employees'
     template_name = 'provarme_dashboard/employees/employee_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['employees'] = Employee.objects.all()
+        return context
 
-# Criando um novo funcionario
+
+
+# Criando um novo professor
 class EmployeeCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Employee
     fields = '__all__'
     template_name = 'provarme_dashboard/employees/employee_form.html'
     success_url = reverse_lazy('dashboard:employees')
-    success_message = "Colaborador %(name_social_name)s foi inserido com sucesso!"
+    success_message = "Professor %(name_social_name)s foi inserido com sucesso!"
 
 
 
-# Editando um funcionario
+# Editando um professor
 class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Employee
     fields = '__all__'
     template_name = 'provarme_dashboard/employees/employee_update_form.html'
     template_name_suffix = '_update_form'
     success_url = reverse_lazy('dashboard:employees')
-    success_message = "Colaborador %(name_social_name)s foi atualizado com sucesso!"
+    success_message = "Professor %(name_social_name)s foi atualizado com sucesso!"
 
 
-# Deletando um funcionario
+# Deletando um professor
 @login_required
 @csrf_exempt
 def employee_delete(request, employee_id):
@@ -170,8 +126,103 @@ def employee_delete(request, employee_id):
         raise Http404()
     if request.method == 'GET':
         employee.delete()
-        messages.success(request, 'Colaborador excluído com sucesso!')
+        messages.success(request, 'Professor excluído com sucesso!')
         return HttpResponseRedirect(reverse('dashboard:employees'))
     else:
         raise Http404()
 
+
+
+u"""
+
+    Informações relativas as categorias
+"""
+
+# Listagem de categorias de cada tenant
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    context_object_name = 'categories'
+    template_name = 'provarme_dashboard/categories/category_list.html'
+
+
+# Criando uma nova categoria
+class CategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'provarme_dashboard/categories/category_form.html'
+    success_url = reverse_lazy('dashboard:categories')
+    success_message = "Categoria %(description)s foi inserida com sucesso!"
+
+
+
+# Editando uma categoria
+class CategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'provarme_dashboard/categories/category_form.html'
+    success_url = reverse_lazy('dashboard:categories')
+    success_message = "Categoria %(description)s foi atualizada com sucesso!"
+
+
+# Deletando uma categoria
+@login_required
+@csrf_exempt
+def category_delete(request, category_id):
+    try:
+        category = Category.objects.get(pk=category_id)
+    except Category.DoesNotExist:
+        raise Http404()
+    if request.method == 'GET':
+        category.delete()
+        messages.success(request, 'Categoria excluída com sucesso!')
+        return HttpResponseRedirect(reverse('dashboard:categories'))
+    else:
+        raise Http404()
+
+
+
+
+u"""
+
+    Informações relativas as questoes
+"""
+
+# Listagem de questões de cada tenant
+class QuestionListView(LoginRequiredMixin, ListView):
+    model = Question
+    context_object_name = 'questions'
+    template_name = 'provarme_dashboard/questions/question_list.html'
+
+
+# Criando uma nova questão
+class QuestionCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Question
+    form_class = CategoryForm
+    template_name = 'provarme_dashboard/questions/question_form.html'
+    success_url = reverse_lazy('dashboard:questions')
+    success_message = "Questão %(wording)s foi inserida com sucesso!"
+
+
+
+# Editando uma questão
+class QuestionUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Question
+    template_name = 'provarme_dashboard/questions/question_form.html'
+    success_url = reverse_lazy('dashboard:questions')
+    success_message = "Questão %(wording)s foi atualizada com sucesso!"
+
+
+# Deletando uma questão
+@login_required
+@csrf_exempt
+def question_delete(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404()
+    if request.method == 'GET':
+        question.delete()
+        messages.success(request, 'Questão excluída com sucesso!')
+        return HttpResponseRedirect(reverse('dashboard:questions'))
+    else:
+        raise Http404()

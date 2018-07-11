@@ -1,24 +1,21 @@
-{% extends "atrix_dashboard/base_dashboard.html" %}
+{% extends "provarme_dashboard/base_dashboard.html" %}
 {% load i18n static %}
-{% block title %}{% trans '[atrixmob] -  Seus clientes' %}{% endblock %}
+{% block title %}{% trans '[provar.me] -  Seus alunos' %}{% endblock %}
 {% block breadcrumb %}
-<h1>
-Clientes
-<small>Gerencie os seus clientes</small>
-</h1>
-<a href="{% url 'dashboard:new_customer' %}" class="btn bg-purple margin pull-right">ADICIONAR</a>
+<li class="breadcrumb-item active">Alunos</li>
 {% endblock breadcrumb %}
 {% block main %}
-  <!-- Conteúdo principal -->
-    <section class="content">
-        <div class="row">
-          <div class="col-xs-12">
 
-            <div class="box">
-            <div class="box-header">
-            </div>
+
+  <!-- Conteúdo principal -->
+
+        <div class="row">
+          <div class="col-sm-12">
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="card">
+            <div class="card-body">
+              <h1 class="card-title">Alunos</h1>
+              <h3 class="card-subtitle">Gerencie seus alunos</h3>
               {% if customers.count > 0 %}
               <table id="customers" class="table table-bordered table-striped dataTable">
                 <thead>
@@ -50,14 +47,14 @@ Clientes
                   <td>{{ customer.phone_number }}</td>
                   <td style="{% if customer.status %} color:green;{% else %} color:red; {% endif %}">
                       {% if customer.status %}
-                        Ativo
+                        <center><span class="fa fa-check"></span></center>
                       {% else %}
-                        Inativo
+                        <center><span class="fa fa-times"></span></center>
                       {% endif %}
                   </td>
                   <td>
-                      <a href="{% url 'dashboard:update_customer' customer.pk %}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
-                      <a href="#" class="btn btn-danger btn-xs delete-customer" data-toggle="tooltip" data-title="Excluir Cliente" data-url="{% url 'dashboard:delete_customer' customer.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                      <a href="{% url 'dashboard:update_customer' customer.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                      <a href="#" class="btn btn-primary disabled btn-xs delete-customer"  data-toggle="tooltip" data-title="Excluir Aluno" data-url="{% url 'dashboard:delete_customer' customer.id %}"><span class="fa fa-trash"></span></a>
                   </td>
                 </tr>
                 {% endfor %}
@@ -76,19 +73,21 @@ Clientes
               </table>
                 {% else %}
 
-                    <center><h4>Você ainda não possui clientes cadastrados no sistema!</h4></center>
+                    <center><h4>Você ainda não possui alunos cadastrados no sistema!</h4></center>
 
                 {% endif %}
 
 
+              <br><br>
+            <a href="{% url 'dashboard:new_customer' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">ADICIONAR</a>
+
+
             </div>
             <!-- /.box-body -->
+              </div>
           </div>
-          <!-- /.box -->
           </div>
-        </div>
 
-    </section>
     <!-- /.content -->
 {% endblock main %}
 {% block javascript %}
@@ -109,7 +108,7 @@ $(function () {
 			function deleteQuestion(url) {
 				swal({
 					title: "Tem certeza?",
-					text: "Você irá excluir esse cliente e tudo relacionado a ele será apagado!",
+					text: "Você irá excluir esse aluno e tudo relacionado a ele será apagado!",
 					type: "warning",
 					showCancelButton: true,
 					cancelButtonText: "Cancelar",

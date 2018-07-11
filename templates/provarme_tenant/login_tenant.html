@@ -2,60 +2,53 @@
 {% load i18n static %}
 {% block title %}Acesse sua instância agora mesmo{% endblock %}
 {% block main %}
-<div class="login-box">
-  <div class="login-logo">
-    <a href="/">
-      <img src="{% static 'provarme_landing/image/logo.png' %}" alt="" width="300" height="80"/>
-    </a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-      <p class="login-box-msg">{{ tenant.name_fantasy }}, seja bem vindo(a)!</p>
-      <p class="login-box-msg">Conecte-se para iniciar seu trabalho</p>
-
-    <form action="." method="post">
-        {% csrf_token %}
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}">
-        {% endif %}
-      <div class="form-group has-feedback">
-        <input type="email" name="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          {% if form.email.errors %}
-            {% for error  in form.email.errors %}
-                <div>
-                    <small>{{ error }}</small>
+<div class="unix-login">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="login-content card">
+                            <div class="login-form">
+                                <h4><img src="{% static 'provarme_core/static/img/logo.png' %}" alt="" width="150" height="40"/></h4>
+                                 <form action="." method="post">
+                                    {% csrf_token %}
+                                    {% if next %}
+                                        <input type="hidden" name="next" value="{{ next }}">
+                                    {% endif %}
+                                  <div class="form-group has-feedback">
+                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                      {% if form.email.errors %}
+                                        {% for error  in form.email.errors %}
+                                            <div>
+                                                <small>{{ error }}</small>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                  </div>
+                                  <div class="form-group has-feedback">
+                                    <input type="password" name="password" class="form-control" placeholder="Senha">
+                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                      {% if form.password.errors %}
+                                        {% for error  in form.password.errors %}
+                                            <div>
+                                                <small>{{ error }}</small>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                  </div>
+                                  <div class="row">
+                                    <!-- /.col -->
+                                    <div class="col-md-12">
+                                      <button type="submit" class="btn bg-primary btn-flat m-b-30 m-t-30">Entrar</button>
+                                        <a href="/" class="btn btn-warning"><small>{% trans 'Voltar' %}</small></a>
+                                    </div>
+                                    <!-- /.col -->
+                                  </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-        {% endif %}
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Senha">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          {% if form.password.errors %}
-            {% for error  in form.password.errors %}
-                <div>
-                    <small>{{ error }}</small>
-                </div>
-            {% endfor %}
-        {% endif %}
-      </div>
-      <div class="row">
-        <!-- /.col -->
-        <div class="col-md-12">
-          <button type="submit" class="btn bg-olive btn-flat margin">Entrar</button>
-            <a href="/" class="btn btn-warning btn-flat pull-right margin"><small>{% trans 'Voltar' %}</small></a>
+            </div>
         </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-    <!-- /.social-auth-links -->
-
-    <a href="#" class="text-green">Esqueci minha senha</a><br>
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
 {% endblock main %}
