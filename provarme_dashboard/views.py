@@ -114,7 +114,7 @@ class ProductListView(LoginRequiredMixin, ListView):
     template_name = 'provarme_dashboard/products/product_list.html'
 
 
-# Criando um setup
+# Criando um product
 class ProductCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Product
     fields = '__all__'
@@ -123,10 +123,48 @@ class ProductCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = "Produto foi criado com sucesso!"
 
 
-# Editando um setup
+# Editando um product
 class ProductUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Product
     fields = '__all__'
     template_name = 'provarme_dashboard/products/product_form.html'
     success_url = reverse_lazy('dashboard:products')
     success_message = "Produto foi atualizado com sucesso!"
+
+
+
+# Estimativa de lucro de um produto
+def product_estimate(request, pk):
+    setup = Setup.objects.all().first()
+    product = Product.objects.get(pk=pk)
+
+
+    cost_fix = (product.cost * setup.tx_iof/100) + (product.price * setup.tx_shopify/100) + (product.price * setup.tx_gateway/100) + (product.price * setup.tx_antecipation/100) + (product.price * setup.tx_tax/100) + product.cost
+    cost_fix = round(cost_fix, 2)
+    cost_marketing = round(product.price * product.marketing / 100, 2)
+    profit = round(product.price - cost_fix - cost_marketing, 2)
+    profit_percent = round(profit / product.price * 100, 2)
+
+
+    context = {
+        'markup': product.markup,
+        'price': product.price,
+        'cost_fix': cost_fix,
+        'cost_marketing': cost_marketing,
+        'profit': profit,
+        'profit_percent': profit_percent,
+    }
+
+    return render(request, 'provarme_dashboard/products/estimate.html', {'product': context})
+
+
+
+# Listando o tráfego diário
+def traffic_list(request):
+    traffic = Traffic.objects.all()
+
+    context = {
+        'traffic': traffic,
+    }
+
+    return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)

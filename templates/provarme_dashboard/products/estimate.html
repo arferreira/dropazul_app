@@ -1,0 +1,84 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% load widget_tweaks %}
+{% block title %}{% trans '[Drop Azul] -  Estimativa de Lucro' %}{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Novo Aluno</li>
+{% endblock breadcrumb %}
+{% block main %}
+  <!-- Conteúdo principal -->
+  <div class="row">
+
+    <!--Estimador de Lucro -->
+    <div class="col-lg-12">
+<div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Estimativa de Lucro do {{ product.name }}</h6>
+                </div>
+                <div class="card-body">
+
+              <table id="customers" class="table table-bordered table-striped dataTable">
+                <thead>
+                <tr>
+                  <th>Markup</th>
+                  <th>Preço Final</th>
+                  <th>Custo Fixo</th>
+                  <th>Custo de Marketing</th>
+                  <th>Máximo CPA</th>
+                  <th>Lucro</th>
+                  <th>% Lucro</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                  <td>{{ product.markup }}</td>
+                  <td>
+                    R$ {{ product.price }}
+                  </td>
+                  <td>R$ {{ product.cost_fix }}</td>
+                  <td>R$ {{ product.cost_marketing }}</td>
+                  <td>R$ {{ product.price }}</td>
+                  <td>
+                    R$ {{ product.profit }}
+                  </td>
+                  <td>
+                        {{ product.profit_percent }} %
+
+                  </td>
+                </tr>
+
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Markup</th>
+                  <th>Preço Final</th>
+                  <th>Custo Fixo</th>
+                  <th>Custo de Marketing</th>
+                  <th>Máximo CPA</th>
+                  <th>Lucro</th>
+                  <th>% Lucro</th>
+                </tr>
+                </tfoot>
+              </table>
+
+
+
+
+            </div>
+
+                    <a href="{% url 'dashboard:products' %}" class="btn btn-warning">
+                      {% trans 'Voltar' %}
+                    </a>
+            <!-- /.box-body -->
+              </div>
+          </div>
+          </div>
+    <!-- /.content -->
+{% endblock main %}
+
+<!-- Bloco de scripts js -->
+{% block javascript %}
+
+{% endblock javascript %}

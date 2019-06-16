@@ -1,0 +1,1 @@
+web: gunicorn provarme.wsgi --log-file

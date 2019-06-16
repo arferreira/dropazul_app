@@ -83,23 +83,39 @@
       </div>
 
 
+         <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:providers' %}">
+          <i class="fas fa-fw fa-hands-helping"></i>
+          <span>Fornecedores</span>
+        </a>
+
+      </li>
+
+
         <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{% url 'dashboard:products' %}">
           <i class="fas fa-fw fa-cart-plus"></i>
-          <span>Produto</span>
+          <span>Produtos</span>
         </a>
 
       </li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pedidos</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          <i class="fab fa-facebook-f"></i>
+          <span>Facebook ADS</span>
         </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
 
+            <a class="collapse-item" href="{% url 'dashboard:traffic' %}">Diário</a>
+
+          </div>
+        </div>
       </li>
+
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
@@ -263,8 +279,10 @@
                 {% endif %}
             {% endfor %}
 		{% endif %}
+   <script>
 {% block javascript %}
 {% endblock javascript %}
+</script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ STATUS_STORE = (
 
 class Provider(models.Model):
     name = models.CharField('Nome', max_length=255)
-    local = models.Charfield('Localização', max_length=100)
+    local = models.CharField('Localização', max_length=100)
     link = models.CharField('Link da Loja', max_length=255)
     whatsapp = models.CharField('Número de Whatsapp', max_length=255)
 
@@ -24,3 +24,7 @@ class Provider(models.Model):
     class Meta:
         verbose_name = 'Fornecedor'
         verbose_name_plural = 'Fornecedores'
+
+
+    def __str__(self):
+        return self.name

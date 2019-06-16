@@ -1,8 +1,8 @@
 {% extends "provarme_dashboard/base_dashboard.html" %}
 {% load i18n static %}
-{% block title %}{% trans '[Drop Azul] -  Seus alunos' %}{% endblock %}
+{% block title %}{% trans '[Drop Azul] -  Seus produtos' %}{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active">Loja</li>
+<li class="breadcrumb-item active">Produtos</li>
 {% endblock breadcrumb %}
 {% block main %}
 
@@ -13,39 +13,42 @@
 <div class="col-lg-12">
 <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Configurações Gerais</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Produtos</h6>
                 </div>
                 <div class="card-body">
-              {% if setups.count > 0 %}
+              {% if products.count > 0 %}
               <table id="customers" class="table table-bordered table-striped dataTable">
                 <thead>
                 <tr>
-                  <th>Taxa de Shopify</th>
-                  <th>Taxa de Gateway</th>
-                  <th>Criado em</th>
-                  <th>Atualizado em</th>
+                  <th>Nome</th>
+                  <th>Fornecedor</th>
+                  <th>Custo</th>
+                  <th>Mark UP</th>
+                  <th>Preço Final</th>
                   <th>Status</th>
                   <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for setup in setups %}
+                {% for product in products %}
                 <tr>
-                  <td><a href="{% url 'dashboard:update_setup' setup.pk %}" class="link-datatable">{{ setup.tx_shopify }}%</a></td>
+                  <td><a href="{% url 'dashboard:update_product' product.pk %}" class="link-datatable">{{ product.name }}</a></td>
                   <td>
-                    {{ setup.tx_gateway }}%
+                    {{ product.provider.name }}
                   </td>
-                    <td>{{ setup.created_at }}</td>
-                  <td>{{ setup.updated_at }}</td>
-                  <td style="{% if store.status %} color:green;{% else %} color:red; {% endif %}">
-                      {% if store.status %}
+                  <td>R$ {{ product.cost }}</td>
+                  <td>{{ product.markup }}</td>
+                  <td>R$ {{ product.price }}</td>
+                  <td style="{% if product.status == True %} color:green;{% else %} color:red; {% endif %}">
+                      {% if product.status == True %}
                         <center><span class="fa fa-check"></span></center>
                       {% else %}
                         <center><span class="fa fa-times"></span></center>
                       {% endif %}
                   </td>
                   <td>
-                      <a href="{% url 'dashboard:update_setup' setup.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                      <a href="{% url 'dashboard:estimate_product' product.pk %}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
+                      <a href="{% url 'dashboard:update_product' product.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
 
                   </td>
                 </tr>
@@ -54,10 +57,11 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Taxa de Shopify</th>
-                  <th>Taxa de Gateway</th>
-                  <th>Criado em</th>
-                  <th>Atualizado em</th>
+                  <th>Nome</th>
+                  <th>Fornecedor</th>
+                  <th>Custo</th>
+                  <th>Mark UP</th>
+                  <th>Preço Final</th>
                   <th>Status</th>
                   <th>Ações</th>
                 </tr>
@@ -65,15 +69,15 @@
               </table>
                 {% else %}
 
-                    <center><h4>Você ainda não possui configurações gerais cadastradas no sistema!</h4></center>
+                    <center><h4>Você ainda não possui produtos cadastrados no sistema!</h4></center>
 
                 {% endif %}
 
 
               <br><br>
-            {% if setup.count < 1 %}
-            <a href="{% url 'dashboard:new_setup' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
-            {% endif %}
+
+            <a href="{% url 'dashboard:new_product' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Novo</a>
+
 
             </div>
             <!-- /.box-body -->

@@ -39,6 +39,14 @@ urlpatterns = [
     path('produtos/', ProductListView.as_view(), name='products'),
     path('produto/novo', ProductCreateView.as_view(), name='new_product'),
     path('produto/editar/<int:pk>', ProductUpdateView.as_view(), name='update_product'),
+    path('produto/estimativa/<int:pk>', product_estimate, name='estimate_product'),
+
+
+    # Traffic
+    path('trafego/', ProductListView.as_view(), name='traffic'),
+    path('trafego/novo', ProductCreateView.as_view(), name='new_traffic'),
+    path('trafego/editar/<int:pk>', ProductUpdateView.as_view(), name='update_traffic'),
+
 
 
 

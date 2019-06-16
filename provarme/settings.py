@@ -6,6 +6,7 @@
 import os
 
 from decouple import config
+from dj_database_url import parse as dburl
 
 from provarme_core.applist import *
 from provarme_core.json_settings import get_settings
@@ -34,7 +35,17 @@ ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
-DATABASES = settings['DB']
+default_dburl = {
+        'ENGINE': 'tenant_schemas.postgresql_backend',
+        'NAME': 'provarme_development',
+        'USER': 'antonioricardo',
+        'PASSWORD': 'rub32912289',
+        'HOST': 'localhost',
+        'PORT': 5432,
+    }
+DATABASES = {
+
+}
 
 
 MIDDLEWARE = [
@@ -204,3 +215,8 @@ SHOPIFY_APP_DEV_MODE = False
 # Set secure proxy header to allow proper detection of secure URLs behind a proxy.
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Configurando o Drop Azul para o  Heroku.
+import django_heroku
+django_heroku.settings(locals())

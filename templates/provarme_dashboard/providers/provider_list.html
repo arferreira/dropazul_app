@@ -1,6 +1,6 @@
 {% extends "provarme_dashboard/base_dashboard.html" %}
 {% load i18n static %}
-{% block title %}{% trans '[Drop Azul] -  Seus alunos' %}{% endblock %}
+{% block title %}{% trans '[Drop Azul] -  Seus fornecedores' %}{% endblock %}
 {% block breadcrumb %}
 <li class="breadcrumb-item active">Loja</li>
 {% endblock breadcrumb %}
@@ -13,15 +13,15 @@
 <div class="col-lg-12">
 <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Configurações Gerais</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Fornecedores</h6>
                 </div>
                 <div class="card-body">
-              {% if setups.count > 0 %}
+              {% if providers.count > 0 %}
               <table id="customers" class="table table-bordered table-striped dataTable">
                 <thead>
                 <tr>
-                  <th>Taxa de Shopify</th>
-                  <th>Taxa de Gateway</th>
+                  <th>Nome</th>
+                  <th>Whatsapp</th>
                   <th>Criado em</th>
                   <th>Atualizado em</th>
                   <th>Status</th>
@@ -29,23 +29,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for setup in setups %}
+                {% for provider in providers %}
                 <tr>
-                  <td><a href="{% url 'dashboard:update_setup' setup.pk %}" class="link-datatable">{{ setup.tx_shopify }}%</a></td>
+                  <td><a href="{% url 'dashboard:update_provider' provider.pk %}" class="link-datatable">{{ provider.name }}</a></td>
                   <td>
-                    {{ setup.tx_gateway }}%
+                    {{ provider.whatsapp }}
                   </td>
-                    <td>{{ setup.created_at }}</td>
-                  <td>{{ setup.updated_at }}</td>
-                  <td style="{% if store.status %} color:green;{% else %} color:red; {% endif %}">
-                      {% if store.status %}
+                    <td>{{ provider.created_at }}</td>
+                  <td>{{ provider.updated_at }}</td>
+                  <td style="{% if provider.status %} color:green;{% else %} color:red; {% endif %}">
+                      {% if provider.status %}
                         <center><span class="fa fa-check"></span></center>
                       {% else %}
                         <center><span class="fa fa-times"></span></center>
                       {% endif %}
                   </td>
                   <td>
-                      <a href="{% url 'dashboard:update_setup' setup.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                      <a href="{{ provider.link }}" target="_blank" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
+                      <a href="{% url 'dashboard:update_provider' provider.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
 
                   </td>
                 </tr>
@@ -54,8 +55,8 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Taxa de Shopify</th>
-                  <th>Taxa de Gateway</th>
+                  <th>Nome</th>
+                  <th>Whatsapp</th>
                   <th>Criado em</th>
                   <th>Atualizado em</th>
                   <th>Status</th>
@@ -65,15 +66,15 @@
               </table>
                 {% else %}
 
-                    <center><h4>Você ainda não possui configurações gerais cadastradas no sistema!</h4></center>
+                    <center><h4>Você ainda não possui fornecedores cadastrados no sistema!</h4></center>
 
                 {% endif %}
 
 
               <br><br>
-            {% if setup.count < 1 %}
-            <a href="{% url 'dashboard:new_setup' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
-            {% endif %}
+
+            <a href="{% url 'dashboard:new_provider' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Novo</a>
+
 
             </div>
             <!-- /.box-body -->

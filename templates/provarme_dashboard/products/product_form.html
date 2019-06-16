@@ -28,16 +28,16 @@
                             <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                          <label for="">Taxa do Shopify:</label>
-                                          {{ form.tx_shopify|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_shopify }}</strong>
+                                          <label for="">Nome:</label>
+                                          {{ form.name|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.name }}</strong>
                               </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                          <label for="">Taxa de Gateway:</label>
-                                          {{ form.tx_gateway|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_gateway }}</strong>
+                                          <label for="">Apelido:</label>
+                                          {{ form.slug|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.slug }}</strong>
                                     </div>
                             </div>
                             </div>
@@ -45,16 +45,16 @@
                         <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                          <label for="">Taxa de Antecipação:</label>
-                                          {{ form.tx_antecipation|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_antecipation }}</strong>
+                                          <label for="">Link para o produto:</label>
+                                          {{ form.link|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.link }}</strong>
                               </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                          <label for="">Imposto:</label>
-                                          {{ form.tx_tax|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_tax }}</strong>
+                                          <label for="">Fornecedor:</label>
+                                          {{ form.provider|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.provider }}</strong>
                                     </div>
                             </div>
                             </div>
@@ -62,23 +62,56 @@
                     <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                          <label for="">IOF:</label>
-                                          {{ form.tx_iof|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_iof }}</strong>
+                                          <label for="">Custo do Produto:</label>
+                                          {{ form.cost|add_class:'form-control'| attr:"id:cost" }}
+                                          <strong style="color:red;">{{ form.errors.cost }}</strong>
                               </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                          <label for="">Cashback:</label>
-                                          {{ form.tx_cashback|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_cashback }}</strong>
+                                          <label for="">Mark UP: <span style="color: red;">Recomendado 2.75</span></label>
+                                          {{ form.markup|add_class:'form-control'| attr:"id:markup" }}
+                                          <strong style="color:red;">{{ form.errors.markup }}</strong>
+                                    </div>
+                            </div>
+                            </div>
+
+
+                     <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                          <label for="">Preço Recomendado do Produto:</label>
+                                          {{ form.recommended_price|add_class:'form-control'| attr:"id:recommended_price" }}
+                                          <strong style="color:red;">{{ form.errors.recommended_price }}</strong>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                          <label for="">Preço Final:<span style="color: green;"> Seu preço final</span></label>
+                                          {{ form.price|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.price }}</strong>
+                                    </div>
+                            </div>
+                         <div class="col-md-6">
+                                <div class="form-group">
+                                          <label for="">Status:</label>
+                                          {{ form.status|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.status }}</strong>
+                                    </div>
+                            </div>
+
+                          <div class="col-md-6">
+                                <div class="form-group">
+                                          <label for="">Custo com Marketing(%):</label>
+                                          {{ form.marketing|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.marketing }}</strong>
                                     </div>
                             </div>
                             </div>
 
 
                         <button type="submit" class="btn btn-primary pull-right">Salvar</button>
-                     <a href="{% url 'dashboard:setups' %}" class="btn btn-warning">
+                     <a href="{% url 'dashboard:products' %}" class="btn btn-warning">
                       {% trans 'Voltar' %}
                     </a>
 
@@ -91,19 +124,20 @@
           </div>
         </div>
 
+    <!--Estimador de Lucro -->
+
+          </div>
     <!-- /.content -->
 {% endblock main %}
 
 <!-- Bloco de scripts js -->
 {% block javascript %}
-<script>
-    // mascaras
-    $("#cpf").mask("999.999.999-99");
-    $("#cnpj").mask("99.999.999/9999-99");
-    $("#id_zipcode").mask("99999-999");
-    $("#phone_number").mask("(99) 99999-9999");
-
-
-
-</script>
+$("#recommended_price").focus(function(){
+      var cost = $("#cost").val();
+      var markup = $("#markup").val();
+      var calculo = cost * markup;
+      // Atualiza input
+      $("#recommended_price").val(calculo).trigger('blur');
+      $(this).css("color", "orange");
+    });
 {% endblock javascript %}
