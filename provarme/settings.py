@@ -26,7 +26,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ADMINS = [
     ('Antonio Ricardo', 'antonioricardo@provar.me'),
 ]
-settings = get_settings()
+
 
 ALLOWED_HOSTS = ['*']
 

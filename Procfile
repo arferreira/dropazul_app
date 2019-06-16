@@ -1,1 +1,1 @@
-web: gunicorn provarme.wsgi --log-file
+web: gunicorn provarme.wsgi --log-file -
