@@ -26,7 +26,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ADMINS = [
     ('Antonio Ricardo', 'antonioricardo@provar.me'),
 ]
-
+settings = get_settings()
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,12 +40,10 @@ default_dburl = {
         'NAME': 'provarme_development',
         'USER': 'antonioricardo',
         'PASSWORD': 'rub32912289',
-        'HOST': '157.230.241.48',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
-DATABASES = {
-    'default': default_dburl,
-}
+DATABASES = settings['DB']
 
 
 MIDDLEWARE = [
@@ -215,8 +213,3 @@ SHOPIFY_APP_DEV_MODE = False
 # Set secure proxy header to allow proper detection of secure URLs behind a proxy.
 # See https://docs.djangoproject.com/en/1.7/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
-# Configurando o Drop Azul para o  Heroku.
-import django_heroku
-django_heroku.settings(locals())
