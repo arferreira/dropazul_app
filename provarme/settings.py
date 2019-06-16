@@ -40,7 +40,7 @@ default_dburl = {
         'NAME': 'provarme_development',
         'USER': 'antonioricardo',
         'PASSWORD': 'rub32912289',
-        'HOST': 'localhost',
+        'HOST': '157.230.241.48',
         'PORT': 5432,
     }
 DATABASES = {
