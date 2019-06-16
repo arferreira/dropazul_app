@@ -5,451 +5,524 @@
 {% block title %}Gestão de seus simulados e provas{% endblock %}
 
 {% block main %}
-    	<div class="bg-body">
-		<div class="circle">
-			<span></span>
-		</div>
-	</div>
-
-	<!-- header -->
-	<header>
-		<!-- navbar -->
-		<nav id="navbar" class="navbar navbar-custom navbar-fixed-top" data-spy="affix" data-offset-top="70">
-			<div class="container">
-				<div class="row">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header page-scroll">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<i class="fa fa-bars"></i>
-						</button>
-						<a class="navbar-brand page-scroll logo-light" href="/"><img alt="" src="{% static 'provarme_landing/image/logo.png' %}"></a>
-						<a class="navbar-brand page-scroll logo-clr" href="/"><img alt="" src="{% static 'provarme_landing/image/logoinverter.png' %}"></a>
-					</div>
-
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<div class="right-nav text-right">
-							<ul class="nav navbar-nav menu">
-								<li>
-									<a href="">Sobre</a>
-								</li>
-								<li>
-									<a href="#overview">Porquê?</a>
-								</li>
-								<li>
-									<a href="#video">Funcionalidades</a>
-								</li>
-								<li>
-									<a href="#feature">Benefícios</a>
-								</li>
 
 
-							</ul>
-							<div class="nav-btn">
-								<a href="{% url 'tenant:signature' %}" class="btn btn-grad rad-5">Assinar</a>
-							</div>
-						</div>
-					</div>
-					<!-- /.navbar-collapse -->
-				</div>
-			</div>
-		</nav>
-		<!-- End navbar -->
 
-		<!-- banner -->
-		<div id="home" class="hero">
-			<div class="container">
-				<div class="row">
-					<div class="hero-content">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="intro-text">
-									<h1>Automatize seus simulados, gere vendas, leads, atendimento ao aluno.</h1>
-									<p class="para-lg">Menos que R$ 4,00 por dia ;)</p>
+<!-- navbar area start -->
+<nav class="navbar navbar-area navbar-expand-lg absolute">
+    <div class="container-fluid nav-container">
+        <div class="logo-wrapper navbar-brand">
+            <a href="index.html" class="logo ">
+                <img src="{% static 'provarme_landing/img/logo.png' %}" alt="logo">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="cgency">
+            <!-- navbar collapse start -->
+            <ul class="navbar-nav" id="primary-menu">
+                <!-- navbar- nav -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#feature">Recursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#pricing">Planos e Preços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contato</a>
+                </li>
+            </ul>
+            <!-- /.navbar-nav -->
+        </div>
+        <!-- /.navbar btn wrapper -->
+        <div class="responsive-mobile-menu">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#cgency" aria-controls="cgency"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <!-- navbar collapse end -->
+        <div class="nav-right-content">
+            <ul>
+                <li class="nav-btn">
+                    <a href="{% url 'tenant:login' %}" class="boxed-btn blank">Acessar Painel</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar area end -->
 
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="img-pre">
-									<img class="jump-anim" alt="" src="{% static 'provarme_landing/image/img-a.png' %}">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Banner -->
-	</header>
-	<!-- End header -->
+<!-- header area start -->
+<div class="header-area header-bg" id="home">
+    <div class="header-area-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="header-inner"><!-- header inner -->
 
-	<!-- section -->
-	<section class="section" id="feature">
-		<div class="container">
-			<div class="row">
-				<div class="section-text text-center">
-					<h2>Porque utilizar o provarme em meu negócio?</h2>
+                        <h2 class=" wow FadeInDown" style="color:#fff;">Escale seu negócio <br /> sem complicação</h2>
 
-				</div>
-				<div class="col-content hover md text-center">
-					<div class="col-md-4 wow animated fadeIn" data-wow-delay=".2s">
-						<div class="box-bg hover-box">
-							<div class="box-content hover-content">
-								<div class="icon">
-									<img alt="" src="{% static 'provarme_landing/image/icon-1.png' %}">
-								</div>
-								<h5 class="mg-15">Sua apresentação online</h5>
-								<p>
-									Ao assinar o provarme, você ganha um site e um webapp somente seu,
-									<strong>totalmente personalizável</strong> com sua logo, identidade visual,
-									 e mídias sociais conectadas.
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 wow animated fadeIn" data-wow-delay=".3s">
-						<div class="box-bg hover-box">
-							<div class="box-content hover-content">
-								<div class="icon">
-									<img alt="" src="{% static 'provarme_landing/image/icon-2.png' %}">
-								</div>
-								<h5 class="mg-15">Controle gerencial e negócios</h5>
-								<p>
-										É o primeiro passo para quem deseja melhorar sua gestão e aumentar seus resultados!
-										Você poderá trabalhar com as funcionalidades que mais precisa,
-										tanto online quanto offline, e tudo isso de seu computador, tablet ou celular!
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 wow animated fadeIn" data-wow-delay=".4s">
-						<div class="box-bg hover-box">
-							<div class="box-content hover-content">
-								<div class="icon">
-									<img alt="" src="{% static 'provarme_landing/image/icon-3.png' %}">
-								</div>
-								<h5 class="mg-15">Sua agenda automática online</h5>
-								<p>
-										Gerencie seus agendamentos de forma simples e moderna.
-										Gerencie sua agenda de forma rápida quando e onde estiver. Abra ou feche sua agenda em períodos determinados.
-										Diga adeus aos “caderninhos” riscados e confusos: você vai ter uma agenda que nunca fica sem páginas.
+                        <div class="btn-wrapper">
+                            <a href="{% url 'tenant:signature' %}" class="boxed-btn gd-bg" style="background: white; color:#0088ed;">Quero agora!</a>
+                        </div>
+                    </div><!-- //. header inner -->
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="header-right-image">
+        <div class="header-right-image-animation">
+            <img src="{% static 'provarme_landing/img/header-right.png' %}" alt="header right image">
+        </div>
+   </div>
+   <div class="header-bottom-area padding-top-130"><!-- header bottom area -->
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-4 col-md-6">
+                   <div class="single-feature-item-01  wow zoomIn"><!-- single feature item 01 -->
+                        <div class="icon">
+                            <i class="flaticon-sketch"></i>
+                        </div>
+                        <div class="content">
+                            <h4 class="title">Financeiro</h4>
+                            <p>Life lain held calm and true neat she. Much feet each so went no from. Truth began.</p>
+                        </div>
+                   </div><!-- //. single feature item 01 -->
+               </div>
+               <div class="col-lg-4 col-md-6">
+                   <div class="single-feature-item-01  wow zoomIn"><!-- single feature item 01 -->
+                        <div class="icon">
+                            <i class="flaticon-bullseye"></i>
+                        </div>
+                        <div class="content">
+                            <h4 class="title">Tráfego</h4>
+                            <p>Life lain held calm and true neat she. Much feet each so went no from. Truth began.</p>
+                        </div>
+                   </div><!-- //. single feature item 01 -->
+               </div>
+               <div class="col-lg-4 col-md-6">
+                   <div class="single-feature-item-01  wow zoomIn"><!-- single feature item 01 -->
+                        <div class="icon">
+                            <i class="flaticon-repair"></i>
+                        </div>
+                        <div class="content">
+                            <h4 class="title">Atendimento</h4>
+                            <p>Life lain held calm and true neat she. Much feet each so went no from. Truth began.</p>
+                        </div>
+                   </div><!-- //. single feature item 01 -->
+               </div>
+           </div>
+       </div>
+   </div><!-- header bottom area -->
+</div>
+<!-- header area end -->
 
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End  -->
+<!-- block feature area start -->
+<div class="block-feature-area padding-top-120" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="block-feature-item"><!-- block feature item -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="img-wrapper box-shadow-90">
+                                <img src="{% static 'provarme_landing/img/softawe-1.jpg' %}" alt="software image">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="content-block-area padding-left-50"><!-- content block area -->
+                                <h4 class="title wow fadeInUp">Controle Gerencial</h4>
+                                <p>
+                                    Assuma definitivamente o controle gerencial e financeiro da sua empresa de forma simples e eficaz, controlando todos os gargalos pertinentes ao dropshipping.
+                                </p>
+                                <!--<div class="btn-wrapper margin-top-20 wow fadeInDown">
+                                    <a href="#" class="boxed-btn gd-bg br-5 w180px">Read More</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- block feature area end -->
 
-	<section id="overview" class="sec-pad">
-		<div class="container">
-			<div class="row col-content">
-				<div class="flx-container align-flx-center flx-off-sm row res-center">
-					<div class="col-md-6">
-						<div class="img-set one">
-							<img alt="" src="{% static 'provarme_landing/image/a-img-part-1.png' %}">
-							<img class="animated wow fadeInRight" data-wow-delay=".1s" alt="" src="{% static 'provarme_landing/image/a-img-part-2.png' %}">
-							<img class="animated wow fadeInRight" data-wow-delay=".2s" alt="" src="{% static 'provarme_landing/image/a-img-part-3.png' %}">
-							<img class="animated wow fadeInRight" data-wow-delay=".3s" alt="" src="{% static 'provarme_landing/image/a-img-part-4.png' %}">
-						</div>
-					</div>
-					<div class="col-md-5 col-md-offset-1">
-						<div class="text">
-							<div class="icon icon-bg-md grdnt-blue">
-								<span class="ti-layers-alt"></span>
-							</div>
-							<h2>Controle financeiro completo.</h2>
-							<p class="para-lg">
-								Tenha total controle de seu negócio!
-								Com o provarme você consegue analisar e cruzar informações importantes para avaliar e acompanhar o crescimento do seu negócio de forma bem simples.
-							</p>
-							<div class="btn-holder">
-								<a class="btn rad-5 btn-outline" href="#">Começar</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- block feature area start -->
+<div class="block-feature-area padding-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="block-feature-item"><!-- block feature item -->
+                    <div class="row reorder-xs">
+                        <div class="col-lg-6">
+                            <div class="content-block-area padding-right-50"><!-- content block area -->
+                                <h4 class="title wow fadeInUp">Evolua sua gestão</h4>
+                                <p>Tenha de forma rápida um overview de seu negócio diariamente, te auxiliando a tomar as melhores decisões, reduzindo drasticamente os erros. </p>
+                               <!-- <div class="btn-wrapper margin-top-20">
+                                    <a href="#" class="boxed-btn gd-bg br-5 w180px">Read More</a>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img-wrapper box-shadow-90 wow fadeInDown">
+                                <img src="{% static 'provarme_landing/img/softawe-2.jpg' %}" alt="software image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- block feature area end -->
 
-	<section class="section">
-		<div class="container">
-			<div class="row col-content">
-				<div class="overview flx-container align-flx-center flx-off-sm row res-center text-right">
-					<div class="col-md-5">
-						<div class="text">
-							<div class="icon icon-bg-md grdnt-blue pull-right">
-								<span class="ti-control-forward"></span>
-							</div>
-							<div class="clearfix"></div>
-							<h2>Relacionamento com seu clientes.</h2>
-							<p class="para-lg">
-								Fidelize seus clientes utilizando as nossas ferramentas de Relacionamento: lembre-os de datas comemorativas e importantes, e também seja lembrado!
-							</p>
-							<div class="btn-holder">
-								<a class="btn rad-5 btn-outline" href="#">Ver preços</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-md-offset-1">
-						<div class="img-set four">
-							<img alt="" src="{% static 'provarme_landing/image/img-d.png' %}">
-							<img class="animated wow fadeInLeft" data-wow-delay=".1s" alt="" src="{% static 'provarme_landing/image/img-d.png' %}">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- why choose us area start -->
+<section class="why-chose-us why-choose-us-bg padding-top-110 padding-bottom-55" id="feature">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="section-title center-aligned">
+                    <h2 class="title">Porquê todos os dropshippers utilizam este app?</h2>
+                    <p>
+                        Somos uma plataforma que conecta tudo o que você precisa para a gestão de suas lojas de dropshipping
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-box-01 margin-bottom-30">
+                    <div class="icon">
+                        <i class="flaticon-screen"></i>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Mobilidade</h4>
+                        <p>
+                            Acompanhe todas as operações de seu negócio de forma rápida, carregue a sua empresa no bolso.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-box-01 margin-bottom-30">
+                    <div class="icon">
+                        <i class="flaticon-bullseye"></i>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Tráfego</h4>
+                        <p>
+                            Tenha sempre em mãos um catálogo em um ambiente amigável, para acompanhar suas estratégias de escala para seus produtos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-box-01 margin-bottom-30">
+                    <div class="icon">
+                        <i class="flaticon-paper"></i>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Métricas e Relatórios</h4>
+                        <p>
+                            Suas métricas te ajudam em sua tomada de decisões. Aqui você pode catalogar e mensurar todos os resultados de forma limpa e geral.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-	<!-- -->
-	<section class="sec-pad" id="video">
-		<div class="container">
-			<div class="row">
-				<div class="bg-img overly grdnt-blue text-center">
-					<img alt="" src="{% static 'provarme_landing/image/video-img.jpg' %}">
-					<div class="content-over">
-						<h2>Como funciona?</h2>
-						<p><a class="btn-round video" href="https://www.youtube.com/watch?v=iaj8ktgL3BY"><i class="fa fa-play" aria-hidden="true"></i></a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- end -->
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-box-01 margin-bottom-30">
+                    <div class="icon">
+                        <i class="flaticon-tool"></i>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Conversão de Boletos</h4>
+                        <p>
+                            Agora você vai pedir por mais compras em boleto, com a nossa plataforma, você elevará sua conversão para até 82%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-box-01 margin-bottom-30">
+                    <div class="icon">
+                        <i class="flaticon-teamwork"></i>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">Integração</h4>
+                        <p>
+                            Nós trabalhamos diariamente para manter nossa ferramenta sempre integrada com as principais soluções para dropshipping.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="why-us-box-01 margin-bottom-30">
+                    <div class="icon">
+                        <i class="flaticon-life-insurance"></i>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">100% Seguro</h4>
+                        <p>
+                            Todo o ambiente é seguro e asseguramos a consistência de seus dados utilizando as melhores tecnologias do mercado.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- why choose us area end -->
 
 
-	<!-- Testimonial -->
-	<section class="section">
-		<div class="container-lg">
-			<div class="row">
-				<div class="section-text text-center">
-					<h2>Conheça alguns de nossos clientes</h2>
 
-				</div>
-				<div class="owl-carousel quote">
-					<div class="quote-item box-bg">
-						<div class="box-content">
-							<img alt="" src="{% static 'provarme_landing/image/quote-img-a.jpg' %}"/>
-							<div class="quote-text">
-								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
-								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
-								<div class="rating">
-									<ul class="rating-list">
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><p>(5)</p></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="quote-item box-bg">
-						<div class="box-content">
-							<img alt="" src="{% static 'provarme_landing/image/quote-img-a.jpg' %}"/>
-							<div class="quote-text">
-								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
-								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
-								<div class="rating">
-									<ul class="rating-list">
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><p>(5)</p></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="quote-item box-bg">
-						<div class="box-content">
-							<img alt="" src="{% static 'provarme_landing/image/quote-img-a.jpg' %}"/>
-							<div class="quote-text">
-								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
-								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
-								<div class="rating">
-									<ul class="rating-list">
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><p>(5)</p></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="quote-item box-bg">
-						<div class="box-content">
-							<img alt="" src="{% static 'provarme_landing/image/quote-img-a.jpg' %}"/>
-							<div class="quote-text">
-								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
-								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
-								<div class="rating">
-									<ul class="rating-list">
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><p>(5)</p></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="quote-item box-bg">
-						<div class="box-content">
-							<img alt="" src="{% static 'provarme_landing/image/quote-img-a.jpg' %}"/>
-							<div class="quote-text">
-								<p><em>Lorem ipsum dolor sit amet, eu debet utinam vim. Idque accusam ea sit repudiandae id. Quo ex alia natum tritani, dolorum persequeris.</em></p>
-								<h6>Roger Bentham <span class="fw-300"> / Author Magento</span></h6>
-								<div class="rating">
-									<ul class="rating-list">
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><i class="fa fa-star" aria-hidden="true"></i></li>
-										<li><p>(5)</p></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End -->
 
-	<!-- Faq section -->
-	<section class="section sec-pad" id="faq">
-		<div class="container">
-			<div class="row">
-				<div class="section-text text-center">
-					<div class="section-text text-center">
-						<h2>Como funciona?</h2>
-					</div>
-				</div>
-				<div class="faq col-md-8 col-md-offset-2">
-					<div class="wrapper center-block">
-						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-							<div class="panel panel-default">
-								<div class="panel-heading active" role="tab" id="headingOne">
-									<h5 class="panel-title">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-											How it works?
-										</a>
-									</h5>
-								</div>
-								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-									<div class="panel-body">
-										Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingTwo">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-											Is this refundable?
-										</a>
-									</h4>
-								</div>
-								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-									<div class="panel-body">
-										Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingThree">
-									<h4 class="panel-title">
-										<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-											Can price reduced?
-										</a>
-									</h4>
-								</div>
-								<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-									<div class="panel-body">
-										Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End faq -->
+<!-- intro video area start -->
+<div class="intro-video-area intro-video-bg padding-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-video-inner"><!-- intro video inner -->
+                    <div class="img-wrapper">
+                        <img src="{% static 'provarme_landing/img/intro-video-laptop.png' %}" alt="intro vidoe laptop">
+                        <div class="hover">
+                                <a href="https://www.youtube.com/watch?v=I29WdREgrCA" class="video-play-btn mfp-iframe"><i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div><!-- //. intro video inner area -->
+            </div>
 
-	<!-- -->
-	<section class="section">
-		<div class="container">
-			<div class="row">
-				<div class="grdnt-blue">
-					<div class="content-over text-center">
-						<div class="section-text text-center">
-							<h3>Teste o provarme, é gratuíto por 7 dias!</h3>
-						</div>
-						<div class="sub-input col-md-6 col-sm-8 col-sm-offset-2 col-md-offset-3 subscribe custom-form animated wow fadeInUp" data-wow-delay=".1s">
-							<form class="custom-form" role="form" action="" method="post">
-								<div class="form-group">
-									<label for="subscribe-email"></label>
-									<input type="text" name="name" placeholder="Seu nome" class="subscribe-email form-control" id="subscribe-name">
-								</div>
-								<div class="form-group">
-										<label for="subscribe-email"></label>
-										<input type="text" name="email" placeholder="Seu email" class="subscribe-email form-control" id="subscribe-email">
-									</div>
+        </div>
+    </div>
+</div>
+<!-- intro video area end -->
 
-								<div class="form-group">
-									<label for="subscribe-email"></label>
-									<input type="text" name="email" placeholder="Seu telefone" class="subscribe-email form-control" id="subscribe-telefone">
-								</div>
-								<div class="form-group">
-										<div class="g-recaptcha" data-sitekey="6Le-GVoUAAAAADnaERupkSsJhc5-5cM3dhR6slLS"></div>
-								</div>
-								<button type="submit" class="btn btn-outline rad-5">Enviar</button>
-							</form>
-							<div class="text-center light result-box">
-								<div class="success-message"></div>
-								<div class="error-message"></div>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- price plan area start -->
+<div class="price-plan-area padding-top-110 padding-bottom-100" id="pricing">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="section-title center-aligned">
+                    <h2 class="title">Nossos planos e preços</h2>
+                    <p>
+                        Planos feitos sob medida para o sucesso de sua loja de dropshipping
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-price-table-01  wow zoomIn"><!-- single price table 01 -->
+                    <div class="price-header">
+                        <span class="name">Básico</span>
+                        <div class="price-wrap">R$ 89,90<span class="month">/Mês</span></div>
+                    </div>
+                    <div class="price-body">
+                        <ul>
+                            <li>10 Produtos</li>
+                            <li>1.000 Boletos</li>
+                            <li>2 Usuários</li>
+                            <li><b>Suporte Gratuito</b></li>
+                        </ul>
+                    </div>
+                    <div class="price-footer">
+                        <a href="#" class="boxed-btn blank bordered btn-rounded w180px">Assinar</a>
+                    </div>
+                </div><!-- //.single price table 01 -->
+            </div>
+            <div class="col-lg-4 col-md-6 remove-col-padding">
+                <div class="single-price-table-01 active  wow zoomIn"><!-- single price table 01 -->
+                    <div class="price-header">
+                        <span class="name">Intermediário</span>
+                        <div class="price-wrap">R$ 179,90<span class="month">/Mês</span></div>
+                    </div>
+                    <div class="price-body">
+                        <ul>
+                            <li>100 Produtos</li>
+                            <li>2.600 Boletos</li>
+                            <li>4 Usuários</li>
+                            <li><b>Suporte Gratuito</b></li>
+                        </ul>
+                    </div>
+                    <div class="price-footer">
+                        <a href="#" class="boxed-btn blank bordered btn-rounded w180px">Assinar</a>
+                    </div>
+                </div><!-- //.single price table 01 -->
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-price-table-01  wow zoomIn"><!-- single price table 01 -->
+                    <div class="price-header">
+                        <span class="name">Avançado</span>
+                        <div class="price-wrap">R$ 289,90<span class="month">/Mês</span></div>
+                    </div>
+                    <div class="price-body">
+                        <ul>
+                            <li>1.000 Produtos</li>
+                            <li>+ 3.000 Boletos</li>
+                            <li>6 Usuários</li>
+                            <li><b>Suporte Gratuito</b></li>
+                        </ul>
+                    </div>
+                    <div class="price-footer">
+                        <a href="#" class="boxed-btn blank bordered btn-rounded w180px">Assinar</a>
+                    </div>
+                </div><!-- //.single price table 01 -->
+            </div>
 
-	<!--Footer  -->
-	<footer class="footer-wrapper  sec-pad-sm">
-		<div class="container footer-content">
-			<div class="row">
-				<div class="social-holder text-center">
-					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-					<a  href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-				</div>
-				<div class="spce"></div>
-				<div class="copyright text-center">
-					© 2018 - provar.me. Todos os direitos reservados
-				</div>
-			</div>
-		</div>
-	</footer>
+        </div>
+    </div>
+</div>
+<!-- price plan area end -->
+
+
+
+<!-- contact area start -->
+<div class="contact-area contact-bg" id="contact">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="contact-outer-area"><!-- contact outer area -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                                <div class="content-form-wrapper"><!-- contact form wrapper -->
+                                    <div class="section-title center-aligned">
+                                        <h2 class="title">Fale conosco</h2>
+                                        <p>
+                                            Ficou com alguma dúvida? Envie uma mensagem agora mesmo através do formulário abaixo.
+                                        </p>
+                                    </div>
+                                    <form action="index.html" class="contact-form" id="get_in_touch">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Seu Nome">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control" placeholder="Seu Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Assunto">
+                                                </div>
+                                                <div class="form-group textarea">
+                                                    <textarea name="message" id="message" class="form-control" placeholder="Mensagem" cols="30" rows="10"></textarea>
+                                                </div>
+                                                <button class="submit-btn w180px gd-bg" type="submit">Enviar agora</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- //. contact form wrapper -->
+                        </div>
+                    </div>
+                </div><!-- //. contact outer area -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- contact area end -->
+
+<!-- faq area start -->
+<div class="faq-area padding-top-110 padding-bottom-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="section-title center-aligned">
+                    <h2 class="title">Perguntas Frequentes</h2>
+                    <p>
+                        Tentamos reuniar as 3 principais perguntas que sempre recebemos para explicar um pouco o Drop Azul.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row reorder-xs">
+            <div class="col-lg-6">
+                <div class="accordion-wrapper"><!-- accordion wrapper -->
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <a  data-toggle="collapse" data-target="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
+                                        Como funciona ?
+                                    </a>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    O Drop Azul é uma plataforma desenvolvida para auxiliar o dropshipper na escala de suas lojas, sempre estamos atualizando as funcionalidades de acordo com o que o mercado pede.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" role="button" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Quais as funcionalidades?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                        Nós desenvolvemos uma ferramenta diretamente com quem escala vendas em suas lojas, portanto, cobrimos desde seus produtos, até o atendimento de seu negócio.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <a class="collapsed" data-toggle="collapse" role="button" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Por que eu deveria usar?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                <div class="card-body">
+                                        Entendemos que existam outras possibilidades, como criar várias planilhas e utilizar diretamente em seu google drive, mas nós criamos um ambiente amigável e diversas funcionalidades que irão te levar pra outro patamar.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- //. accordion wrapper -->
+            </div>
+            <div class="col-lg-6">
+                <div class="img-wrapper wow zoomIn">
+                    <img src="{% static 'provarme_landing/img/faq.png' %}" alt="faq image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- faq area emd -->
+
+
+<!-- footer area start -->
+<footer class="footer-area footer-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget widget about_widget"><!-- footer widget -->
+                    <a href="index.html" class="footer-logo"><img src="{% static 'provarme_landing/img/logo.png' %}" alt=""></a>
+                    <ul class="social-icon">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                    <div class="copyright-text margin-top-30">Todos os direitos reservados © Drop Azul </div>
+                </div><!-- //. footer widget -->
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer area end -->
+
+<div class="back-to-top base-color-2">
+        <i class="fas fa-rocket"></i>
+</div>
 	<!-- End Footer -->
 {% endblock %}

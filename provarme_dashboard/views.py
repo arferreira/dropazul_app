@@ -16,213 +16,117 @@ from django.contrib.messages.views import SuccessMessageMixin
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
-# Importação dos modelos
-from provarme_dashboard.customer.models import Customer
-from provarme_dashboard.provider.models import Provider
-from provarme_dashboard.employee.models import Employee
-from provarme_dashboard.question.models import Category
-from provarme_dashboard.question.models import Question
+# Importação Modelos
 
-# Importação dos forms
-from provarme_dashboard.question.forms import CategoryForm
-#from provarme_dashboard.question_old.forms import QuestionForm
-
-u"""
-
-    Informações relativas ao Aluno
-
-"""
-
-# Listagem de alunos de cada tenant
-class CustomerListView(LoginRequiredMixin, ListView):
-    model = Customer
-    context_object_name = 'customers'
-    template_name = 'provarme_dashboard/customers/customer_list.html'
+from provarme_dashboard.store.models import Store
+from provarme_dashboard.setups.models import Setup
+from provarme_dashboard.providers.models import Provider
+from provarme_dashboard.products.models import Product
 
 
-# Criando um novo aluno
-class CustomerCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Customer
+
+
+# Listagem de loja de cada tenant
+class StoreListView(LoginRequiredMixin, ListView):
+    model = Store
+    context_object_name = 'stores'
+    template_name = 'provarme_dashboard/stores/store_list.html'
+
+
+# Criando uma nova loja
+class StoreCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Store
     fields = '__all__'
-    template_name = 'provarme_dashboard/customers/customer_form.html'
-    success_url = reverse_lazy('dashboard:customers')
-    success_message = "Aluno %(name_social_name)s foi inserido com sucesso!"
+    template_name = 'provarme_dashboard/stores/store_form.html'
+    success_url = reverse_lazy('dashboard:stores')
+    success_message = "Loja %(name)s foi criada com sucesso!"
 
 
-
-# Editando um aluno
-class CustomerUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Customer
+# Editando uma loja
+class StoreUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Store
     fields = '__all__'
-    template_name = 'provarme_dashboard/customers/customer_form.html'
-    success_url = reverse_lazy('dashboard:customers')
-    success_message = "Aluno %(name_social_name)s foi atualizado com sucesso!"
-
-
-# Deletando um aluno
-@login_required
-@csrf_exempt
-def customer_delete(request, customer_id):
-    try:
-        customer = Customer.objects.get(pk=customer_id)
-    except Customer.DoesNotExist:
-        raise Http404()
-    if request.method == 'GET':
-        customer.delete()
-        messages.success(request, 'Aluno excluído com sucesso!')
-        return HttpResponseRedirect(reverse('dashboard:customers'))
-    else:
-        raise Http404()
+    template_name = 'provarme_dashboard/stores/store_form.html'
+    success_url = reverse_lazy('dashboard:stores')
+    success_message = "Loja %(name)s foi atualizada com sucesso!"
 
 
 
-u"""
 
-    Informações relativas ao Professor
-
-"""
-
-
-
-# Listagem de professores de cada tenant
-class EmployeeListView(LoginRequiredMixin, ListView):
-    model = Employee
-    template_name = 'provarme_dashboard/employees/employee_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['employees'] = Employee.objects.all()
-        return context
+# Listagem de setup de cada tenant
+class SetupListView(LoginRequiredMixin, ListView):
+    model = Setup
+    context_object_name = 'setups'
+    template_name = 'provarme_dashboard/setups/setup_list.html'
 
 
-
-# Criando um novo professor
-class EmployeeCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Employee
+# Criando um setup
+class SetupCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Setup
     fields = '__all__'
-    template_name = 'provarme_dashboard/employees/employee_form.html'
-    success_url = reverse_lazy('dashboard:employees')
-    success_message = "Professor %(name_social_name)s foi inserido com sucesso!"
+    template_name = 'provarme_dashboard/setups/setup_form.html'
+    success_url = reverse_lazy('dashboard:setups')
+    success_message = "Configuração foi criada com sucesso!"
 
 
-
-# Editando um professor
-class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Employee
+# Editando um setup
+class SetupUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Setup
     fields = '__all__'
-    template_name = 'provarme_dashboard/employees/employee_update_form.html'
-    template_name_suffix = '_update_form'
-    success_url = reverse_lazy('dashboard:employees')
-    success_message = "Professor %(name_social_name)s foi atualizado com sucesso!"
-
-
-# Deletando um professor
-@login_required
-@csrf_exempt
-def employee_delete(request, employee_id):
-    try:
-        employee = Employee.objects.get(pk=employee_id)
-    except Employee.DoesNotExist:
-        raise Http404()
-    if request.method == 'GET':
-        employee.delete()
-        messages.success(request, 'Professor excluído com sucesso!')
-        return HttpResponseRedirect(reverse('dashboard:employees'))
-    else:
-        raise Http404()
-
-
-
-u"""
-
-    Informações relativas as categorias
-"""
-
-# Listagem de categorias de cada tenant
-class CategoryListView(LoginRequiredMixin, ListView):
-    model = Category
-    context_object_name = 'categories'
-    template_name = 'provarme_dashboard/categories/category_list.html'
-
-
-# Criando uma nova categoria
-class CategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Category
-    form_class = CategoryForm
-    template_name = 'provarme_dashboard/categories/category_form.html'
-    success_url = reverse_lazy('dashboard:categories')
-    success_message = "Categoria %(description)s foi inserida com sucesso!"
-
-
-
-# Editando uma categoria
-class CategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Category
-    form_class = CategoryForm
-    template_name = 'provarme_dashboard/categories/category_form.html'
-    success_url = reverse_lazy('dashboard:categories')
-    success_message = "Categoria %(description)s foi atualizada com sucesso!"
-
-
-# Deletando uma categoria
-@login_required
-@csrf_exempt
-def category_delete(request, category_id):
-    try:
-        category = Category.objects.get(pk=category_id)
-    except Category.DoesNotExist:
-        raise Http404()
-    if request.method == 'GET':
-        category.delete()
-        messages.success(request, 'Categoria excluída com sucesso!')
-        return HttpResponseRedirect(reverse('dashboard:categories'))
-    else:
-        raise Http404()
+    template_name = 'provarme_dashboard/setups/setup_form.html'
+    success_url = reverse_lazy('dashboard:setups')
+    success_message = "Configuração foi atualizada com sucesso!"
 
 
 
 
-u"""
 
-    Informações relativas as questoes
-"""
-
-# Listagem de questões de cada tenant
-class QuestionListView(LoginRequiredMixin, ListView):
-    model = Question
-    context_object_name = 'questions'
-    template_name = 'provarme_dashboard/questions/question_list.html'
+# Listagem de fornecedores de cada tenant
+class ProviderListView(LoginRequiredMixin, ListView):
+    model = Provider
+    context_object_name = 'providers'
+    template_name = 'provarme_dashboard/providers/provider_list.html'
 
 
-# Criando uma nova questão
-class QuestionCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Question
-    form_class = CategoryForm
-    template_name = 'provarme_dashboard/questions/question_form.html'
-    success_url = reverse_lazy('dashboard:questions')
-    success_message = "Questão %(wording)s foi inserida com sucesso!"
+# Criando um setup
+class ProviderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Provider
+    fields = '__all__'
+    template_name = 'provarme_dashboard/providers/provider_form.html'
+    success_url = reverse_lazy('dashboard:providers')
+    success_message = "Fornecedor foi criado com sucesso!"
+
+
+# Editando um setup
+class ProviderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Provider
+    fields = '__all__'
+    template_name = 'provarme_dashboard/providers/provider_form.html'
+    success_url = reverse_lazy('dashboard:providers')
+    success_message = "Fornecedor foi atualizado com sucesso!"
 
 
 
-# Editando uma questão
-class QuestionUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Question
-    template_name = 'provarme_dashboard/questions/question_form.html'
-    success_url = reverse_lazy('dashboard:questions')
-    success_message = "Questão %(wording)s foi atualizada com sucesso!"
+# Listagem de produtos de cada tenant
+class ProductListView(LoginRequiredMixin, ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = 'provarme_dashboard/products/product_list.html'
 
 
-# Deletando uma questão
-@login_required
-@csrf_exempt
-def question_delete(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404()
-    if request.method == 'GET':
-        question.delete()
-        messages.success(request, 'Questão excluída com sucesso!')
-        return HttpResponseRedirect(reverse('dashboard:questions'))
-    else:
-        raise Http404()
+# Criando um setup
+class ProductCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Product
+    fields = '__all__'
+    template_name = 'provarme_dashboard/products/product_form.html'
+    success_url = reverse_lazy('dashboard:products')
+    success_message = "Produto foi criado com sucesso!"
+
+
+# Editando um setup
+class ProductUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Product
+    fields = '__all__'
+    template_name = 'provarme_dashboard/products/product_form.html'
+    success_url = reverse_lazy('dashboard:products')
+    success_message = "Produto foi atualizado com sucesso!"

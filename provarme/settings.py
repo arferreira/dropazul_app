@@ -126,11 +126,15 @@ TENANT_MODEL = 'provarme_tenant.Client'
 # STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join('static'),)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 
@@ -183,3 +187,20 @@ PAGSEGURO_LOG_IN_MODEL = True # se o valor for True, os checkouts e transações
 FIXTURE_DIRS = [
     os.path.join(BASE_DIR, 'fixtures'),
 ]
+
+
+# Add Shopify Auth configuration.
+#
+# Note that sensitive credentials SHOPIFY_APP_API_KEY and SHOPIFY_APP_API_SECRET are read from environment variables,
+# as is best practice. These environment variables are in turn read from a .env file in the project directory.
+# See https://github.com/theskumar/python-dotenv for more.
+SHOPIFY_APP_NAME = 'provarme_dashboard'
+SHOPIFY_APP_API_KEY = '5ec896d39cb6b2cfbb5d0db880a835ad'
+SHOPIFY_APP_API_SECRET = '3ce25aed7251cb4c36a82a11f898ec6e'
+SHOPIFY_APP_API_SCOPE = ['read_products', 'read_orders']
+SHOPIFY_APP_IS_EMBEDDED = True
+SHOPIFY_APP_DEV_MODE = False
+
+# Set secure proxy header to allow proper detection of secure URLs behind a proxy.
+# See https://docs.djangoproject.com/en/1.7/ref/settings/#secure-proxy-ssl-header
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

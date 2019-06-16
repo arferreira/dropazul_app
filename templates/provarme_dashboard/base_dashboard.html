@@ -3,263 +3,232 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>provar.me [Painel] | Gestão de seus simulados e comunicação com o aluno</title>
-    <!-- Icones da página -->
-	<link rel="apple-touch-icon" sizes="57x57" href="{% static 'atrix_landing/image/apple-icon-57x57.png' %}">
-	<link rel="apple-touch-icon" sizes="60x60" href="{% static 'atrix_landing/image/apple-icon-60x60.png' %}">
-	<link rel="apple-touch-icon" sizes="72x72" href="{% static 'atrix_landing/image/apple-icon-72x72.png' %}">
-	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'atrix_landing/image/apple-icon-76x76.png' %}">
-	<link rel="apple-touch-icon" sizes="114x114" href="{% static 'atrix_landing/image/apple-icon-114x114.png' %}">
-	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'atrix_landing/image/apple-icon-120x120.png' %}">
-	<link rel="apple-touch-icon" sizes="144x144" href="{% static 'atrix_landing/image/apple-icon-144x144.png' %}">
-	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'atrix_landing/image/apple-icon-152x152.png' %}">
-	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'atrix_landing/image/apple-icon-180x180.png' %}">
-	<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'atrix_landing/image/android-icon-192x192.png' %}">
-	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'atrix_landing/image/favicon-32x32.png' %}">
-	<link rel="icon" type="image/png" sizes="96x96" href="{% static 'atrix_landing/image/favicon-96x96.png' %}">
-	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'atrix_landing/image/favicon-16x16.png' %}">
 
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
+  <title>Drop Azul - A melhor gestão para o seu negócio de dropshipping</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'assets/css/lib/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{% static 'assets/css/helper.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'provarme_core/static/css/sweetalert.css' %}">
-    <link href="{% static 'assets/css/lib/toastr/toastr.min.css' %}" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{%  static 'provarme_dashboard/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-    <!--[if lt IE 9]>
-    <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <!-- Custom styles for this template-->
+  <link href="{%  static 'provarme_dashboard/css/sb-admin-2.css' %}" rel="stylesheet">
 
-<![endif]-->
-    <!--Custom style Datatable-->
-<style>
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-    z-index: 3;
-    color: #fff;
-    cursor: default;
-    background-color: #7b01e9;
-    border-color: #7b01e9;
-}
-</style>
 </head>
 
-<body class="fix-header fix-sidebar">
-
-    <!-- Main wrapper  -->
-    <div id="main-wrapper">
-        <!-- header header  -->
-        <div class="header">
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-                <!-- Logo -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">
-                        <!-- Logo icon -->
-
-                        <b><img src="{% static 'assets/images/provarme-icon.png' %}" alt=""></b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span><img src="{% static 'provarme_core/static/img/logo.png' %}" alt="" width="140" height="35"/></span>
-                    </a>
-                </div>
-                <!-- End Logo -->
-                <div class="navbar-collapse">
-                    <!-- toggle and nav items -->
-                    <ul class="navbar-nav mr-auto mt-md-0">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- Messages -->
-
-                        <!-- End Messages -->
-                    </ul>
-                    <!-- User profile and search -->
-                    <ul class="navbar-nav my-lg-0">
 
 
-                        <!-- Comment -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
-								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-							</a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notificações</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="btn btn-danger btn-circle m-r-10"><i class="fa fa-link"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Título da notificação</h5> <span class="mail-desc">Texto da notificação!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Visualizar todas as notificações</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Comment -->
-                        <!-- Messages -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
-								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-							</a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Você possui 4 novas mensagens</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="#">
-                                                <div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                                <div class="mail-contnet">
-                                                    <h5>Aluno X</h5> <span class="mail-desc">Estou com dúvidas!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center" href="javascript:void(0);"> <strong>Visualizar todas as mensagens</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Messages -->
-                        <!-- Profile -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              {% if user.profile.image_profile %}
-                                  <img src="/media/{{ request.tenant.domain_url }}/{{ user.profile.image_profile }}" class="profile-pic" alt="Imagem do Usuário">
-                              {% else %}
-                                  <img src="{% static 'assets/images/users/5.jpg' %}" alt="user" class="profile-pic" />
-                              {% endif %}
+<body id="page-top">
 
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right animated zoomIn">
-                                <ul class="dropdown-user">
-                                    <li><a href="{% url 'tenant:profile' %}"><i class="ti-user"></i> Perfil</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> Financeiro</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Mensagens</a></li>
-                                    <li><a href="{% url 'tenant:logout' %}"><i class="fa fa-power-off"></i> Sair</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-box-open"></i>
         </div>
-        <!-- End header header -->
+        <div class="sidebar-brand-text mx-3">Drop Azul</div>
+      </a>
 
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
 
-        <!-- Left Sidebar  -->
-        <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dashboard:index' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Painel Gerencial</span></a>
+      </li>
 
-                        <li> <a class="" href="{% url 'dashboard:index' %}" ><i class="fa fa-dashboard"></i><span class="hide-menu">Painel de Controle</span></a></li>
-                        <li> <a class="" href="{% url 'site:index' %}" ><i class="fa fa-globe"></i><span class="hide-menu">Webapp Aluno</span></a></li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
 
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-sitemap"></i><span class="hide-menu">Cadastros</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{% url 'dashboard:customers' %}"><i class="fa fa-caret-right"></i> Alunos</a></li>
-                                <li><a href="{% url 'dashboard:questions' %}"><i class="fa fa-caret-right"></i> Banco de questões</a></li>
-                                <li><a href="{% url 'dashboard:customers' %}"><i class="fa fa-caret-right"></i> Simulados</a></li>
-                                <li><a href="{% url 'dashboard:categories' %}"><i class="fa fa-caret-right"></i> Categorias</a></li>
-                                <li><a href="{% url 'dashboard:employees' %}"><i class="fa fa-caret-right"></i> Professores</a></li>
-                                <li><a href="{% url 'dashboard:customers' %}"><i class="fa fa-caret-right"></i> Campanhas</a></li>
-                            </ul>
-                        </li>
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Administrativo
+      </div>
 
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Configurações</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
 
-
-
-
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
+            <a class="collapse-item" href="{% url 'dashboard:stores' %}">Loja</a>
+            <a class="collapse-item" href="{% url 'dashboard:setups' %}">Gerais</a>
+          </div>
         </div>
-        <!-- End Left Sidebar  -->
-        <!-- Page wrapper  -->
-        <div class="page-wrapper">
-            <!-- Bread crumb -->
-            <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <!--<h3 class="text-primary">Painel de Controle</h3> -->
-                </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="/">Início</a></li>
-                        {% block breadcrumb %}
-                        {% endblock breadcrumb %}
-                    </ol>
-                </div>
-            </div>
-            <!-- End Bread crumb -->
-            <!-- Container fluid  -->
-            <div class="container-fluid">
+      </li>
+
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Gerencial
+      </div>
+
+
+        <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-cart-plus"></i>
+          <span>Produto</span>
+        </a>
+
+      </li>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pedidos</span>
+        </a>
+
+      </li>
+
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Tráfego</span></a>
+      </li>
+
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-phone"></i>
+          <span>Conversão</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+  <!-- Start Page Content -->
+   <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </span>
+                  {% if user.profile.image_profile %}
+                      <img src="/media/{{ request.tenant.domain_url }}/{{ user.profile.image_profile }}" class="img-profile rounded-circle" alt="Imagem do Usuário">
+                  {% else %}
+                      <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt="user" class="img-profile rounded-circle" />
+                  {% endif %}
+
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="{% url 'tenant:profile' %}">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Perfil
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'tenant:logout' %}" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Sair
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+    <!-- End of Sidebar -->
+                <div class="container-fluid">
                {% block main %}
+
                 <!-- Conteúdo principal -->
                {% endblock main %}
-            </div>
-            <!-- End Container fluid  -->
-            <!-- footer -->
-            <footer class="footer"> © 2018 <a href="https://provar.me">provar.me</a></footer>
-            <!-- End footer -->
+                </div>
         </div>
-        <!-- End Page wrapper  -->
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Você tem certeza que deseja sair do sistema?</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="{% url 'tenant:logout' %}">Sim</a>
+        </div>
+      </div>
     </div>
-    <!-- End Wrapper -->
-    <!-- All Jquery -->
-    <script src="{% static 'assets/js/lib/jquery/jquery.min.js' %}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{% static 'assets/js/lib/bootstrap/js/popper.min.js' %}"></script>
-    <script src="{% static 'assets/js/lib/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- DataTables -->
-    <script src="{% static 'provarme_core/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'provarme_core/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="{% static 'assets/js/jquery.slimscroll.js' %}"></script>
-    <!--Menu sidebar -->
-    <script src="{% static 'assets/js/sidebarmenu.js' %}"></script>
-    <!--stickey kit -->
-    <script src="{% static 'assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js' %}"></script>
-
-    <!-- Alertas -->
-    <script src="{% static 'provarme_core/static/js/sweetalert.min.js' %}"></script>
-    <!--Toastr-->
-    <script src="{% static 'assets/js/lib/toastr/toastr.min.js' %}"></script>
-    <!-- scripit init-->
-    <script src="{% static 'assets/js/lib/toastr/toastr.init.js' %}"></script>
-    <script src="{% static 'provarme_landing/js/maskedinput.js' %}"></script>
-    <script src="{% static 'provarme_landing/js/searchcep.js' %}"></script>
+  </div>
 
 
-    <!--Custom JavaScript -->
-    <script src="{% static 'assets/js/custom.min.js' %}"></script>
+ <!-- Bootstrap core JavaScript-->
+  <script src="{% static 'provarme_dashboard/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static 'provarme_dashboard/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static 'provarme_dashboard/js/sb-admin-2.min.js' %}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{% static 'provarme_dashboard/vendor/chart.js/Chart.min.js' %}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{% static 'provarme_dashboard/js/demo/chart-area-demo.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/js/demo/chart-pie-demo.js' %}"></script>
 
 <!--Mensagens e Notificações-->
 {% if messages %}

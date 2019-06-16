@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Drop Azul - {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- Meta tags para SEO -->
+	<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+	<meta name="description" content="Com o atrixmob você vai conseguir gerir o seu negócio de forma automatizada. Tenha um lindo site com sua identidade visual, faça a gestão de seu negócio e amplifique o seu atendimento a clientes.">
+	<meta name="title" content="atrixmob - Gestão e automatização de pequenos e médios negócios">
+	<meta name="author" content="Atrix Mob">
+	<meta name="keywords" content="atrix, atrixmob, sistema de lava jato, sistema para lava rapido, programa lava rapido, sistema salão de beleza, salão de beleza, programa de agendamento, sistema de gestão financeira, mv lava jato, sistema de gestão, lavagem de veiculos">
+
+	<!-- Icones da landing -->
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Custom css da landing -->
+	<link rel="stylesheet" type="text/css" href="{% static 'provarme_tenant/css/vendor.bundle.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'provarme_tenant/css/style.css' %}">
+	<!-- Re Captcha -->
+	<script src='https://www.google.com/recaptcha/api.js?hl=pt-BR'></script>
+	<!--Font awesome cdn-->
+	<link rel="stylesheet" href="{% static 'provarme_landing/css/fontawesome.min.css' %}">
+	<link rel="canonical" href="http://www.dropazul.com.br">
+</head>
+<body class="box-site" data-spy="scroll" data-target="#navbar" data-offset="70">
+
+{% block main %}
+{% endblock %}
+
+	<!-- scripts da landing page -->
+	<script src="{% static 'provarme_landing/js/jquery.js' %}"></script>
+	<script src="{% static 'provarme_tenant/js/vendor.bundle.js' %}"></script>
+	<script src="{% static 'provarme_tenant/js/maskedinput.js' %}"></script>
+	<script src="{% static 'provarme_tenant/js/searchcep.js' %}"></script>
+	<script src="{% static 'provarme_tenant/js/script.js' %}"></script>
+{% block javascript %}{% endblock %}
+</body>
+</html>

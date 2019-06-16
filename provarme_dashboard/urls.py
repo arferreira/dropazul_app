@@ -16,32 +16,32 @@ urlpatterns = [
     # Rota principal do dashboard
     path('', dashboard_index.as_view(), name='index'),
 
-    # Alunos
-    path('alunos/', CustomerListView.as_view(), name='customers'),
-    path('aluno/novo', CustomerCreateView.as_view(), name='new_customer'),
-    path('aluno/editar/<int:pk>', CustomerUpdateView.as_view(), name='update_customer'),
-    path('aluno/excluir/<int:customer_id>', customer_delete, name='delete_customer'),
+    # Store
+    path('loja/', StoreListView.as_view(), name='stores'),
+    path('loja/nova', StoreCreateView.as_view(), name='new_store'),
+    path('loja/editar/<int:pk>', StoreUpdateView.as_view(), name='update_store'),
 
 
-    # professores
-    path('professores/', EmployeeListView.as_view(), name='employees'),
-    path('professor/novo', EmployeeCreateView.as_view(), name='new_employee'),
-    path('professor/editar/<int:pk>', EmployeeUpdateView.as_view(), name='update_employee'),
-    path('professor/excluir/<int:employee_id>', employee_delete, name='delete_employee'),
+    # Setups
+    path('setup/', SetupListView.as_view(), name='setups'),
+    path('setup/novo', SetupCreateView.as_view(), name='new_setup'),
+    path('setup/editar/<int:pk>', SetupUpdateView.as_view(), name='update_setup'),
 
 
-    # Categorias
-    path('categorias/', CategoryListView.as_view(), name='categories'),
-    path('categoria/nova/', CategoryCreateView.as_view(), name='new_category'),
-    path('categoria/editar/<int:pk>', CategoryUpdateView.as_view(), name='update_category'),
-    path('categoria/excluir/<int:category_id>', category_delete, name='delete_category'),
+
+    # Providers
+    path('fornecedores/', ProviderListView.as_view(), name='providers'),
+    path('fornecedor/novo', ProviderCreateView.as_view(), name='new_provider'),
+    path('fornecedor/editar/<int:pk>', ProviderUpdateView.as_view(), name='update_provider'),
 
 
-    # Questões
-    path('questoes/', QuestionListView.as_view(), name='questions'),
-    path('questao/nova/', QuestionCreateView.as_view(), name='new_question'),
-    path('questao/editar/<int:pk>', QuestionUpdateView.as_view(), name='update_question'),
-    path('questao/excluir/<int:question_id>', question_delete, name='delete_question'),
+    # Products
+    path('produtos/', ProductListView.as_view(), name='products'),
+    path('produto/novo', ProductCreateView.as_view(), name='new_product'),
+    path('produto/editar/<int:pk>', ProductUpdateView.as_view(), name='update_product'),
+
+
+
 
 
 

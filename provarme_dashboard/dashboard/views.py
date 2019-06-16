@@ -8,7 +8,7 @@ from django.views.generic.base import TemplateView
 
 
 # Importação dos modelos
-from provarme_dashboard.customer.models import Customer
+#from provarme_dashboard.customer.models import Customer
 
 
 
@@ -23,7 +23,7 @@ u"""
 class IndexView(LoginRequiredMixin, TemplateView):
     login_url = '/tenant/login/'
     template_name = 'provarme_dashboard/index_dashboard.html'
-    customers = Customer.objects.all()
+    customers = 2
 
     def get(self, request):
         return render(request, self.template_name, {'customers': self.customers})

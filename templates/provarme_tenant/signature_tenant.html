@@ -1,4 +1,4 @@
-{% extends "provarme_landing/base.html" %}
+{% extends "provarme_landing/base2.html" %}
 {% load i18n static solo_tags %}
 {% block javascript %}
 <script type="text/javascript">
@@ -123,8 +123,9 @@ $(function() {
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 							<i class="fa fa-bars"></i>
 						</button>
-						<a class="navbar-brand page-scroll logo-light" href="/"><img alt="" src="{% static 'provarme_landing/image/logo.png' %}"></a>
-						<a class="navbar-brand page-scroll logo-clr" href="/"><img alt="" src="{% static 'provarme_landing/image/logoinverter.png' %}"></a>
+						<a class="navbar-brand page-scroll logo-light" href="/"><img alt="" src="{% static 'provarme_landing/img/logo-white.png' %}"></a>
+                        <a class="navbar-brand page-scroll logo-clr" href="/"><img alt="" src="{% static 'provarme_landing/img/logo-white.png' %}"></a>
+
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -269,7 +270,7 @@ $(function() {
                                             <div class="row">
                                                 <div class="col-lg-12 col-md-12 col-xs-10">
                                                     <input autofocus required type="checkbox" name="acceptance" id="id_acceptance" placeholder="" value="{{ form_data.acceptance }}">
-                                                    <label for="id_acceptance"><span style="color: #39308F;">Declaro que li e estou de acordo com a <a target="blank" href="https://maestrus.com/privacidade">Política de privacidade</a>, os <a target="blank" href="https://maestrus.com/termos">Termos de Uso</a> e o <a target="blank" href="https://maestrus.com/contrato">Contrato de Prestação de Serviços</a>.</span></label>
+                                                    <label for="id_acceptance"><span style="color: #2389f1;">Declaro que li e estou de acordo com a <a target="blank" href="https://dropazul.com/privacidade">Política de privacidade</a>, os <a target="blank" href="https://maestrus.com/termos">Termos de Uso</a> e o <a target="blank" href="https://maestrus.com/contrato">Contrato de Prestação de Serviços</a>.</span></label>
 
 
                                                 </div>
@@ -278,7 +279,7 @@ $(function() {
                                             <div class="row">
                                                 <div class=" col-lg-12 text-right">
                                                     <a href="/" class="btn btn-warning pull-left" style="background: #f0ad4e;">Voltar</a>
-                                                <input class="btn btn-primary" style="background: #39308F" type="submit" value="Assinar">
+                                                <input class="btn btn-primary" style="background: #2389f1" type="submit" value="Assinar">
                                                 </div>
                                             </div>
                                         </form>
@@ -313,13 +314,10 @@ $(function() {
 	<footer class="footer-wrapper  sec-pad-sm">
 		<div class="container footer-content">
 			<div class="row">
-				<div class="social-holder text-center">
-					<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-					<a  href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-				</div>
+
 				<div class="spce"></div>
-				<div class="copyright text-center">
-					© 2018 - Atrixmob. Todos os direitos reservados
+				<div class="copyright text-center" style="color:white;">
+					© 2019 - Drop Azul. Gestão completa para Dropshipping
 				</div>
 			</div>
 		</div>

@@ -23,7 +23,8 @@ urlpatterns = [
     # rota para tenants
     path('tenant/', include(tenant_urls, namespace='tenant')),
     # rota para dashboard
-    path('dashboard/', include(dashboard_urls, namespace='dashboard')),
+path('dashboard/', include(dashboard_urls, namespace='dashboard')),
+
 ]
 
 

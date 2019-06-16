@@ -4,15 +4,16 @@
 {% block page-title %}{% trans 'Perfil de usuario' %}{% endblock %}
 
 {% block main %}
-<section class="content">
-    <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Meu Perfil</h3>
 
+<div class="row">
+<div class="col-lg-12">
+<div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Meu Perfil</h6>
+                </div>
+                <div class="card-body">
 
-        </div>
-        <div class="box-body">
-           <form action="." method="post" enctype="multipart/form-data">
+                    <form action="." method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
@@ -62,9 +63,10 @@
                     <input class="btn btn-primary" type="submit" value="{% trans 'Salvar' %}">
                 </div>
             </form>
-        </div>
 
+                </div>
+              </div>
+    </div>
+    </div>
 
-      </div>
-</section>
 {% endblock main %}
