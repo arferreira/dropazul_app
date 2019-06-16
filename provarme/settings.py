@@ -44,7 +44,7 @@ default_dburl = {
         'PORT': 5432,
     }
 DATABASES = {
-
+    'default': default_dburl,
 }
 
 
