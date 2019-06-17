@@ -1,5 +1,4 @@
 #!/Users/antonioricardosouza/Projetos/provarme_core/.provarme/bin/python
-
 # -*- coding: utf-8 -*-
 import re
 import sys
