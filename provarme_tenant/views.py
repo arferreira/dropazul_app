@@ -153,7 +153,7 @@ class TenantRegisterView(View):
                 # Montando estrutura de email
                 active_url = '{0}.{1}'.format(tenant_name, get_current_site(request))
                 active_url = active_url.replace("www.", "")
-                mail_subject = '[provarme_core] - Inicie sua instância do provarme_core.'
+                mail_subject = '[Drop Azul] - Inicie sua instância do provarme_core.'
                 to_email = email
                 plain_text = render_to_string('provarme_tenant/email_notification/tenant_active_email.html', {
                     'user': user,
@@ -289,7 +289,7 @@ class TenantSignatureView(RedirectView):
             client.name = tenant_name
             client.name_fantasy = name_fantasy
             client.is_active = False
-            client.schema_name = 'provarme_' + tenant_name
+            client.schema_name = 'dropazul_' + tenant_name
             client.save()
 
             # Criando a compra para o cliente
@@ -300,7 +300,7 @@ class TenantSignatureView(RedirectView):
             purchase.save()
 
             # Executando as migrações
-            with schema_context('provarme_' + tenant_name):
+            with schema_context('dropazul_' + tenant_name):
                 print('Rodando as migrações com o Cliente que foi criado!')
                 user = User()
                 user.email = email
@@ -311,8 +311,8 @@ class TenantSignatureView(RedirectView):
                 user.is_superuser = False
                 user.save()
                 # Lógica para o pagamento do plano e assinatura
-                config = {'sandbox': True, 'USE_SHIPPING': False}
-                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='51E3688E0039466ABF8FEDDA8BD9A687',
+                config = {'sandbox': False, 'USE_SHIPPING': False}
+                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='5F3E6B8B63B94400806F818F8B0C9AEF',
                                config=config)
                 pg.sender = {
                     "name": name_fantasy,
@@ -320,13 +320,13 @@ class TenantSignatureView(RedirectView):
                     "phone": phone,
                     "email": email
                 }
-                pg.reference_prefix = None
+                pg.reference_prefix = "REF"
                 pg.shipping = None
                 pg.reference = purchase.pk
                 pg.add_item(id=purchase.plan.pk, description=purchase.plan.description,
                             amount=purchase.plan.amount, quantity=1)
                 pg.redirect_url = self.request.build_absolute_uri(
-                    reverse('tenant:signature')
+                    reverse('tenant:signature', args=[purchase.pk])
                 )
                 pg.notification_url = self.request.build_absolute_uri(
                     reverse('tenant:pagseguro_notification')
