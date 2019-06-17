@@ -35,14 +35,6 @@ ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = ['127.0.0.1']
 
 # Databases
-default_dburl = {
-        'ENGINE': 'tenant_schemas.postgresql_backend',
-        'NAME': 'provarme_development',
-        'USER': 'antonioricardo',
-        'PASSWORD': 'rub32912289',
-        'HOST': 'localhost',
-        'PORT': 5432,
-    }
 DATABASES = settings['DB']
 
 
