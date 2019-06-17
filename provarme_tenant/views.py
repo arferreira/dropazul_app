@@ -312,7 +312,7 @@ class TenantSignatureView(RedirectView):
                 user.save()
                 # Lógica para o pagamento do plano e assinatura
                 config = { 'sandbox': True }
-                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='51E3688E0039466ABF8FEDDA8BD9A687',
+                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='5F3E6B8B63B94400806F818F8B0C9AEF',
                                config=config)
                 pg.sender = {
                     "name": name_fantasy,
