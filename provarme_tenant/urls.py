@@ -14,8 +14,7 @@ urlpatterns = [
     path('activate/<int:id>/<token>/', activate, name='activate'),
     # rota para perfil do usuario tenant
     path('profile/', TenantProfile.as_view(), name='profile'),
-    path('obrigado/', ThankPageView.as_view(), name='thank'),
-    path('pendente/', PendingPageView.as_view(), name='pending'),
+
 ]
 
 if settings.DEBUG is True:
