@@ -8,7 +8,7 @@ app_name="provarme_tenant"
 
 urlpatterns = [
     # root route
-    path('assinatura/', TenantSignatureView.as_view(), name='signature'),
+    path('criacao/', TenantSignatureView.as_view(), name='signature'),
     # atualizando status de pagamento de planos
     path('assinatura/retorno/', pagseguro_notification, name='pagseguro_notification'),
     #  Requisições ajax de validação de instancia
