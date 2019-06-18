@@ -103,6 +103,48 @@ class Logout(View):
         return HttpResponseRedirect(reverse_lazy('site:index'))
 
 
+
+# ===================================================
+# Registro de Compras
+# ===================================================
+def create_purchase_upnid(request):
+    cod_product = request.POST.get('cod_product', None)
+    purchase_date = request.POST.get('purchase_date', None)
+    prod_name = request.POST.get('prod_name', None)
+    transaction = request.POST.get('transaction', None)
+    email = request.POST.get('email', None)
+    first_name = request.POST.get('first_name', None)
+    last_name = request.POST.get('last_name', None)
+    cpf = request.POST.get('cpf', None)
+    phone_local_code = request.POST.get('phone_local_code', None)
+    phone_number = request.POST.get('phone_number', None)
+    payment_type = request.POST.get('payment_type', None)
+    status = request.POST.get('status', None)
+
+
+    purchase = Purchase()
+    purchase.cod_product = cod_product
+    purchase.purchase_date = purchase_date
+    purchase.prod_name = prod_name
+    purchase.transaction = transaction
+    purchase.email = email
+    purchase.first_name = first_name
+    purchase.last_name = last_name
+    purchase.cpf = cpf
+    purchase.phone_local_code = phone_local_code
+    purchase.phone_number = phone_number
+    purchase.payment_type = payment_type
+    purchase.status = status
+
+    purchase.save()
+
+    return HttpResponse('success')
+
+
+
+
+
+
 # ===================================================
 # Registro de Inquilinos
 # ===================================================

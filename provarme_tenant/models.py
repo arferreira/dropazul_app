@@ -81,76 +81,30 @@ PURCHASE_STATUS_CHOICES = (
 
 
 class Purchase(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE,
-                             verbose_name='Inquilino', related_name='purchases')
-    plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
-    status = models.IntegerField(
-        'Situação', choices=PURCHASE_STATUS_CHOICES, default=0, blank=True
-    )
-    active_url = models.CharField(max_length=500, verbose_name='URL de ativação')
+    cod_product = models.IntegerField('ID do produto', null=True)
+    purchase_date = models.DateField('Data da Compra', auto_now_add=True, null=True)
+    prod_name = models.CharField(max_length=255, verbose_name='Nome do produto', null=True)
+    transaction = models.IntegerField('ID da da venda', default=0, null=True)
+    email = models.CharField('Email do Comprador', max_length=255, null=True)
+    first_name = models.CharField('Primeiro Nome', max_length=100, null=True)
+    last_name = models.CharField('Último Nome', max_length=100, null=True)
+    cpf = models.CharField('CPF', max_length=11, null=True)
+    phone_local_code = models.CharField('DDD', max_length=3, null=True)
+    phone_number = models.CharField('Telefone', max_length=9, null=True)
+    payment_type = models.CharField('Tipo', max_length=100, null=True)
+    status = models.CharField('Situação', max_length=100, null=True)
 
-    created_on = models.DateField(auto_now_add=True, verbose_name='Criado em')
-    modified_on = models.DateTimeField('Modificado em', auto_now=True)
-    validate_on = models.DateTimeField(default=datetime.now()+timedelta(days=30), verbose_name='Valido até')
 
     def __str__(self):
-        return self.client.name
+        return self.client.first_name
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['-purchase_date']
         verbose_name = 'Compra'
         verbose_name_plural = 'Compras'
 
 
-    def pagseguro_update_status(self, status):
-        if status == '3':
-            self.status = 1
-            print('Status de compra alterado')
-            client = Client.objects.get(pk=self.client.pk) # recuperando o tenant para notificação.
-            # preparando para disparar a notificação
-            with schema_context(client.schema_name):
-                mail_subject = '[provarme_core] - Bem-vindo ao AtrixMob! Segue seus dados de acesso.'
-                user = User.objects.last()
-                to_email = user.email
-                plain_text = render_to_string('provarme_tenant/email_notification/tenant_active_email.html', {
-                    'user': user,
-                    'domain': self.active_url,
-                    'schema_name': client.schema_name,
-                    'id': user.pk,
-                    'token': account_activation_token.make_token(user),
-                })
-                message_html = render_to_string('provarme_tenant/email_notification/tenant_active_email.html', {
-                    'user': user,
-                    'domain': self.active_url,
-                    'schema_name': client.schema_name,
-                    'id': user.pk,
-                    'token': account_activation_token.make_token(user),
-                })
-                try:
-                    send_mail(
-                        mail_subject,
-                        plain_text,
-                        'contato.provarme_core@provarme_core.com.br',
-                        [to_email],
-                        html_message=message_html,
-                        fail_silently=False
-                    )
-                except Exception as e:
-                    print('O email não foi enviado, erro: ', e)
-                mail_admins(
-                    'Notificação - Houve alteração em registro de pagamento',
-                    'O sistema acabou de receber uma atualização de pagamento do:  %s' % client,
-                    fail_silently=False
-                )
-        elif status == '7':
-            print('Status de compra alterado')
-            mail_admins(
-                'Notificação - Houve alteração em registro de pagamento',
-                'O sistema acabou de receber uma atualização de pagamento',
-                fail_silently=False
-            )
-            self.status = 2
-        self.save()
+
 
 
 

@@ -2,13 +2,15 @@ from django.urls import path, re_path
 from django.conf.urls import url
 
 from provarme_tenant.views import (TenantRegisterView, TenantSignatureView, Login, Logout,
-                                   validate_tenant, activate, pagseguro_notification)
+                                   validate_tenant, activate, pagseguro_notification, create_purchase_upnid)
 
 app_name="provarme_tenant"
 
 urlpatterns = [
     # root route
     path('criacao/', TenantSignatureView.as_view(), name='signature'),
+    #webhook upnid compra instancia
+    path('compra/', create_purchase_upnid, name='purchase'),
     # atualizando status de pagamento de planos
     path('assinatura/retorno/', pagseguro_notification, name='pagseguro_notification'),
     #  Requisições ajax de validação de instancia
