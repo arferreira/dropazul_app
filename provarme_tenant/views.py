@@ -311,17 +311,15 @@ class TenantSignatureView(RedirectView):
                 user.is_superuser = False
                 user.save()
                 # Lógica para o pagamento do plano e assinatura
-                config = { 'sandbox': True }
-                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='5F3E6B8B63B94400806F818F8B0C9AEF',
-                               config=config)
+                config = {'sandbox': True}
+                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='5F3E6B8B63B94400806F818F8B0C9AEF')
                 pg.sender = {
                     "name": name_fantasy,
                     "area_code": area_code,
                     "phone": phone,
                     "email": email
                 }
-                pg.reference_prefix = "CODE"
-                pg.shipping = None
+
                 pg.reference = purchase.pk
                 pg.add_item(id=purchase.plan.pk, description=purchase.plan.description,
                             amount=purchase.plan.amount, quantity=1)
