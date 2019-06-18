@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include, re_path
 
-from provarme_tenant.views import (TenantRegisterView, Login, Logout, activate, TenantProfile)
+from provarme_tenant.views import (TenantRegisterView, Login, Logout, activate, TenantProfile, PendingPageView, ThankPageView)
 from provarme import settings
 
 app_name="provarme_tenant"
@@ -14,6 +14,8 @@ urlpatterns = [
     path('activate/<int:id>/<token>/', activate, name='activate'),
     # rota para perfil do usuario tenant
     path('profile/', TenantProfile.as_view(), name='profile'),
+    path('obrigado/', ThankPageView.as_view(), name='thank'),
+    path('pendente/', PendingPageView.as_view(), name='pending'),
 ]
 
 if settings.DEBUG is True:

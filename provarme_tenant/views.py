@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, ListView, DeleteView, RedirectView
+from django.views.generic import View, ListView, DeleteView, RedirectView, TemplateView
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
@@ -253,7 +253,7 @@ class TenantProfile(LoginRequiredMixin, View):
 # ===================================================
 
 
-class TenantSignatureView(RedirectView):
+class TenantSignatureView(TemplateView):
     template_name = "provarme_tenant/signature_tenant.html"
     plans = Plan.objects.all()
 
@@ -311,33 +311,25 @@ class TenantSignatureView(RedirectView):
                 user.is_superuser = False
                 user.save()
                 # Lógica para o pagamento do plano e assinatura
-                config = {'sandbox': True}
-                pg = PagSeguro(email='antonioricardo_ferreira@hotmail.com', token='5F3E6B8B63B94400806F818F8B0C9AEF')
-                pg.sender = {
-                    "name": name_fantasy,
-                    "area_code": area_code,
-                    "phone": phone,
-                    "email": email
-                }
-
-                pg.reference = purchase.pk
-                pg.add_item(id=purchase.plan.pk, description=purchase.plan.description,
-                            amount=purchase.plan.amount, quantity=1)
-                pg.redirect_url = self.request.build_absolute_uri(
-                    reverse('tenant:signature')
-                )
-                pg.notification_url = self.request.build_absolute_uri(
-                    reverse('tenant:pagseguro_notification')
-                )
+                url_payment = "https://upnid.com/go/p9854?p=n4kj"
 
                 mail_admins(
                     'Notificação - Nova contratação do sistema',
                     'O sistema acabou de criar e aguarda pagamento da instancia: %s' % tenant_name,
                     fail_silently=False
                 )
-                response = pg.checkout()
-            print('Criação finalizada!')
-        return HttpResponseRedirect(response.payment_url)
+
+                print('Criação de instância finalizada!')
+                print("Redirecionando usuário para o pagamento.....")
+        return HttpResponseRedirect(url_payment)
+
+
+class PendingPageView(TemplateView):
+    template_name = 'provarme_tenant/pending.html'
+
+
+class ThankPageView(TemplateView):
+    template_name = 'provarme_tenant/thank.html'
 
 
 @csrf_exempt
