@@ -320,7 +320,7 @@ class TenantSignatureView(RedirectView):
                     "phone": phone,
                     "email": email
                 }
-                pg.reference_prefix = None
+                pg.reference_prefix = "CODE"
                 pg.shipping = None
                 pg.reference = purchase.pk
                 pg.add_item(id=purchase.plan.pk, description=purchase.plan.description,
