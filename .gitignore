@@ -108,3 +108,5 @@ local_settings.py
 .env
 log/
 settings.ini
+.dropazul
+.provarme
