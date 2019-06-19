@@ -6,7 +6,6 @@ from provarme_tenant.views import (TenantRegisterView, Login, Logout, activate, 
 from provarme import settings
 
 app_name="provarme_tenant"
-
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name="logout"),
@@ -18,6 +17,7 @@ urlpatterns = [
     path('profile/', TenantProfile.as_view(), name='profile'),
 
 ]
+
 
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

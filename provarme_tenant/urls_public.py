@@ -9,6 +9,8 @@ app_name="provarme_tenant"
 urlpatterns = [
     # root route
     path('criacao/', TenantSignatureView.as_view(), name='signature'),
+    #webhook upnid compra instancia
+    path('compra_plano_upnid/', create_purchase_upnid, name='purchase'),
     # atualizando status de pagamento de planos
     path('assinatura/retorno/', pagseguro_notification, name='pagseguro_notification'),
     #  Requisições ajax de validação de instancia
