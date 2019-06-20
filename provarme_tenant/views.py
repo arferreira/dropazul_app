@@ -1,6 +1,7 @@
 import random, string
 
 from django.contrib.sites.shortcuts import get_current_site
+from django.views.decorators.http import require_http_methods
 from django.core.mail import EmailMessage, send_mail, mail_admins
 from django.template.loader import render_to_string
 from django.contrib.auth import login, logout
@@ -107,6 +108,7 @@ class Logout(View):
 # ===================================================
 # Registro de Compras
 # ===================================================
+@require_http_methods(['GET', 'POST'])
 def create_purchase_upnid(request):
 
     if request.method == 'GET':
