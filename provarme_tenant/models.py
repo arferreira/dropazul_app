@@ -96,7 +96,7 @@ class Purchase(models.Model):
 
 
     def __str__(self):
-        return self.client.first_name
+        return self.first_name
 
     class Meta:
         ordering = ['-purchase_date']
