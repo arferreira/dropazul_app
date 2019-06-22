@@ -1,11 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Página do Professor</h1>
-<a href="{% url 'dashboard:index' %}">Acessar painel</a>
-</body>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Drop Azul - Painel Administrativo</title>
+        <style>
+            ::-moz-selection {
+                background: #2389f1;
+                text-shadow: none;
+            }
+
+            ::selection {
+                background: #202E33;
+                text-shadow: none;
+            }
+
+            html {
+                padding: 30px 10px;
+                font-size: 20px;
+                line-height: 1.4;
+                color: #FFF;
+                background: #2389f1;
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+            }
+
+            html,
+            input {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            body {
+                max-width: 500px;
+                _width: 500px;
+                padding: 30px 20px 50px;
+                border: 1px solid #2389f1;
+                border-radius: 4px;
+                margin: 0 auto;
+                box-shadow: 0 1px 10px #2389f1, inset 0 1px 0 #2389f1;
+                background: #2389f1;
+            }
+
+            h1 {
+                margin: 0 10px;
+                font-size: 50px;
+                text-align: center;
+            }
+
+            h1 span {
+                color: #FFF;
+            }
+
+            h3 {
+                margin: 1.5em 0 0.5em;
+            }
+
+            p {
+                margin: 1em 0;
+            }
+
+            ul {
+                padding: 0 0 0 40px;
+                margin: 1em 0;
+            }
+
+            .container {
+                max-width: 380px;
+                _width: 380px;
+                margin: 0 auto;
+                background: #2389f1;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <center><img src="https://i.ibb.co/bFcYNPc/logo-white.png" alt="logoprovarme"></div></center>
+            <center><h1>Seja bem-vindo <span>:)</span></h1>
+            <p>Através do link abaixo você acessa ao seu painel administrativo:</p>
+            <p><a style="color:white;" href="{% url 'dashboard:index' %}">Acessar painel</a></p>
+
+            </center>
+        </div>
+    </body>
 </html>

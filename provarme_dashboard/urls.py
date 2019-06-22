@@ -49,6 +49,13 @@ urlpatterns = [
 
 
 
+    # Orders
+    path('pedidos/', ProductCreateView.as_view(), name='orders'),
+    path('trafego/novo', ProductCreateView.as_view(), name='new_traffic'),
+    path('trafego/editar/<int:pk>', ProductUpdateView.as_view(), name='update_traffic'),
+
+
+
 
 
 

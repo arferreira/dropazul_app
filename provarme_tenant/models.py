@@ -98,6 +98,8 @@ class Purchase(models.Model):
     def __str__(self):
         return self.first_name
 
+
+
     class Meta:
         ordering = ['-purchase_date']
         verbose_name = 'Compra'

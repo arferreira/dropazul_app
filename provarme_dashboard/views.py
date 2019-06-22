@@ -1,6 +1,8 @@
 # responses django
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -13,6 +15,10 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 
+
+import mercadopago
+import json
+
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
@@ -22,6 +28,7 @@ from provarme_dashboard.store.models import Store
 from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
+from provarme_dashboard.traffic.models import Traffic
 
 
 
@@ -168,3 +175,16 @@ def traffic_list(request):
     }
 
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
+
+
+# Webhook (Pedidos Shopify)
+@require_http_methods(['GET', 'POST'])
+@csrf_exempt
+def create_order_shopify(request):
+
+    if request.method == 'GET':
+        print('recebi um get')
+    elif request.method == 'POST':
+        pass
+
+    return HttpResponse('success')

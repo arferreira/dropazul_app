@@ -116,6 +116,7 @@ def create_purchase_upnid(request):
     if request.method == 'GET':
         print('recebi um get')
     elif request.method == 'POST':
+
         print('recebi um post')
         cod_product = request.POST.get('cod_product', None)
         purchase_date = request.POST.get('purchase_date', None)
@@ -129,6 +130,7 @@ def create_purchase_upnid(request):
         phone_number = request.POST.get('phone_number', None)
         payment_type = request.POST.get('payment_type', None)
         status = request.POST.get('status', None)
+        
 
         purchase = Purchase()
         purchase.cod_product = cod_product
@@ -345,12 +347,7 @@ class TenantSignatureView(TemplateView):
             client.schema_name = 'provarme_' + tenant_name
             client.save()
 
-            # Criando a compra para o cliente
-            purchase = Purchase()
-            purchase.plan = Plan.objects.get(pk=plan)
-            purchase.client = client
-            purchase.active_url = '{0}.{1}'.format(tenant_name, site_url)
-            purchase.save()
+
 
             # Executando as migrações
             with schema_context('provarme_' + tenant_name):
@@ -359,7 +356,7 @@ class TenantSignatureView(TemplateView):
                 user.email = email
                 user.username = name_fantasy
                 user.set_password(password)
-                user.is_active = False
+                user.is_active = True
                 user.is_staff= False
                 user.is_superuser = False
                 user.save()
