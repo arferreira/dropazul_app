@@ -16,7 +16,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 
 
-import mercadopago
+
 import json
 
 from tenant_schemas.utils import schema_exists, schema_context, connection
