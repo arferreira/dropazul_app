@@ -2,7 +2,7 @@
 import json
 import requests
 from django.shortcuts import render, HttpResponse
-from correios import Correios
+
 from django.views.decorators.csrf import csrf_protect
 
 
