@@ -22,5 +22,5 @@ tests:clean
 static:clean
 	python manage.py collectstatic
 
-atrixmob_start:
-	sudo supervisorctl restart atrixmob_core
+dropazul_restart:
+	sudo supervisorctl restart dropazul_app
