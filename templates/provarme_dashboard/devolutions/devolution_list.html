@@ -1,0 +1,111 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[Drop Azul] -  Suas trocas e devoluções' %}{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Produtos</li>
+{% endblock breadcrumb %}
+{% block main %}
+
+
+  <!-- Conteúdo principal -->
+
+  <div class="row">
+<div class="col-lg-12">
+<div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Trocas & Devoluções</h6>
+                </div>
+                <div class="card-body">
+              {% if devolutions.count > 0 %}
+              <table id="customers" class="table table-bordered table-striped dataTable">
+                <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Produto</th>
+                  <th>Pedido</th>
+                  <th>Rastreio</th>
+                  <th>Pagamento</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for devolution in devolutions %}
+                <tr>
+                  <td>{{ devolution.full_name }}</td>
+                  <td>
+                    {{ devolution.product.name }}
+                  </td>
+                  <td>{{ devolution.number_order }}</td>
+                  <td>{{ devolution.code_tracking }}</td>
+                  <td>{{ devolution.reason }}</td>
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Nome</th>
+                  <th>Produto</th>
+                  <th>Pedido</th>
+                  <th>Rastreio</th>
+                  <th>Pagamento</th>
+                </tr>
+                </tfoot>
+              </table>
+                {% else %}
+
+                    <center><h4>Você ainda não possui solicitações de devoluções!</h4></center>
+
+                {% endif %}
+
+
+              <br><br>
+                <span style="color:red;">Informe aos seus clientes o link abaixo para realizarem solicitações de trocas e devoluções</span>
+                <p>  http://suaurl.dropazul.com/trocas-devolucoes/ </p>
+
+
+            </div>
+            <!-- /.box-body -->
+              </div>
+          </div>
+          </div>
+
+    <!-- /.content -->
+{% endblock main %}
+{% block javascript %}
+<script type="text/javascript">
+$(function () {
+    $('#customers').DataTable( {
+         "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+            }
+    } );
+
+
+    $("#customers").on("click", ".delete-customer", function () {
+				var url = $(this).attr("data-url");
+				deleteQuestion(url);
+			});
+
+			function deleteQuestion(url) {
+				swal({
+					title: "Tem certeza?",
+					text: "Você irá excluir esse aluno e tudo relacionado a ele será apagado!",
+					type: "warning",
+					showCancelButton: true,
+					cancelButtonText: "Cancelar",
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Sim, excluir!",
+					closeOnConfirm: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						window.location.href = url;
+					}
+				});
+	};
+
+
+})
+</script>
+{% endblock javascript %}

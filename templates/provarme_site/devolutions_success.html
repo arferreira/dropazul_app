@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <title>Drop Azul - Painel Administrativo</title>
+    <title>Drop Azul - Obrigado</title>
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -75,12 +75,9 @@ textarea{
                 <div class="row">
 							<div class="col-sm-12">
 								<h1><img src="https://i.ibb.co/bFcYNPc/logo-white.png" alt=""></h1>
-                                <h1 style="color:white;">Movimentações de sua encomenda: <span></span></h1>
+                                <h1 style="color:white;">Obrigado <span> :)</span></h1>
                                 <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12"  align="center">
-                                {% for evento in eventos %}
-                                   <p style="color: white;"> Data: {{ evento.data }} - {% if "CHINA" in evento.local %} Exterior {% else %}{{ evento.local }}{% endif %} - {{ evento.situacao }}</p>
-                                {% endfor %}
-                                    <a href="{% url 'site:tracking_order'%}" class="btn btn-success">Nova consulta</a>
+                                    <p style="color:white;">Já recebemos a sua solicitação de devolução/troca, fique tranquilo, o processo é automático e entraremos em contato com maior detalhes.</p>
                                 </div>
 							</div>
 						</div>

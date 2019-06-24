@@ -29,6 +29,7 @@ from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
 from provarme_dashboard.traffic.models import Traffic
+from provarme_dashboard.products.models import Devolution
 
 
 
@@ -163,6 +164,17 @@ def product_estimate(request, pk):
     }
 
     return render(request, 'provarme_dashboard/products/estimate.html', {'product': context})
+
+
+
+
+
+
+# Listagem de trocas e devoluções de cada tenant
+class DevolutionsListView(LoginRequiredMixin, ListView):
+    model = Devolution
+    context_object_name = 'devolutions'
+    template_name = 'provarme_dashboard/devolutions/devolution_list.html'
 
 
 

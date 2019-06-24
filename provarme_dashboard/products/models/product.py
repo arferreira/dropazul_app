@@ -34,3 +34,40 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
+
+
+
+    def __str__(self):
+        return self.name
+
+
+
+
+
+
+
+
+TYPE_PURCHASE = (
+    ('via Cartão de Crédito', 'via Cartão de Crédito'),
+    ('via Boleto Bancário', 'via Boleto Bancário'),
+)
+
+
+class Devolution(models.Model):
+    full_name = models.CharField('Nome Completo', max_length=255)
+    cell_phone = models.CharField('Telefone (Whatsapp)', max_length=20)
+    number_order = models.CharField('Número do Pedido', max_length=255)
+    code_tracking = models.CharField('Código de Rastreio', max_length=255)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    type_purchase = models.CharField('Tipo de Compra', max_length=255, choices=TYPE_PURCHASE)
+    reason = models.CharField('Motivo da devolução', max_length=255)
+
+
+    class Meta:
+        verbose_name = 'Trocas e Devoluções'
+        verbose_name_plural = 'Trocas e Devoluções'
+
+
+
+    def __str__(self):
+        return self.full_name

@@ -56,7 +56,8 @@ urlpatterns = [
 
 
 
-
+    # Traffic
+    path('devolucoes/', DevolutionsListView.as_view(), name='devolutions'),
 
 
 
