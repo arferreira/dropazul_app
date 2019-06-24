@@ -14,7 +14,7 @@ app_name="provarme_dashboard"
 
 urlpatterns = [
     # Rota principal do dashboard
-    path('', dashboard_index.as_view(), name='index'),
+    path('visao-geral/', dashboard_index.as_view(), name='index'),
 
     # Store
     path('loja/', StoreListView.as_view(), name='stores'),

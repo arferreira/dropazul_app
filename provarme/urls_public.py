@@ -26,7 +26,7 @@ urlpatterns = [
     # rota para tenants
     path('cliente/', include(tenant_urls, namespace='tenant')),
     # rota para dashboard
-    path('dashboard/', include(dashboard_urls, namespace='dashboard')),
+    path('painel/', include(dashboard_urls, namespace='dashboard')),
     # admin django route
     path('manage/', admin.site.urls),
 
