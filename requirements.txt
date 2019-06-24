@@ -5,7 +5,6 @@ boto3==1.7.26
 botocore==1.10.26
 certifi==2018.4.16
 chardet==3.0.4
-correios-api-py==0.1.1
 decorator==4.3.0
 dj-database-url==0.5.0
 dj-static==0.0.6
@@ -44,7 +43,6 @@ prompt-toolkit==1.0.15
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
 ptyprocess==0.5.2
-py-correios==0.0.1
 pyactiveresource==2.1.2
 pyasn1==0.4.3
 pyasn1-modules==0.2.1
