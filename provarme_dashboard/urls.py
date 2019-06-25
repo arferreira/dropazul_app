@@ -22,6 +22,12 @@ urlpatterns = [
     path('loja/editar/<int:pk>', StoreUpdateView.as_view(), name='update_store'),
 
 
+    # Categories
+    path('categorias/', CategoryListView.as_view(), name='categories'),
+    path('categoria/nova', CategoryCreateView.as_view(), name='new_category'),
+    path('categoria/editar/<int:pk>', CategoryUpdateView.as_view(), name='update_category'),
+
+
     # Setups
     path('setup/', SetupListView.as_view(), name='setups'),
     path('setup/novo', SetupCreateView.as_view(), name='new_setup'),

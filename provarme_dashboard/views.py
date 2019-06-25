@@ -30,6 +30,7 @@ from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
 from provarme_dashboard.traffic.models import Traffic
 from provarme_dashboard.products.models import Devolution
+from provarme_dashboard.financial.models import (Category)
 
 
 
@@ -57,6 +58,32 @@ class StoreUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/stores/store_form.html'
     success_url = reverse_lazy('dashboard:stores')
     success_message = "Loja %(name)s foi atualizada com sucesso!"
+
+
+
+# Listagem de categorias de cada tenant
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    context_object_name = 'categories'
+    template_name = 'provarme_dashboard/financial/category_list.html'
+
+
+# Criando uma nova categoria
+class CategoryCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Category
+    fields = '__all__'
+    template_name = 'provarme_dashboard/financial/category_form.html'
+    success_url = reverse_lazy('dashboard:categories')
+    success_message = "Categoria %(description)s foi criada com sucesso!"
+
+
+# Editando uma categoria
+class CategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Category
+    fields = '__all__'
+    template_name = 'provarme_dashboard/financial/category_form.html'
+    success_url = reverse_lazy('dashboard:categories')
+    success_message = "Categoria %(description)s foi atualizada com sucesso!"
 
 
 

@@ -83,6 +83,19 @@
         Gerencial
       </div>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Financeiro</span>
+        </a>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+
+            <a class="collapse-item" href="{% url 'dashboard:categories' %}">Categorias</a>
+            <a class="collapse-item" href="{% url 'dashboard:setups' %}">Gerais</a>
+          </div>
+        </div>
+      </li>
 
          <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
@@ -301,7 +314,15 @@
     app_id: "ai7dmi8v"
   };
 </script>
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ai7dmi8v';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ai7dmi8v';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+ window.intercomSettings = {
+  app_id: "ai7dmi8v",
+  name: "{{ request.user.name|escapejs }}", // Full name
+  email: "{{ request.user.email|escapejs }}", // Email address
+  created_at: "{{ request.user.date_joined|date:"U" }}" // Signup Date
+};
+</script>
+ 
    <script>
 {% block javascript %}
 {% endblock javascript %}
