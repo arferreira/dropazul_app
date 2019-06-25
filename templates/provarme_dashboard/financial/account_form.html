@@ -1,0 +1,90 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% load widget_tweaks %}
+{% block title %}{% trans '[Drop Azul] -  Nova Conta' %}{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Novo Aluno</li>
+{% endblock breadcrumb %}
+{% block main %}
+  <!-- Conteúdo principal -->
+  <div class="row">
+<div class="col-lg-12">
+<div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Nova Conta </h6>
+                </div>
+                <div class="card-body">
+
+                    <form class="form" action="" method="post">
+                        {% csrf_token %}
+
+                            {% if form.errors %}
+                                    <div class="alert alert-danger">
+                                            <strong>Ocorreu um erro no preenchimento do formulário!</strong>
+                                            <br>
+                                            <strong>Fique atento aos itens obrigatórios!</strong>
+                                    </div>
+                            {% endif %}
+                            <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                          <label for="">Nome da Conta:</label>
+                                          {{ form.name|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.name }}</strong>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                          <label for="">Saldo</label>
+                                          {{ form.balance|add_class:'form-control' }}
+                                          <strong style="color:red;">{{ form.errors.balance }}</strong>
+                                    </div>
+                            </div>
+                            </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                          <label for="">Data do Saldo:</label>
+                                         
+                                          <input name="balance_date" class="form-control" type="date" value="{{ account.balance_date }}" />
+                                          <strong style="color:red;">{{ form.errors.balance_date|attr:"type=date" }}</strong>
+                              </div>
+                            </div>
+                           
+                            </div>
+
+
+
+
+                        <button type="submit" class="btn btn-primary pull-right">Salvar</button>
+                     <a href="{% url 'dashboard:accounts' %}" class="btn btn-warning">
+                      {% trans 'Voltar' %}
+                    </a>
+
+                      <!-- /.box-footer -->
+                    </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+          </div>
+        </div>
+
+    <!--Estimador de Lucro -->
+
+          </div>
+    <!-- /.content -->
+{% endblock main %}
+
+<!-- Bloco de scripts js -->
+{% block javascript %}
+$("#recommended_price").focus(function(){
+      var cost = $("#cost").val();
+      var markup = $("#markup").val();
+      var calculo = cost * markup;
+      // Atualiza input
+      $("#recommended_price").val(calculo).trigger('blur');
+      $(this).css("color", "orange");
+    });
+{% endblock javascript %}

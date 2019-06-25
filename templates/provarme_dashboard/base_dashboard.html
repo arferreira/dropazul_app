@@ -19,6 +19,8 @@
 
   <!-- Custom styles for this template-->
   <link href="{%  static 'provarme_dashboard/css/sb-admin-2.css' %}" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -92,7 +94,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
 
             <a class="collapse-item" href="{% url 'dashboard:categories' %}">Categorias</a>
-            <a class="collapse-item" href="{% url 'dashboard:setups' %}">Gerais</a>
+            <a class="collapse-item" href="{% url 'dashboard:accounts' %}">Contas</a>
           </div>
         </div>
       </li>
@@ -275,6 +277,7 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'provarme_dashboard/js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'provarme_dashboard/js/demo/chart-pie-demo.js' %}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <!--Mensagens e Notificações-->
 {% if messages %}

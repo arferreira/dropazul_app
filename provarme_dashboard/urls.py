@@ -28,6 +28,12 @@ urlpatterns = [
     path('categoria/editar/<int:pk>', CategoryUpdateView.as_view(), name='update_category'),
 
 
+    # Contas
+    path('contas/', AccountListView.as_view(), name='accounts'),
+    path('conta/nova', AccountCreateView.as_view(), name='new_account'),
+    path('conta/editar/<int:pk>', AccountUpdateView.as_view(), name='update_account'),
+
+
     # Setups
     path('setup/', SetupListView.as_view(), name='setups'),
     path('setup/novo', SetupCreateView.as_view(), name='new_setup'),
