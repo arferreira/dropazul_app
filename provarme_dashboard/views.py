@@ -29,6 +29,7 @@ from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
 from provarme_dashboard.traffic.models import Traffic
+from provarme_dashboard.order.models import Order
 from provarme_dashboard.products.models import Devolution
 from provarme_dashboard.financial.models import (Category, Account, Expense)
 
@@ -116,7 +117,7 @@ class AccountUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 
-    # Listagem de contas a pagar de cada tenant
+# Listagem de contas a pagar de cada tenant
 class ExpenseListView(LoginRequiredMixin, ListView):
     model = Expense
     context_object_name = 'expenses'
@@ -139,6 +140,14 @@ class ExpenseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/financial/expense_form.html'
     success_url = reverse_lazy('dashboard:expenses')
     success_message = "Despesa %(name)s foi atualizada com sucesso!"
+
+
+
+# Listagem de pedidos de cada tenant
+class OrderListView(LoginRequiredMixin, ListView):
+    model = Order
+    context_object_name = 'orders'
+    template_name = 'provarme_dashboard/orders/order_list.html'
 
 
 
@@ -270,15 +279,3 @@ def traffic_list(request):
 
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
 
-
-# Webhook (Pedidos Shopify)
-@require_http_methods(['GET', 'POST'])
-@csrf_exempt
-def create_order_shopify(request):
-
-    if request.method == 'GET':
-        print('recebi um get')
-    elif request.method == 'POST':
-        pass
-
-    return HttpResponse('success')

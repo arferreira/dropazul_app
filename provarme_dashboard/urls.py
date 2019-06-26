@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import path, include
 
 # views Dashboard
-from provarme_dashboard.dashboard.views import IndexView as dashboard_index
+from provarme_dashboard.dashboard.views import index_view as dashboard_index
 
 from provarme_dashboard.views import *
 
@@ -11,7 +11,7 @@ app_name="provarme_dashboard"
 
 urlpatterns = [
     # Rota principal do dashboard
-    path('visao-geral/', dashboard_index.as_view(), name='index'),
+    path('visao-geral/', dashboard_index, name='index'),
 
     # Store
     path('loja/', StoreListView.as_view(), name='stores'),
@@ -55,9 +55,7 @@ urlpatterns = [
     path('trafego/editar/<int:pk>', ProductUpdateView.as_view(), name='update_traffic'),
 
     # Orders
-    path('pedidos/', ProductCreateView.as_view(), name='orders'),
-    path('trafego/novo', ProductCreateView.as_view(), name='new_traffic'),
-    path('trafego/editar/<int:pk>', ProductUpdateView.as_view(), name='update_traffic'),
+    path('pedidos/', OrderListView.as_view(), name='orders'),
 
     # Traffic
     path('devolucoes/', DevolutionsListView.as_view(), name='devolutions'),

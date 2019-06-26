@@ -13,39 +13,51 @@
 <div class="col-lg-12">
 <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Sua Loja</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Seus pedidos</h6>
                 </div>
                 <div class="card-body">
               {% if orders.count > 0 %}
               <table id="customers" class="table table-bordered table-striped dataTable">
                 <thead>
                 <tr>
-                  <th>Nome</th>
-                  <th>URL</th>
+                  <th>Pedido</th>
+                  <th>Cliente</th>
+                  <th>Telefone</th>
+                  <th>Valor</th>
+                  <th>Situação</th>
                   <th>Criado em</th>
-                  <th>Atualizado em</th>
-                    <th>Status</th>
                   <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for order in orders %}
                 <tr>
-                  <td><a href="{% url 'dashboard:update_store' store.pk %}" class="link-datatable">{{ store.name }}</a></td>
+                  <td><a href="" class="link-datatable">{{ order.order_number }}</a></td>
                   <td>
-                    {{ store.url }}
-                  </td>
-                    <td>{{ store.created_at }}</td>
-                  <td>{{ store.updated_at }}</td>
-                  <td style="{% if store.status %} color:green;{% else %} color:red; {% endif %}">
-                      {% if store.status %}
-                        <center><span class="fa fa-check"></span></center>
-                      {% else %}
-                        <center><span class="fa fa-times"></span></center>
-                      {% endif %}
+                    {{ order.customer.first_name }} {{ order.customer.last_name }}
                   </td>
                   <td>
-                      <a href="{% url 'dashboard:update_store' store.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                    {% for address in order.customer.address.all %}
+                    
+                    {{ address.phone }}
+                    {% endfor %} 
+                  </td>
+                    <td style="">
+                     R$ {{ order.total_price }}
+                  </td>
+                  <td style="">
+                  {% if order.financial_status == 'pending' %}
+                     <span style="color:red;">Boleto Bancário</span>
+                     {% elif order.financial_status == 'paid' %}
+                     <span style="color:green;">Cartão</span>
+                     {% else %}
+                     <span style="color:blue;">Desconhecido</span>
+                     {% endif %}
+                  </td>
+                  <td>{{ order.created_at }}</td>
+                  <td>
+                      
+                      <a class="btn btn-success btn-xs" href="https://api.whatsapp.com/send?phone={{ order.customer.address.first.clean_phone }}&text=Oi%20{{ order.customer.first_name }}%2C%20tudo%20bem%3F" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
                   </td>
                 </tr>
@@ -54,26 +66,23 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Nome</th>
-                  <th>URL</th>
+                  <th>Pedido</th>
+                  <th>Cliente</th>
+                  <th>Telefone</th>
+                  <th>Valor</th>
+                  <th>Situação</th>
                   <th>Criado em</th>
-                  <th>Atualizado em</th>
-                    <th>Status</th>
                   <th>Ações</th>
                 </tr>
                 </tfoot>
               </table>
                 {% else %}
 
-                    <center><h4>Você ainda não possui uma loja cadastrada no sistema!</h4></center>
+                    <center><h4>Sua Loja ainda não recebeu pedidos!</h4></center>
 
                 {% endif %}
 
 
-              <br><br>
-            {% if stores.count <= 0 %}
-            <a href="{% url 'dashboard:new_store' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
-            {% endif %}
 
             </div>
             <!-- /.box-body -->

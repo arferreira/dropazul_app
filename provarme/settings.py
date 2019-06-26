@@ -24,7 +24,8 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ADMINS = [
-    ('Antonio Ricardo', 'contato@dropazul.com'),
+    ('Antonio Ricardo', 'antonioricardoarfs@gmail.com'),
+    ('Mariana Rosa', 'marianaarosa88@gmail.com'),
 ]
 settings = get_settings()
 

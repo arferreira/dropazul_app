@@ -1,5 +1,10 @@
+from datetime import date
+
+
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+
+
 
 
 class OrderManager(models.Manager):
@@ -34,8 +39,12 @@ class Order(models.Model):
     objects = OrderManager()
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
 
     def __str__(self):
-        return self.name
+        return self.shopify_id
+
+    
+
