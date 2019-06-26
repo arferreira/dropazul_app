@@ -17,7 +17,7 @@
                 </div>
                 <div class="card-body">
               {% if categories.count > 0 %}
-              <table id="customers" class="table table-bordered table-striped dataTable">
+              <table id="categories" class="table table-bordered table-striped dataTable">
                 <thead>
                 <tr>
                   <th>Descriçao</th>
@@ -78,7 +78,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(function () {
-    $('#customers').DataTable( {
+    $('#categories').DataTable( {
          "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
             }
