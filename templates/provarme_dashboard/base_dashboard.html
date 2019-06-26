@@ -20,6 +20,7 @@
   <!-- Custom styles for this template-->
   <link href="{%  static 'provarme_dashboard/css/sb-admin-2.css' %}" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+  <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 
 
 </head>
@@ -95,6 +96,7 @@
 
             <a class="collapse-item" href="{% url 'dashboard:categories' %}">Categorias</a>
             <a class="collapse-item" href="{% url 'dashboard:accounts' %}">Contas</a>
+            <a class="collapse-item" href="{% url 'dashboard:expenses' %}">Contas a Pagar</a>
           </div>
         </div>
       </li>
@@ -278,6 +280,7 @@
   <script src="{% static 'provarme_dashboard/js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'provarme_dashboard/js/demo/chart-pie-demo.js' %}"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <!--Mensagens e Notificações-->
 {% if messages %}

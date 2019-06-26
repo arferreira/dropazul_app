@@ -30,7 +30,7 @@ from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
 from provarme_dashboard.traffic.models import Traffic
 from provarme_dashboard.products.models import Devolution
-from provarme_dashboard.financial.models import (Category, Account)
+from provarme_dashboard.financial.models import (Category, Account, Expense)
 
 
 
@@ -111,6 +111,34 @@ class AccountUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/financial/account_form.html'
     success_url = reverse_lazy('dashboard:accounts')
     success_message = "Conta %(name)s foi atualizada com sucesso!"
+
+
+
+
+
+    # Listagem de contas a pagar de cada tenant
+class ExpenseListView(LoginRequiredMixin, ListView):
+    model = Expense
+    context_object_name = 'expenses'
+    template_name = 'provarme_dashboard/financial/expense_list.html'
+
+
+# Criando uma nova contas a pagar
+class ExpenseCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Expense
+    fields = '__all__'
+    template_name = 'provarme_dashboard/financial/expense_form.html'
+    success_url = reverse_lazy('dashboard:expenses')
+    success_message = "Despesa %(name)s foi criada com sucesso!"
+
+
+# Editando uma contas a pagar
+class ExpenseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Expense
+    fields = '__all__'
+    template_name = 'provarme_dashboard/financial/expense_form.html'
+    success_url = reverse_lazy('dashboard:expenses')
+    success_message = "Despesa %(name)s foi atualizada com sucesso!"
 
 
 
