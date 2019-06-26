@@ -23,6 +23,16 @@ urlpatterns = [
     path('categoria/nova', CategoryCreateView.as_view(), name='new_category'),
     path('categoria/editar/<int:pk>', CategoryUpdateView.as_view(), name='update_category'),
 
+    # Contas
+    path('contas/', AccountListView.as_view(), name='accounts'),
+    path('conta/nova', AccountCreateView.as_view(), name='new_account'),
+    path('conta/editar/<int:pk>', AccountUpdateView.as_view(), name='update_account'),
+
+    # Contas a Pagar
+    path('contas-a-pagar/', ExpenseListView.as_view(), name='expenses'),
+    path('contas-a-pagar/nova', ExpenseCreateView.as_view(), name='new_expense'),
+    path('contas-a-pagar/editar/<int:pk>', ExpenseUpdateView.as_view(), name='update_expense'),
+
     # Setups
     path('setup/', SetupListView.as_view(), name='setups'),
     path('setup/novo', SetupCreateView.as_view(), name='new_setup'),

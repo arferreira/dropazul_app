@@ -230,7 +230,7 @@ class TenantRegisterView(View):
                     send_mail(
                         mail_subject,
                         plain_text,
-                        'contato.provarme_core@provarme_core.com.br',
+                        'contato@dropazul.com',
                         [to_email],
                         html_message=message_html,
                         fail_silently=False

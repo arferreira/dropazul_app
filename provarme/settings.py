@@ -24,7 +24,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ADMINS = [
-    ('Antonio Ricardo', 'antonioricardo@provar.me'),
+    ('Antonio Ricardo', 'contato@dropazul.com'),
 ]
 settings = get_settings()
 
@@ -153,16 +153,13 @@ TIME_ZONE = "America/Sao_Paulo"
 # LOGGING do provarme
 
 
-# EMAIL SMTP (Mailgun)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.mailgun.org"
-EMAIL_HOST_USER = "postmaster@mg.provar.me"
-EMAIL_HOST_PASSWORD = "d76ab0f7328937aa7938c6f2a6197a68-e44cc7c1-3567e721"
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-CONTACT_EMAIL = "contato@provar.me"
+# EMAIL SMTP (Sendgrid)
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_PORT = 2525
-EMAIL_SUBJECT_PREFIX = '[provar.me]'
 
 # #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = "smtp.gmail.com"
