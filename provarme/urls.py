@@ -8,6 +8,7 @@ from provarme_landing import urls as landing_urls
 from provarme_site import urls as site_urls
 from provarme_tenant import urls as tenant_urls
 from provarme_dashboard import urls as dashboard_urls
+from provarme_webhooks import urls as webhooks_urls
 from provarme_tenant.views import TenantRegisterView, activate
 from provarme import settings
 
@@ -24,7 +25,8 @@ urlpatterns = [
     path('tenant/', include(tenant_urls, namespace='tenant')),
     # rota para dashboard
     path('painel/', include(dashboard_urls, namespace='dashboard')),
-
+    # rota para webhooks
+    path('webhooks/', include(webhooks_urls, namespace='webhooks')),
 ]
 
 

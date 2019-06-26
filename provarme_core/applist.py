@@ -26,6 +26,7 @@ LOCAL_APPS = (
 THIRD_PARTY_APPS = (
     'solo',
     'storages',
+    'test_without_migrations',
 )
 
 SHARED_APPS = (
