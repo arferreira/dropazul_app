@@ -6,6 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% block opengraph %}
+        <meta name="description"          content="Uma plataforma única para gestão e escala de dropshipping.">
+        <meta property="og:url"           content="https://www.dropazul.com/" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Drop Azul - Gestão para dropshipping" />
+        <meta property="og:description"   content="Uma plataforma única para gestão e escala de dropshipping." />
+        <meta property="og:image"         content="{% static 'provarme_landing/img/fbprofile.png' %}" />
+      {% endblock %}
+
+
     <title> Gestão Online | Controle a sua operação de dropshipping com o Drop Azul </title>
     <!-- favicon -->
     <link rel="shortcut icon" href="{% static 'provarme_landing/img/favicon.ico' %}" type="image/x-icon">
