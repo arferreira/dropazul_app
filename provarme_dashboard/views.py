@@ -32,6 +32,7 @@ from provarme_dashboard.traffic.models import Traffic
 from provarme_dashboard.order.models import Order
 from provarme_dashboard.products.models import Devolution
 from provarme_dashboard.financial.models import (Category, Account, Expense)
+from provarme_dashboard.customer.models import Customer
 
 
 
@@ -148,6 +149,13 @@ class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     context_object_name = 'orders'
     template_name = 'provarme_dashboard/orders/order_list.html'
+
+
+# Listagem de clientes de cada tenant
+class CustomerListView(LoginRequiredMixin, ListView):
+    model = Customer
+    context_object_name = 'customers'
+    template_name = 'provarme_dashboard/customers/customer_list.html'
 
 
 

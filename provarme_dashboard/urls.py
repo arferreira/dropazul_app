@@ -55,7 +55,10 @@ urlpatterns = [
     path('trafego/editar/<int:pk>', ProductUpdateView.as_view(), name='update_traffic'),
 
     # Orders
-    path('pedidos/', OrderListView.as_view(), name='orders'),
+    path('vendas/', OrderListView.as_view(), name='orders'),
+
+    # Customers
+    path('clientes/', CustomerListView.as_view(), name='customers'),
 
     # Traffic
     path('devolucoes/', DevolutionsListView.as_view(), name='devolutions'),

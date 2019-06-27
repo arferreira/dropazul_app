@@ -19,7 +19,8 @@
   <!-- Custom styles for this template-->
   <link href="{%  static 'provarme_dashboard/css/sb-admin-2.css' %}" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-  <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- Custom styles for this page -->
+  <link href="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
 
 </head>
@@ -118,19 +119,27 @@
         </a>
 
       </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:orders' %}">
+          <i class="fas fa-cash-register"></i>
+          <span>Vendas</span>
+        </a>
+
+      </li>
+        <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:customers' %}">
+          <i class="fas fa-user-check"></i>
+          <span>Clientes</span>
+        </a>
+
+      </li>
           <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:devolutions' %}">
           <i class="fas fa-sync-alt"></i>
           <span>Trocas & Devoluções</span>
-        </a>
-
-      </li>
-         <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard:orders' %}">
-          <i class="fas fa-cash-register"></i>
-          <span>Pedidos</span>
         </a>
 
       </li>
@@ -143,12 +152,11 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
 
-            <a class="collapse-item" href="{% url 'dashboard:traffic' %}">Diário</a>
+            <a class="collapse-item" href="{% url 'dashboard:traffic' %}">Dicas</a>
 
           </div>
         </div>
       </li>
-
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
@@ -161,7 +169,7 @@
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-phone"></i>
-          <span>Conversão</span></a>
+          <span>Suporte</span></a>
       </li>
 
       <!-- Divider -->
