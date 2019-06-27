@@ -13,7 +13,6 @@ DJANGO_APPS = (
     'widget_tweaks',
     'debug_toolbar',
     'pagseguro',
-    'django_intercom',
 )
 
 LOCAL_APPS = (
