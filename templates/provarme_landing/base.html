@@ -53,6 +53,16 @@
     <script src="{% static 'provarme_landing/js/contact.js' %}"></script>
     <!-- main -->
     <script src="{% static 'provarme_landing/js/main.js' %}"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142851798-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142851798-1');
+    </script>
+
     <script>
   window.intercomSettings = {
     app_id: "ai7dmi8v"
