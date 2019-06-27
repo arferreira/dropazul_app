@@ -7,7 +7,6 @@ from provarme_tenant.models import Client
 
 def tenant_middleware(get_response):
 
-
     def middleware(request):
         # we are going to use subdomains to identify customers.
 
@@ -27,6 +26,5 @@ def tenant_middleware(get_response):
 
         # all done, the view will receive a request with a tenant attribute
         return get_response(request)
-
 
     return middleware
