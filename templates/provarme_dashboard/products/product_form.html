@@ -132,6 +132,7 @@
 
 <!-- Bloco de scripts js -->
 {% block javascript %}
+<script>
 $("#recommended_price").focus(function(){
       var cost = $("#cost").val();
       var markup = $("#markup").val();
@@ -140,4 +141,5 @@ $("#recommended_price").focus(function(){
       $("#recommended_price").val(calculo).trigger('blur');
       $(this).css("color", "orange");
     });
+    </script>
 {% endblock javascript %}
