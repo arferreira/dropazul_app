@@ -346,7 +346,9 @@
   created_at: "{{ request.user.date_joined|date:"U" }}" // Signup Date
 };
 </script>
- 
+  <!-- Page level plugins -->
+  <script src="{% static 'provarme_dashboard/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
    
 {% block javascript %}
 {% endblock javascript %}
