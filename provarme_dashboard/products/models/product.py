@@ -1,9 +1,11 @@
 from django.db import models
 
+from provarme_dashboard.core.models import AbstractBaseModel
+from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models.provider import Provider
 
 
-class Product(models.Model):
+class Product(AbstractBaseModel):
 
     STATUS = (
         (True, 'Ativa'),
@@ -22,8 +24,20 @@ class Product(models.Model):
     price = models.DecimalField('Preço Final', max_digits=5, decimal_places=2)
     status = models.BooleanField(verbose_name='Situação', default=True, choices=STATUS)
 
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Modificado em')
+    @property
+    def final_cost(self):
+        setup = Setup.objects.first()
+
+        if setup:
+            tx_iof = setup.tx_iof or 0
+            tx_gateway = setup.tx_gateway or 0
+            tx_tax = setup.tx_tax or 0
+
+            return round(((self.cost * tx_iof) +
+                         ((self.price * tx_gateway) / 100) +
+                         ((self.price * tx_tax) / 100) + self.cost), 2)
+
+        return 0
 
     class Meta:
         verbose_name = 'Produto'
@@ -33,14 +47,13 @@ class Product(models.Model):
         return self.name
 
 
+class Devolution(AbstractBaseModel):
 
-TYPE_PURCHASE = (
-    ('via Cartão de Crédito', 'via Cartão de Crédito'),
-    ('via Boleto Bancário', 'via Boleto Bancário'),
-)
+    TYPE_PURCHASE = (
+        ('via Cartão de Crédito', 'via Cartão de Crédito'),
+        ('via Boleto Bancário', 'via Boleto Bancário'),
+    )
 
-
-class Devolution(models.Model):
     full_name = models.CharField('Nome Completo', max_length=255)
     cell_phone = models.CharField('Telefone (Whatsapp)', max_length=20)
     number_order = models.CharField('Número do Pedido', max_length=255)
@@ -49,12 +62,9 @@ class Devolution(models.Model):
     type_purchase = models.CharField('Tipo de Compra', max_length=255, choices=TYPE_PURCHASE)
     reason = models.CharField('Motivo da devolução', max_length=255)
 
-
     class Meta:
         verbose_name = 'Trocas e Devoluções'
         verbose_name_plural = 'Trocas e Devoluções'
-
-
 
     def __str__(self):
         return self.full_name

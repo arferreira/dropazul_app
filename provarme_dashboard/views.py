@@ -1,18 +1,20 @@
-# responses django
+import json
+
+from tenant_schemas.utils import schema_exists, schema_context, connection
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-# CBVs Django
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, InvalidPage
 
@@ -25,7 +27,6 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
 # Importação Modelos
-
 from provarme_dashboard.store.models import Store
 from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models import Provider
@@ -267,6 +268,11 @@ def traffic_list(request):
 
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
 
+
+# class CashFlowListView(LoginRequiredMixin, ListView):
+#
+#     model = CashFlow
+#     template_name = 'provarme_dashboard/cash_flow/cash_flow_list.html'
 
 # View para gerenciar suporte
 def support_index_view(request):

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,6 +12,7 @@
   <meta name="author" content="">
 
   <title>Drop Azul - A melhor gestão para o seu negócio de dropshipping</title>
+  <link rel="shortcut icon" href="{% static 'provarme_landing/img/favicon.ico' %}" type="image/x-icon">
 
   <!-- Custom fonts for this template-->
   <link href="{%  static 'provarme_dashboard/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -21,9 +23,9 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
   <!-- Custom styles for this page -->
   <link href="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <link href="{% static 'provarme_dashboard/vendor/datepicker-gijgo/gijgo.min.css' %}" rel="stylesheet">
 
 </head>
-
 
 <body id="page-top">
 
@@ -74,8 +76,6 @@
         </div>
       </li>
 
-
-
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -91,39 +91,36 @@
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-
             <a class="collapse-item" href="{% url 'dashboard:categories' %}">Categorias</a>
             <a class="collapse-item" href="{% url 'dashboard:accounts' %}">Contas</a>
             <a class="collapse-item" href="{% url 'dashboard:expenses' %}">Contas a Pagar</a>
+            <a class="collapse-item" href="#">Fluxo de Caixa</a>
           </div>
         </div>
       </li>
 
-         <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:providers' %}">
           <i class="fas fa-fw fa-hands-helping"></i>
           <span>Fornecedores</span>
         </a>
-
       </li>
 
-
-        <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:products' %}">
           <i class="fas fa-fw fa-cart-plus"></i>
           <span>Produtos</span>
         </a>
-
       </li>
-        <!-- Nav Item - Pages Collapse Menu -->
+
+      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:orders' %}">
           <i class="fas fa-cash-register"></i>
           <span>Vendas</span>
         </a>
-
       </li>
         <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
@@ -131,43 +128,30 @@
           <i class="fas fa-user-check"></i>
           <span>Clientes</span>
         </a>
-
       </li>
-          <!-- Nav Item - Pages Collapse Menu -->
+
+      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:devolutions' %}">
           <i class="fas fa-sync-alt"></i>
           <span>Trocas & Devoluções</span>
         </a>
-
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-          <i class="fab fa-facebook-f"></i>
-          <span>Facebook ADS</span>
-        </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-
-            <a class="collapse-item" href="{% url 'dashboard:traffic' %}">Dicas</a>
-
-          </div>
-        </div>
       </li>
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{% url 'dashboard:traffic' %}">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Tráfego</span></a>
+          <span>Gerenciamento de Tráfego</span>
+        </a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:support' %}">
           <i class="fas fa-comments-dollar"></i>
-          <span>Suporte</span></a>
+          <span>Suporte</span>
+        </a>
       </li>
 
       <!-- Divider -->
@@ -179,12 +163,11 @@
       </div>
 
     </ul>
-  <!-- Start Page Content -->
-   <div id="content-wrapper" class="d-flex flex-column">
 
+    <!-- Start Page Content -->
+    <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -193,12 +176,8 @@
             <i class="fa fa-bars"></i>
           </button>
 
-
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
-
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -208,13 +187,13 @@
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                     {{ request.user.first_name }} {{ request.user.last_name }}
                 </span>
-                  {% if user.profile.image_profile %}
-                      <img src="/media/{{ request.tenant.domain_url }}/{{ user.profile.image_profile }}" class="img-profile rounded-circle" alt="Imagem do Usuário">
-                  {% else %}
-                      <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt="user" class="img-profile rounded-circle" />
-                  {% endif %}
-
+                {% if user.profile.image_profile %}
+                    <img src="/media/{{ request.tenant.domain_url }}/{{ user.profile.image_profile }}" class="img-profile rounded-circle" alt="Imagem do Usuário">
+                {% else %}
+                    <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt="user" class="img-profile rounded-circle" />
+                {% endif %}
               </a>
+
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="{% url 'tenant:profile' %}">
@@ -228,45 +207,21 @@
                 </a>
               </div>
             </li>
-
           </ul>
 
         </nav>
-        <!-- End of Topbar -->
-    <!-- End of Sidebar -->
-                <div class="container-fluid">
-               {% block main %}
-
-                <!-- Conteúdo principal -->
-               {% endblock main %}
-                </div>
-        </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Você tem certeza que deseja sair do sistema?</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="{% url 'tenant:logout' %}">Sim</a>
+        <div class="container-fluid">
+          {% block main %}{% endblock main %}
         </div>
       </div>
     </div>
   </div>
 
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  {% include "provarme_dashboard/components/modals/logout.html" %}
 
   <!-- Bootstrap core JavaScript-->
   <script src="{% static 'provarme_dashboard/vendor/jquery/jquery.min.js' %}"></script>
@@ -284,6 +239,7 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'provarme_dashboard/js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'provarme_dashboard/js/demo/chart-pie-demo.js' %}"></script>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
@@ -350,6 +306,10 @@
   <script src="{% static 'provarme_dashboard/vendor/datatables/jquery.dataTables.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/vendor/clipboard/jquery.clipboard.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/inputmask/jquery.mask.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/inputmask/jquery.maskMoney.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/datepicker-gijgo/gijgo.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/datepicker-gijgo/messages.pt-br.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/js/main.js' %}"></script>
 
   {% block javascript %}{% endblock javascript %}

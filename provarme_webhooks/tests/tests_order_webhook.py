@@ -10,12 +10,13 @@ from django.urls import reverse_lazy
 from provarme_dashboard.customer.models import Customer
 from provarme_dashboard.order.models import Order
 from provarme_webhooks.tests.fixtures import ORDER_BODY
+from provarme_dashboard.core.tests.helpers import BaseTenantTestCase as TestCase
 
 
-class BaseTenantTestCase(TenantTestCase):
+class OrderCreationTestCase(TestCase):
 
     def setUp(self):
-        self.client = TenantClient(self.tenant)
+        super(OrderCreationTestCase, self).setUp()
         self.headers = {
             'X-Shopify-Topic': 'orders/create',
             'X-Shopify-Hmac-Sha256': 'XWmrwMey6OsLMeiZKwP4FppHH3cmAiiJJAweH5Jo4bM=',
@@ -23,12 +24,6 @@ class BaseTenantTestCase(TenantTestCase):
             'X-Shopify-API-Version': '2019-04',
             'HTTP_X_REQUESTED_WITH': u'XMLHttpRequest'
         }
-
-
-class OrderCreationTestCase(BaseTenantTestCase):
-
-    def setUp(self):
-        super(OrderCreationTestCase, self).setUp()
         self.response = self.client.post(reverse_lazy('webhooks:order-creation'), data=json.dumps(ORDER_BODY),
                                          content_type='application/json', **self.headers)
 
