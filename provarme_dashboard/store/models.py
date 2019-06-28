@@ -11,7 +11,6 @@ class Store(AbstractBaseModel):
     )
 
     name = models.CharField('Nome da Loja', max_length=100)
-    initials = models.CharField('Sigla da Loja', max_length=100)
     url = models.URLField('URL da Loja', max_length=100)
     client_id_mp = models.CharField('CLIENT_ID (Mercado Pago)', max_length=255)
     client_secret_mp = models.CharField('CLIENT_SECRET (Mercado Pago)', max_length=255)

@@ -6,6 +6,7 @@ from provarme_dashboard.dashboard.views import index_view as dashboard_index
 
 from provarme_dashboard.views import *
 from provarme_dashboard.financial.views import *
+from provarme_dashboard.store.views import StoreListView, StoreCreateView, StoreUpdateView
 from provarme_dashboard.traffic.views import TrafficListView, TrafficCreateView, TrafficUpdateView
 
 

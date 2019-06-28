@@ -27,7 +27,7 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 
 
 # Importação Modelos
-from provarme_dashboard.store.models import Store
+
 from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
@@ -37,29 +37,6 @@ from provarme_dashboard.products.models import Devolution
 from provarme_dashboard.customer.models import Customer
 
 
-# Listagem de loja de cada tenant
-class StoreListView(LoginRequiredMixin, ListView):
-    model = Store
-    context_object_name = 'stores'
-    template_name = 'provarme_dashboard/stores/store_list.html'
-
-
-# Criando uma nova loja
-class StoreCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Store
-    fields = '__all__'
-    template_name = 'provarme_dashboard/stores/store_form.html'
-    success_url = reverse_lazy('dashboard:stores')
-    success_message = "Loja %(name)s foi criada com sucesso!"
-
-
-# Editando uma loja
-class StoreUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Store
-    fields = '__all__'
-    template_name = 'provarme_dashboard/stores/store_form.html'
-    success_url = reverse_lazy('dashboard:stores')
-    success_message = "Loja %(name)s foi atualizada com sucesso!"
 
 
 
