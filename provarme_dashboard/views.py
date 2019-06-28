@@ -16,7 +16,17 @@ from django.views.generic.edit import UpdateView
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator, InvalidPage
 
+# python
+from datetime import datetime, timedelta
+
+import json
+
+from tenant_schemas.utils import schema_exists, schema_context, connection
+
+
+# Importação Modelos
 from provarme_dashboard.store.models import Store
 from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models import Provider
@@ -51,7 +61,6 @@ class StoreUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/stores/store_form.html'
     success_url = reverse_lazy('dashboard:stores')
     success_message = "Loja %(name)s foi atualizada com sucesso!"
-
 
 
 # Listagem de categorias de cada tenant
@@ -127,7 +136,6 @@ class ExpenseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/financial/expense_form.html'
     success_url = reverse_lazy('dashboard:expenses')
     success_message = "Despesa %(name)s foi atualizada com sucesso!"
-
 
 
 # Listagem de pedidos de cada tenant
@@ -224,7 +232,8 @@ def product_estimate(request, pk):
     setup = Setup.objects.all().first()
     product = Product.objects.get(pk=pk)
 
-    cost_fix = (product.cost * setup.tx_iof/100) + (product.price * setup.tx_shopify/100) + (product.price * setup.tx_gateway/100) + (product.price * setup.tx_antecipation/100) + (product.price * setup.tx_tax/100) + product.cost
+    cost_fix = (product.cost * setup.tx_iof/100) + (product.price * setup.tx_shopify/100) + (product.price *
+                                                                                             setup.tx_gateway/100) + (product.price * setup.tx_antecipation/100) + (product.price * setup.tx_tax/100) + product.cost
     cost_fix = round(cost_fix, 2)
     cost_marketing = round(product.price * product.marketing / 100, 2)
     profit = round(product.price - cost_fix - cost_marketing, 2)
@@ -264,3 +273,21 @@ def traffic_list(request):
 #
 #     model = CashFlow
 #     template_name = 'provarme_dashboard/cash_flow/cash_flow_list.html'
+
+# View para gerenciar suporte
+def support_index_view(request):
+    page = request.GET.get('page')
+    paginator = Paginator(Order.objects.filter(
+        financial_status='pending', updated_at__gte=datetime.now()-timedelta(days=7)), 2)
+    total = paginator.count
+
+    try:
+        orders_last_7_days = paginator.page(page)
+    except InvalidPage:
+        orders_last_7_days = paginator.page(1)
+
+    context = {
+        'orders': orders_last_7_days,
+        'total': total,
+    }
+    return render(request, 'provarme_dashboard/support/support_index.html', context)
