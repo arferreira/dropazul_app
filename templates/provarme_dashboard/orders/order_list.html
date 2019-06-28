@@ -2,12 +2,10 @@
 {% load i18n static %}
 {% block title %}{% trans '[Drop Azul] -  Suas vendas' %}{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active">Loja</li>
+  <li class="breadcrumb-item active">Loja</li>
 {% endblock breadcrumb %}
+
 {% block main %}
-
-
-<!-- Conteúdo principal -->
 
 <div class="row">
   <div class="col-lg-12">
@@ -16,9 +14,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Seus pedidos</h6>
       </div>
       <div class="card-body">
-        {% if orders.count > 0 %}
-
-        <table id="customers" class="table table-bordered table-striped">
+        <table id="datatable" class="table table-bordered table-striped dataTable">
           <thead>
             <tr>
               <th>Pedido</th>
@@ -34,95 +30,33 @@
             {% for order in orders %}
               <tr>
                 <td><a href="" class="link-datatable">{{ order.order_number }}</a></td>
-                <td>
-                  {{ order.customer.first_name }} {{ order.customer.last_name }}
-                </td>
+                <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
                 <td>
                   {% for address in order.customer.address.all %}
                     {{ address.phone }}
                   {% endfor %}
                 </td>
-                <td style="">
-                 R$ {{ order.total_price }}
-               </td>
-               <td style="">
-                {% if order.financial_status == 'pending' %}
-                <span style="color:red;">Boleto Bancário</span>
-                {% elif order.financial_status == 'paid' %}
-                <span style="color:green;">Cartão</span>
-                {% else %}
-                <span style="color:blue;">Desconhecido</span>
-                {% endif %}
-              </td>
-              <td>{{ order.created_at }}</td>
-              <td>
-
-                <a class="btn btn-success btn-xs" href="https://api.whatsapp.com/send?phone={{ order.customer.address.first.clean_phone }}&text=Oi%20{{ order.customer.first_name }}%2C%20tudo%20bem%3F" target="_blank"><i class="fab fa-whatsapp"></i></a>
-
-              </td>
-            </tr>
-          {% endfor %}
-
-  </tbody>
-  <tfoot>
-    <tr>
-      <th>Pedido</th>
-      <th>Cliente</th>
-      <th>Telefone</th>
-      <th>Valor</th>
-      <th>Situação</th>
-      <th>Criado em</th>
-      <th>Ações</th>
-    </tr>
-  </tfoot>
-</table>
-{% else %}
-
-<center><h4>Sua Loja ainda não recebeu pedidos!</h4></center>
-
-{% endif %}
-
-</div>
-<!-- /.box-body -->
-</div>
-</div>
+                <td>R$ {{ order.total_price }}</td>
+                 <td>
+                  {% if order.financial_status == 'pending' %}
+                    <span style="color:red;">Boleto Bancário</span>
+                  {% elif order.financial_status == 'paid' %}
+                    <span style="color:green;">Cartão</span>
+                  {% else %}
+                    <span style="color:blue;">Desconhecido</span>
+                  {% endif %}
+                </td>
+                <td>{{ order.created_at }}</td>
+                <td>
+                  <a class="btn btn-success btn-xs" href="https://api.whatsapp.com/send?phone={{ order.customer.address.first.clean_phone }}&text=Oi%20{{ order.customer.first_name }}%2C%20tudo%20bem%3F" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- /.content -->
 {% endblock main %}
-{% block javascript %}
-<script type="text/javascript">
-$(function () {
-  $('#customers').DataTable( {
-   "language": {
-    "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
-  }
-} );
-
-  $("#customers").on("click", ".delete-customer", function () {
-    var url = $(this).attr("data-url");
-    deleteQuestion(url);
-  });
-
-  function deleteQuestion(url) {
-    swal({
-     title: "Tem certeza?",
-     text: "Você irá excluir esse aluno e tudo relacionado a ele será apagado!",
-     type: "warning",
-     showCancelButton: true,
-     cancelButtonText: "Cancelar",
-     confirmButtonColor: "#DD6B55",
-     confirmButtonText: "Sim, excluir!",
-     closeOnConfirm: false
-   },
-   function(isConfirm){
-     if (isConfirm) {
-      window.location.href = url;
-    }
-  });
-  };
-
-
-})
-</script>
-{% endblock javascript %}

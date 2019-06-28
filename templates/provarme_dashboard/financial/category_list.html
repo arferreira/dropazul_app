@@ -1,114 +1,47 @@
 {% extends "provarme_dashboard/base_dashboard.html" %}
-{% load i18n static %}
+{% load i18n static dashboard_tags %}
+
 {% block title %}{% trans '[Drop Azul] -  Suas Categorias' %}{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active">Produtos</li>
+  <li class="breadcrumb-item active">Produtos</li>
 {% endblock breadcrumb %}
+
 {% block main %}
 
-
-  <!-- Conteúdo principal -->
-
-  <div class="row">
-<div class="col-lg-12">
-<div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Categorias</h6>
-                </div>
-                <div class="card-body">
-              {% if categories.count > 0 %}
-              <table id="categories" class="table table-bordered table-striped dataTable">
-                <thead>
-                <tr>
-                  <th>Descriçao</th>
-                  <th>Tipo</th>
-                  <th>Situação</th>
-                  <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for category in categories %}
-                <tr>
-                  <td><a href="{% url 'dashboard:update_category' category.pk %}" class="link-datatable">{{ category.description }}</a></td>
-                  <td>
-                    {% if category.type_categories == 'S' %} Saída {% elif category.type_categories == 'E' %} Entrada {% else %}Todos {% endif %}
-                    
-                  </td>
-                  <td style="{% if category.is_active == True %} color:green; {% elif category.is_active == False %} color:red;">{% endif%}">
-                     {% if category.is_active == True %}Ativa {% else %} Inativa{% endif %}
-                  </td>
-                  <td>
-                      
-                      <a href="{% url 'dashboard:update_category' category.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
-
-                  </td>
-                </tr>
-                {% endfor %}
-
-                </tbody>
-                <tfoot>
-                <tr>
-                 <th>Descriçao</th>
-                  <th>Tipo</th>
-                  <th>Situação</th>
-                  <th>Ações</th>
-                </tr>
-                </tfoot>
-              </table>
-                {% else %}
-
-                    <center><h4>Você ainda não possui categorias cadastradas no sistema!</h4></center>
-
-                {% endif %}
-
-
-              <br><br>
-
-            <a href="{% url 'dashboard:new_category' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
-
-
-            </div>
-            <!-- /.box-body -->
-              </div>
-          </div>
-          </div>
-
-    <!-- /.content -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Categorias</h6>
+      </div>
+      <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped dataTable">
+          <thead>
+            <tr>
+              <th>Descriçao</th>
+              <th>Tipo</th>
+              <th>Situação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for category in categories %}
+              <tr>
+                <td>
+                  <a href="{% url 'dashboard:update_category' category.pk %}" class="link-datatable">{{ category.description }}</a>
+                </td>
+                <td>{{ category.get_type_categories_display }}</td>
+                <td class="font-weight-bold text-{{ category.is_active|text_color }}">{{ category.get_is_active_display }}</td>
+                <td>
+                  <a href="{% url 'dashboard:update_category' category.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{% url 'dashboard:new_category' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock main %}
-{% block javascript %}
-<script type="text/javascript">
-$(function () {
-    $('#categories').DataTable( {
-         "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
-            }
-    } );
-
-
-    $("#customers").on("click", ".delete-customer", function () {
-				var url = $(this).attr("data-url");
-				deleteQuestion(url);
-			});
-
-			function deleteQuestion(url) {
-				swal({
-					title: "Tem certeza?",
-					text: "Você irá excluir esse aluno e tudo relacionado a ele será apagado!",
-					type: "warning",
-					showCancelButton: true,
-					cancelButtonText: "Cancelar",
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Sim, excluir!",
-					closeOnConfirm: false
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						window.location.href = url;
-					}
-				});
-	};
-
-
-})
-</script>
-{% endblock javascript %}
