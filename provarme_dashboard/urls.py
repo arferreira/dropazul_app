@@ -62,4 +62,7 @@ urlpatterns = [
 
     # Traffic
     path('devolucoes/', DevolutionsListView.as_view(), name='devolutions'),
+
+    # Support
+    path('suporte/', support_index_view, name='support'),
 ]

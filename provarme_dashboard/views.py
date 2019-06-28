@@ -287,3 +287,13 @@ def traffic_list(request):
 
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
 
+
+
+# View para gerenciar suporte
+def support_index_view(request):
+    if request.method == 'GET':
+        context = {
+            'oi': 2,
+        }
+    return render(request, '', context)
+    
