@@ -2,108 +2,74 @@
 {% load i18n static %}
 {% load widget_tweaks %}
 {% block title %}{% trans '[Drop Azul] -  Nova Loja' %}{% endblock %}
-{% block breadcrumb %}
-<li class="breadcrumb-item active">Novo Aluno</li>
-{% endblock breadcrumb %}
+
 {% block main %}
-  <!-- Conteúdo principal -->
-  <div class="row">
-<div class="col-lg-12">
-<div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Configurações Gerais</h6>
-                </div>
-                <div class="card-body">
+<!-- Conteúdo principal -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Configurações Gerais</h6>
+      </div>
+      <div class="card-body">
 
-                    <form class="form" action="" method="post">
-                        {% csrf_token %}
-
-                            {% if form.errors %}
-                                    <div class="alert alert-danger">
-                                            <strong>Ocorreu um erro no preenchimento do formulário!</strong>
-                                            <br>
-                                            <strong>Fique atento aos itens obrigatórios!</strong>
-                                    </div>
-                            {% endif %}
-                            <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                          <label for="">Taxa do Shopify:</label>
-                                          {{ form.tx_shopify|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_shopify }}</strong>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                          <label for="">Taxa de Gateway:</label>
-                                          {{ form.tx_gateway|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_gateway }}</strong>
-                                    </div>
-                            </div>
-                            </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                          <label for="">Taxa de Antecipação:</label>
-                                          {{ form.tx_antecipation|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_antecipation }}</strong>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                          <label for="">Imposto:</label>
-                                          {{ form.tx_tax|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_tax }}</strong>
-                                    </div>
-                            </div>
-                            </div>
-
-                    <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group">
-                                          <label for="">IOF:</label>
-                                          {{ form.tx_iof|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_iof }}</strong>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                          <label for="">Cashback:</label>
-                                          {{ form.tx_cashback|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.tx_cashback }}</strong>
-                                    </div>
-                            </div>
-                            </div>
-
-
-                        <button type="submit" class="btn btn-primary pull-right">Salvar</button>
-                     <a href="{% url 'dashboard:setups' %}" class="btn btn-warning">
-                      {% trans 'Voltar' %}
-                    </a>
-
-                      <!-- /.box-footer -->
-                    </form>
+        <form class="form" action="" method="post">
+          {% csrf_token %}
+          {% include "provarme_dashboard/components/form-error.html" with form=form %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  {% include "provarme_dashboard/components/field.html" with field=form.tx_shopify %}
+              </div>
             </div>
-            <!-- /.box-body -->
+            <div class="col-md-6">
+              <div class="form-group">
+                  {% include "provarme_dashboard/components/field.html" with field=form.tx_gateway %}
+              </div>
+            </div>
           </div>
-          <!-- /.box -->
-          </div>
-        </div>
 
-    <!-- /.content -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  {% include "provarme_dashboard/components/field.html" with field=form.tx_antecipation %}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  {% include "provarme_dashboard/components/field.html" with field=form.tx_tax %}
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                  {% include "provarme_dashboard/components/field.html" with field=form.tx_iof %}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  {% include "provarme_dashboard/components/field.html" with field=form.tx_cashback %}
+              </div>
+            </div>
+          </div>
+
+
+          <button type="submit" class="btn btn-primary pull-right">Salvar</button>
+          <a href="{% url 'dashboard:setups' %}" class="btn btn-warning">
+            {% trans 'Voltar' %}
+          </a>
+
+          <!-- /.box-footer -->
+        </form>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- /.content -->
 {% endblock main %}
 
-<!-- Bloco de scripts js -->
-{% block javascript %}
-<script>
-    // mascaras
-    $("#cpf").mask("999.999.999-99");
-    $("#cnpj").mask("99.999.999/9999-99");
-    $("#id_zipcode").mask("99999-999");
-    $("#phone_number").mask("(99) 99999-9999");
-
-
-
-</script>
-{% endblock javascript %}

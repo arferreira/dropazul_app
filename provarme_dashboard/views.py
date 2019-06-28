@@ -28,7 +28,7 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 
 # Importação Modelos
 
-from provarme_dashboard.setups.models import Setup
+
 from provarme_dashboard.providers.models import Provider
 from provarme_dashboard.products.models import Product
 from provarme_dashboard.traffic.models import Traffic
@@ -55,30 +55,6 @@ class CustomerListView(LoginRequiredMixin, ListView):
     context_object_name = 'customers'
     template_name = 'provarme_dashboard/customers/customer_list.html'
 
-
-# Listagem de setup de cada tenant
-class SetupListView(LoginRequiredMixin, ListView):
-    model = Setup
-    context_object_name = 'setups'
-    template_name = 'provarme_dashboard/setups/setup_list.html'
-
-
-# Criando um setup
-class SetupCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Setup
-    fields = '__all__'
-    template_name = 'provarme_dashboard/setups/setup_form.html'
-    success_url = reverse_lazy('dashboard:setups')
-    success_message = "Configuração foi criada com sucesso!"
-
-
-# Editando um setup
-class SetupUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Setup
-    fields = '__all__'
-    template_name = 'provarme_dashboard/setups/setup_form.html'
-    success_url = reverse_lazy('dashboard:setups')
-    success_message = "Configuração foi atualizada com sucesso!"
 
 
 # Listagem de fornecedores de cada tenant
