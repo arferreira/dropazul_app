@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 
 from provarme_dashboard.core.models import AbstractBaseModel
@@ -6,10 +8,14 @@ from provarme_dashboard.core.models import AbstractBaseModel
 # model para gestão de categorias
 class Category(AbstractBaseModel):
 
+    INPUT = 'E'
+    EXIT = 'S'
+    ALL = 'T'
+
     TYPES = (
-        ('E', 'Entrada'),
-        ('S', 'Saída'),
-        ('T', 'Todos')
+        (INPUT, 'Entrada'),
+        (EXIT, 'Saída'),
+        (ALL, 'Todos')
     )
 
     IS_ACTIVE = (
@@ -64,9 +70,9 @@ class Expense(AbstractBaseModel):
     name = models.CharField("Nome", max_length=250)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    maturity = models.DateTimeField('Data', null=True, blank=True)
-    total = models.DecimalField('Valor', max_digits=10, decimal_places=2, default=0)
-    emission_date = models.DateTimeField('Data de Emissão', null=True, blank=True)
+    maturity = models.DateField('Data', null=True, blank=True)
+    total = models.DecimalField('Valor', max_digits=10, decimal_places=2)
+    emission_date = models.DateField('Data de Emissão', null=True, blank=True)
     settle = models.BooleanField('Liquidar', default=False, choices=SETTLE_OPTIONS)
 
     class Meta:
