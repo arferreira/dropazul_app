@@ -58,10 +58,6 @@ urlpatterns = [
     path('produto/estimativa/<int:pk>', product_estimate, name='estimate_product'),
 
     # Traffic
-    # path('trafego/', ProductListView.as_view(), name='traffic'),
-    # path('trafego/novo', ProductCreateView.as_view(), name='new_traffic'),
-    # path('trafego/editar/<int:pk>', ProductUpdateView.as_view(), name='update_traffic'),
-
     path('trafego/', TrafficListView.as_view(), name='traffic'),
     path('trafego/novo', TrafficCreateView.as_view(), name='new_traffic'),
     path('trafego/editar/<int:pk>', TrafficUpdateView.as_view(), name='update_traffic'),
