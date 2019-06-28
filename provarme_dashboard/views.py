@@ -14,8 +14,10 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import Paginator, InvalidPage
 
-
+# python
+from datetime import datetime, timedelta
 
 import json
 
@@ -33,8 +35,6 @@ from provarme_dashboard.order.models import Order
 from provarme_dashboard.products.models import Devolution
 from provarme_dashboard.financial.models import (Category, Account, Expense)
 from provarme_dashboard.customer.models import Customer
-
-
 
 
 # Listagem de loja de cada tenant
@@ -62,7 +62,6 @@ class StoreUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Loja %(name)s foi atualizada com sucesso!"
 
 
-
 # Listagem de categorias de cada tenant
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
@@ -86,8 +85,6 @@ class CategoryUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/financial/category_form.html'
     success_url = reverse_lazy('dashboard:categories')
     success_message = "Categoria %(description)s foi atualizada com sucesso!"
-
-
 
 
 # Listagem de contas de cada tenant
@@ -115,9 +112,6 @@ class AccountUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Conta %(name)s foi atualizada com sucesso!"
 
 
-
-
-
 # Listagem de contas a pagar de cada tenant
 class ExpenseListView(LoginRequiredMixin, ListView):
     model = Expense
@@ -143,7 +137,6 @@ class ExpenseUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Despesa %(name)s foi atualizada com sucesso!"
 
 
-
 # Listagem de pedidos de cada tenant
 class OrderListView(LoginRequiredMixin, ListView):
     model = Order
@@ -156,8 +149,6 @@ class CustomerListView(LoginRequiredMixin, ListView):
     model = Customer
     context_object_name = 'customers'
     template_name = 'provarme_dashboard/customers/customer_list.html'
-
-
 
 
 # Listagem de setup de cada tenant
@@ -185,9 +176,6 @@ class SetupUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Configuração foi atualizada com sucesso!"
 
 
-
-
-
 # Listagem de fornecedores de cada tenant
 class ProviderListView(LoginRequiredMixin, ListView):
     model = Provider
@@ -211,7 +199,6 @@ class ProviderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'provarme_dashboard/providers/provider_form.html'
     success_url = reverse_lazy('dashboard:providers')
     success_message = "Fornecedor foi atualizado com sucesso!"
-
 
 
 # Listagem de produtos de cada tenant
@@ -239,19 +226,17 @@ class ProductUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Produto foi atualizado com sucesso!"
 
 
-
 # Estimativa de lucro de um produto
 def product_estimate(request, pk):
     setup = Setup.objects.all().first()
     product = Product.objects.get(pk=pk)
 
-
-    cost_fix = (product.cost * setup.tx_iof/100) + (product.price * setup.tx_shopify/100) + (product.price * setup.tx_gateway/100) + (product.price * setup.tx_antecipation/100) + (product.price * setup.tx_tax/100) + product.cost
+    cost_fix = (product.cost * setup.tx_iof/100) + (product.price * setup.tx_shopify/100) + (product.price *
+                                                                                             setup.tx_gateway/100) + (product.price * setup.tx_antecipation/100) + (product.price * setup.tx_tax/100) + product.cost
     cost_fix = round(cost_fix, 2)
     cost_marketing = round(product.price * product.marketing / 100, 2)
     profit = round(product.price - cost_fix - cost_marketing, 2)
     profit_percent = round(profit / product.price * 100, 2)
-
 
     context = {
         'markup': product.markup,
@@ -265,16 +250,11 @@ def product_estimate(request, pk):
     return render(request, 'provarme_dashboard/products/estimate.html', {'product': context})
 
 
-
-
-
-
 # Listagem de trocas e devoluções de cada tenant
 class DevolutionsListView(LoginRequiredMixin, ListView):
     model = Devolution
     context_object_name = 'devolutions'
     template_name = 'provarme_dashboard/devolutions/devolution_list.html'
-
 
 
 # Listando o tráfego diário
@@ -288,12 +268,20 @@ def traffic_list(request):
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
 
 
-
 # View para gerenciar suporte
 def support_index_view(request):
-    if request.method == 'GET':
-        context = {
-            'oi': 2,
-        }
-    return render(request, '', context)
-    
+    page = request.GET.get('page')
+    paginator = Paginator(Order.objects.filter(
+        financial_status='pending', updated_at__gte=datetime.now()-timedelta(days=7)), 2)
+    total = paginator.count
+
+    try:
+        orders_last_7_days = paginator.page(page)
+    except InvalidPage:
+        orders_last_7_days = paginator.page(1)
+
+    context = {
+        'orders': orders_last_7_days,
+        'total': total,
+    }
+    return render(request, 'provarme_dashboard/support/support_index.html', context)
