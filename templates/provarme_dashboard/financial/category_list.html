@@ -28,7 +28,7 @@
             {% for category in categories %}
               <tr>
                 <td>
-                  <a href="{% url 'dashboard:update_category' category.pk %}" class="link-datatable">{{ category.description }}</a>
+                  <a href="{% url 'dashboard:update_category' category.pk %}" class="link-datatable">{{ category.description|title }}</a>
                 </td>
                 <td>{{ category.get_type_categories_display }}</td>
                 <td class="font-weight-bold text-{{ category.is_active|text_color }}">{{ category.get_is_active_display }}</td>
