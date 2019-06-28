@@ -1,0 +1,50 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static dashboard_tags %}
+{% block title %}{% trans '[Drop Azul] -  Seus fornecedores' %}{% endblock %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Loja</li>
+{% endblock breadcrumb %}
+
+{% block main %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Tráfego</h6>
+      </div>
+      <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped dataTable">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Data</th>
+              <th>Investimento (R$)</th>
+              <th>Pedidos</th>
+              <th>Vendas</th>
+              <th>Lucro</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+              <tr>
+                <td><a href="{% url 'dashboard:update_traffic' object.pk %}" class="link-datatable">{{ object.product.name }}</a></td>
+                <td>{{ object.event_date }}</td>
+                <td>{{ object.investment }}</td>
+                <td>{{ object.order_quantity }}</td>
+                <td>-</td>
+                <td>-</td>
+                <td>
+                  <a href="{% url 'dashboard:update_traffic' object.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{% url 'dashboard:new_traffic' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Novo</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %}

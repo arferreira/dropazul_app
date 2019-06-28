@@ -23,6 +23,7 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
   <!-- Custom styles for this page -->
   <link href="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <link href="{% static 'provarme_dashboard/vendor/datepicker-gijgo/gijgo.min.css' %}" rel="stylesheet">
 
 </head>
 
@@ -139,7 +140,7 @@
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{% url 'dashboard:traffic' %}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Gerenciamento de Tráfego</span>
         </a>
@@ -220,7 +221,7 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  {% include "provarme_dashboard/modals/logout.html" %}
+  {% include "provarme_dashboard/components/modals/logout.html" %}
 
   <!-- Bootstrap core JavaScript-->
   <script src="{% static 'provarme_dashboard/vendor/jquery/jquery.min.js' %}"></script>
@@ -238,6 +239,7 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'provarme_dashboard/js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'provarme_dashboard/js/demo/chart-pie-demo.js' %}"></script>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
@@ -304,6 +306,10 @@
   <script src="{% static 'provarme_dashboard/vendor/datatables/jquery.dataTables.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/vendor/clipboard/jquery.clipboard.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/inputmask/jquery.mask.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/inputmask/jquery.maskMoney.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/datepicker-gijgo/gijgo.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/vendor/datepicker-gijgo/messages.pt-br.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/js/main.js' %}"></script>
 
   {% block javascript %}{% endblock javascript %}

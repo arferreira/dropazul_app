@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+<div class="form-group">
+  {% with class=class|default:"" %}
+    {% with autocomplete=autocomplete|default:"" %}
+
+      {% if not field.field.widget.input_type == 'hidden' and field.label %}
+        <label for="{{ field.id_for_label }}" class="text-bold">
+          {{ field.label }}{% if field.field.required %}*{% endif %}
+        </label>
+      {% endif %}
+
+      {% if field.errors %}
+        {% render_field field|add_class:class|add_class:'is-invalid' class="form-control" autocomplete=autocomplete %}
+      {% else %}
+        {% render_field field|add_class:class class="form-control" autocomplete=autocomplete %}
+      {% endif %}
+
+      {% include "provarme_dashboard/components/field-help.html" with field=field %}
+      {% include "provarme_dashboard/components/field-error.html" with field=field %}
+    {% endwith%}
+  {% endwith%}
+</div>
