@@ -33,24 +33,29 @@ def index_view(request):
 
     orders_today = Order.objects.filter(created_at__year=today.year, created_at__month=today.month, created_at__day=today.day)
     total_amount = 0
+    qt_orders = Order.objects.filter(created_at__year=today.year, created_at__month=today.month, created_at__day=today.day).count()
+    qt_paid = 0
+    qt_pending = 0
     total_paid = 0
     total_pending = 0
+    
     for order in orders_today:
         total_amount += order.total_price
         if order.financial_status == 'pending':
+            qt_pending += 1
             total_pending += order.total_price
         elif order.financial_status == 'paid':
+            qt_paid += 1
             total_paid += order.total_price
-
-        
+    
+    conversion_now = round((qt_paid * 100 / qt_orders), 2)
 
     # quantidade de clientes
     customers = Customer.objects.all()
     qt_customers = customers.count()
-    # total de boletos do dia
-    print(orders_today)
+    
     context = {
-        'qt_customers': qt_customers,
+        'conversion_now': conversion_now,
         'total_paid': total_paid,
         'total_pending': total_pending,
         'total_amount': total_amount,
