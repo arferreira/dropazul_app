@@ -2,118 +2,49 @@
 {% load i18n static %}
 {% block title %}{% trans '[Drop Azul] -  Seus clientes' %}{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active">Loja</li>
+  <li class="breadcrumb-item active">Loja</li>
 {% endblock breadcrumb %}
+
 {% block main %}
 
-
-  <!-- Conteúdo principal -->
-
-  <div class="row">
-<div class="col-lg-12">
-<div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Seus clientes</h6>
-                </div>
-                <div class="card-body">
-              {% if customers.count > 0 %}
-              <table id="customers" class="table table-bordered table-striped dataTable">
-                <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Telefone</th>
-                  <th>Valor</th>
-                  <th>Criado em</th>
-                  <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for customer in customers %}
-                <tr>
-                  
-                  <td>
-                    {{ customer.first_name }} {{ customer.last_name }}
-                  </td>
-                  <td>
-                    {% for address in customer.address.all %}
-                    
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Seus clientes</h6>
+      </div>
+      <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped dataTable">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Valor</th>
+              <th>Criado em</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for customer in customers %}
+              <tr>
+                <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                <td>
+                  {% for address in customer.address.all %}
                     {{ address.phone }}
-                    {% endfor %} 
-                  </td>
-                    <td style="">
-                     {{ customer.email }}
-                  </td>
-                  
-                  <td>{{ customer.created_at }}</td>
-                  <td>
-                      
-                      <a class="btn btn-success btn-xs" href="https://api.whatsapp.com/send?phone={{ customer.address.first.clean_phone }}&text=Oi%20{{ customer.first_name }}%2C%20tudo%20bem%3F" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                  {% endfor %}
+                </td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.created_at }}</td>
+                <td>
+                  <a class="btn btn-success btn-xs" href="https://api.whatsapp.com/send?phone={{ customer.address.first.clean_phone }}&text=Oi%20{{ customer.first_name }}%2C%20tudo%20bem%3F" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-                  </td>
-                </tr>
-                {% endfor %}
-
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Cliente</th>
-                  <th>Telefone</th>
-                  <th>Email</th>
-                  <th>Criado em</th>
-                  <th>Ações</th>
-                </tr>
-                </tfoot>
-              </table>
-                {% else %}
-
-                    <center><h4>Sua Loja ainda não recebeu clientes!</h4></center>
-
-                {% endif %}
-
-
-
-            </div>
-            <!-- /.box-body -->
-              </div>
-          </div>
-          </div>
-
-    <!-- /.content -->
 {% endblock main %}
-{% block javascript %}
-<script type="text/javascript">
-$(function () {
-    $('#customers').DataTable( {
-         "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
-            }
-    } );
-
-
-    $("#customers").on("click", ".delete-customer", function () {
-				var url = $(this).attr("data-url");
-				deleteQuestion(url);
-			});
-
-			function deleteQuestion(url) {
-				swal({
-					title: "Tem certeza?",
-					text: "Você irá excluir esse aluno e tudo relacionado a ele será apagado!",
-					type: "warning",
-					showCancelButton: true,
-					cancelButtonText: "Cancelar",
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Sim, excluir!",
-					closeOnConfirm: false
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						window.location.href = url;
-					}
-				});
-	};
-
-
-})
-</script>
-{% endblock javascript %}

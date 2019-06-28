@@ -22,9 +22,7 @@
   <!-- Custom styles for this page -->
   <link href="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
-
 </head>
-
 
 
 <body id="page-top">
@@ -270,7 +268,7 @@
   </div>
 
 
- <!-- Bootstrap core JavaScript-->
+  <!-- Bootstrap core JavaScript-->
   <script src="{% static 'provarme_dashboard/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
@@ -288,70 +286,73 @@
   <script src="{% static 'provarme_dashboard/js/demo/chart-pie-demo.js' %}"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <!--<script src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>-->
 
   <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142851798-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142851798-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      gtag('config', 'UA-142851798-1');
-    </script>
+    gtag('config', 'UA-142851798-1');
+  </script>
 
-<!--Mensagens e Notificações-->
-{% if messages %}
-			<script>
-				toastr.options = {
-				  "closeButton": false,
-				  "debug": false,
-				  "newestOnTop": false,
-				  "progressBar": false,
-				  "positionClass": "toast-bottom-full-width",
-				  "preventDuplicates": false,
-				  "onclick": null,
-				  "showDuration": "300",
-				  "hideDuration": "1000",
-				  "timeOut": "5000",
-				  "extendedTimeOut": "1000",
-				  "showEasing": "swing",
-				  "hideEasing": "linear",
-				  "showMethod": "fadeIn",
-				  "hideMethod": "fadeOut"
-				}
-			</script>
-			{% for message in messages %}
-                {% if message.tags == 'success' %}
-                    <script>toastr.success('','{{ message }}');</script>
-                {% elif message.tags == 'warning' %}
-                    <script>toastr.warning('','{{ message }}');</script>
-                {% elif message.tags == 'error' %}
-                    <script>toastr.error('','{{ message }}');</script>
-                {% elif message.tags == 'info' %}
-                    <script>toastr.info('','{{ message }}');</script>
-                {% endif %}
-            {% endfor %}
-		{% endif %}
-    <script>
-  window.intercomSettings = {
-    app_id: "ai7dmi8v"
-  };
-</script>
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ai7dmi8v';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
- window.intercomSettings = {
-  app_id: "ai7dmi8v",
-  name: "{{ request.user.name|escapejs }}", // Full name
-  email: "{{ request.user.email|escapejs }}", // Email address
-  created_at: "{{ request.user.date_joined|date:"U" }}" // Signup Date
-};
-</script>
+  <!--Mensagens e Notificações-->
+	<script>
+		toastr.options = {
+		  "closeButton": false,
+		  "debug": false,
+		  "newestOnTop": false,
+		  "progressBar": false,
+		  "positionClass": "toast-bottom-full-width",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+	</script>
+
+	{% for message in messages %}
+    {% if message.tags == 'success' %}
+      <script>toastr.success('','{{ message }}');</script>
+    {% elif message.tags == 'warning' %}
+      <script>toastr.warning('','{{ message }}');</script>
+    {% elif message.tags == 'error' %}
+      <script>toastr.error('','{{ message }}');</script>
+    {% elif message.tags == 'info' %}
+      <script>toastr.info('','{{ message }}');</script>
+    {% endif %}
+  {% endfor %}
+
+  <script>
+    window.intercomSettings = {
+      app_id: "ai7dmi8v"
+    };
+  </script>
+
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/ai7dmi8v';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+     window.intercomSettings = {
+      app_id: "ai7dmi8v",
+      name: "{{ request.user.name|escapejs }}", // Full name
+      email: "{{ request.user.email|escapejs }}", // Email address
+      created_at: "{{ request.user.date_joined|date:"U" }}" // Signup Date
+    };
+  </script>
+
   <!-- Page level plugins -->
   <script src="{% static 'provarme_dashboard/vendor/datatables/jquery.dataTables.min.js' %}"></script>
   <script src="{% static 'provarme_dashboard/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-   
-{% block javascript %}
-{% endblock javascript %}
+  <script src="{% static 'provarme_dashboard/vendor/clipboard/jquery.clipboard.min.js' %}"></script>
+  <script src="{% static 'provarme_dashboard/js/main.js' %}"></script>
+
+  {% block javascript %}{% endblock javascript %}
 
 </body>
 

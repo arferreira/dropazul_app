@@ -25,7 +25,7 @@ class Customer(models.Model):
     email = models.EmailField('Email', max_length=255, null=True, blank=True)
     first_name = models.CharField('Nome', null=True, blank=True, max_length=100)
     last_name = models.CharField('Sobrenome', null=True, blank=True, max_length=100)
-    
+
 
     body = JSONField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
@@ -89,7 +89,6 @@ class CustomerAddress(models.Model):
     class Meta:
         verbose_name = 'Endereço do Cliente'
         verbose_name_plural = 'Endereços dos Clientes'
-
 
     def clean_phone(self):
         phone = self.phone

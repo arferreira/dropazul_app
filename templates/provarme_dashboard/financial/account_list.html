@@ -2,113 +2,44 @@
 {% load i18n static %}
 {% block title %}{% trans '[Drop Azul] -  Suas Contas' %}{% endblock %}
 {% block breadcrumb %}
-<li class="breadcrumb-item active">Produtos</li>
+  <li class="breadcrumb-item active">Produtos</li>
 {% endblock breadcrumb %}
+
 {% block main %}
 
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Contas</h6>
+      </div>
+      <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped dataTable">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Saldo</th>
+              <th>Data do Saldo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for account in accounts %}
+              <tr>
+                <td><a href="{% url 'dashboard:update_account' account.pk %}" class="link-datatable">{{ account.name }}</a></td>
+                <td>R$ {{ account.balance }}</td>
+                <td>{{ account.balance_date }}</td>
+                <td>
+                  <a href="{% url 'dashboard:update_account' account.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{% url 'dashboard:new_account' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <!-- Conteúdo principal -->
-
-  <div class="row">
-<div class="col-lg-12">
-<div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Contas</h6>
-                </div>
-                <div class="card-body">
-              {% if accounts.count > 0 %}
-              <table id="accounts" class="table table-bordered table-striped dataTable">
-                <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Saldo</th>
-                  <th>Data do Saldo</th>
-                  <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for account in accounts %}
-                <tr>
-                  <td><a href="{% url 'dashboard:update_account' account.pk %}" class="link-datatable">{{ account.name }}</a></td>
-                  <td>
-                   R$ {{ account.balance }}
-                    
-                  </td>
-                  <td style="">
-                    {{ account.balance_date }}
-                  </td>
-                  <td>
-                      
-                      <a href="{% url 'dashboard:update_account' account.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
-
-                  </td>
-                </tr>
-                {% endfor %}
-
-                </tbody>
-                <tfoot>
-                <tr>
-                 <th>Nome</th>
-                  <th>Saldo</th>
-                  <th>Data do Saldo</th>
-                  <th>Ações</th>
-                </tr>
-                </tfoot>
-              </table>
-                {% else %}
-
-                    <center><h4>Você ainda não possui contas cadastradas no sistema!</h4></center>
-
-                {% endif %}
-
-
-              <br><br>
-
-            <a href="{% url 'dashboard:new_account' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
-
-
-            </div>
-            <!-- /.box-body -->
-              </div>
-          </div>
-          </div>
-
-    <!-- /.content -->
 {% endblock main %}
-{% block javascript %}
-<script type="text/javascript">
-$(function () {
-    $('#accounts').DataTable( {
-         "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
-            }
-    } );
-
-
-    $("#customers").on("click", ".delete-customer", function () {
-				var url = $(this).attr("data-url");
-				deleteQuestion(url);
-			});
-
-			function deleteQuestion(url) {
-				swal({
-					title: "Tem certeza?",
-					text: "Você irá excluir esse aluno e tudo relacionado a ele será apagado!",
-					type: "warning",
-					showCancelButton: true,
-					cancelButtonText: "Cancelar",
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Sim, excluir!",
-					closeOnConfirm: false
-				},
-				function(isConfirm){
-					if (isConfirm) {
-						window.location.href = url;
-					}
-				});
-	};
-
-
-})
-</script>
-{% endblock javascript %}
