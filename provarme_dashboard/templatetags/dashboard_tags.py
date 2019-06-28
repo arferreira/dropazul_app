@@ -12,8 +12,14 @@ def text_color(value):
 
 @register.filter('money_color')
 def money_color(value):
-    return 'success' if value > Decimal('0.00') else 'danger'
+    color = ''
 
+    if value > Decimal('0.00'):
+        color = 'success'
+    elif value < Decimal('0.00'):
+        color = 'danger'
+
+    return color
 
 
 @register.filter('clean_phone')

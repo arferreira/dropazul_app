@@ -1,0 +1,58 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static dashboard_tags %}
+{% block title %}{% trans '[Drop Azul] -  Fluxo de Caixa' %}{% endblock %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Loja</li>
+{% endblock breadcrumb %}
+
+{% block main %}
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Fluxo de Caixa</h6>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Compras (R$)</th>
+              <th>Vendas (R$)</th>
+              <th>Tráfego (R$)</th>
+              <th>Taxas (R$)</th>
+              <th>Lucro (R$)</th>
+              <th>Lucro (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for object in object_list %}
+              <tr>
+                <td>{{ object.date|date:'d/m/Y' }}</td>
+                <td class="text-danger">{{ object.shopping }}</td>
+                <td class="text-primary">{{ object.sales }}</td>
+                <td class="text-danger">{{ object.traffic }}</td>
+                <td class="text-danger">{{ object.tax }}</td>
+                <td class="font-weight-bold text-{{ object.profit_real|money_color }}">{{ object.profit_real }}</td>
+                <td class="font-weight-bold text-{{ object.profit_percentage|money_color }}">{{ object.profit_percentage }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <td class="text-right font-weight-bold">Totais:</td>
+            <td class="text-danger">{{ total_shopping }}</td>
+            <td class="text-primary">{{ total_sales }}</td>
+            <td class="text-danger">{{ total_traffic }}</td>
+            <td class="text-danger">{{ total_tax }}</td>
+            <td class="font-weight-bold text-{{ total_profit_real|money_color }}">{{ total_profit_real }}</td>
+            {#<td class="font-weight-bold text-{{ total_profit_percentage|money_color }}">{{ total_profit_percentage }}</td>#}
+            <td></td>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock main %}

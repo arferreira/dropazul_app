@@ -11,6 +11,7 @@ from provarme_dashboard.setups.views import SetupListView, SetupCreateView, Setu
 from provarme_dashboard.providers.views import ProviderListView, ProviderCreateView, ProviderUpdateView
 from provarme_dashboard.products.views import ProductListView, ProductCreateView, ProductUpdateView, product_estimate
 from provarme_dashboard.traffic.views import TrafficListView, TrafficCreateView, TrafficUpdateView
+from provarme_dashboard.cash_flow.views import CashFlowListView
 
 
 app_name = 'provarme_dashboard'
@@ -38,7 +39,7 @@ urlpatterns = [
     path('contas-a-pagar/', ExpenseListView.as_view(), name='expenses'),
     path('contas-a-pagar/nova', ExpenseCreateView.as_view(), name='new_expense'),
     path('contas-a-pagar/editar/<int:pk>', ExpenseUpdateView.as_view(), name='update_expense'),
-    #path('fluxo-de-caixa/', CashFlowListView.as_view(), name='cash-flow'),
+    path('fluxo-de-caixa/', CashFlowListView.as_view(), name='cash-flow'),
 
     # Setups
     path('setup/', SetupListView.as_view(), name='setups'),
