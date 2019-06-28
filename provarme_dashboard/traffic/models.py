@@ -18,7 +18,7 @@ class Traffic(models.Model):
 
     @property
     def profit(self):
-        return self.sales - (self.product.cost * self.order_quantity) - self.investment
+        return self.sales - (self.product.final_cost * self.order_quantity) - self.investment
 
     class Meta:
         verbose_name = 'Tráfego diário'

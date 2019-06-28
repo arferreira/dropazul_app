@@ -1,5 +1,6 @@
 from django.db import models
 
+from provarme_dashboard.setups.models import Setup
 from provarme_dashboard.providers.models.provider import Provider
 
 
@@ -24,6 +25,14 @@ class Product(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Modificado em')
+
+    @property
+    def final_cost(self):
+        setup = Setup.objects.first()
+
+        return round(((self.cost * setup.tx_iof) +
+                ((self.price * setup.tx_gateway) / 100) +
+                ((self.price * setup.tx_tax) / 100) + self.cost), 2)
 
     class Meta:
         verbose_name = 'Produto'
