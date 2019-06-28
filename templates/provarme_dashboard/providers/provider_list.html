@@ -36,6 +36,7 @@
                 <td>{{ provider.updated_at }}</td>
                 <td class="font-weight-bold text-{{ provider.status|text_color }}">{{ provider.get_status_display }}</td>
                 <td>
+                    <a class="btn btn-success btn-xs" href="https://api.whatsapp.com/send?phone={{ provider.whatsapp }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
                   <a href="{{ provider.link }}" target="_blank" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
                   <a href="{% url 'dashboard:update_provider' provider.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
                 </td>

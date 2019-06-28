@@ -2,9 +2,7 @@
 {% load i18n static %}
 {% load widget_tweaks %}
 {% block title %}{% trans '[Drop Azul] -  Nova Fornecedor' %}{% endblock %}
-{% block breadcrumb %}
-<li class="breadcrumb-item active">Novo Fornecedor</li>
-{% endblock breadcrumb %}
+
 {% block main %}
   <!-- Conteúdo principal -->
   <div class="row">
@@ -17,27 +15,16 @@
 
                     <form class="form" action="" method="post">
                         {% csrf_token %}
-
-                            {% if form.errors %}
-                                    <div class="alert alert-danger">
-                                            <strong>Ocorreu um erro no preenchimento do formulário!</strong>
-                                            <br>
-                                            <strong>Fique atento aos itens obrigatórios!</strong>
-                                    </div>
-                            {% endif %}
+                        {% include "provarme_dashboard/components/form-error.html" with form=form %}
                             <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                          <label for="">Nome:</label>
-                                          {{ form.name|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.name }}</strong>
+                                  {% include "provarme_dashboard/components/field.html" with field=form.name %}
                               </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                          <label for="">Local:</label>
-                                          {{ form.local|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.local }}</strong>
+                                    {% include "provarme_dashboard/components/field.html" with field=form.local %}
                                     </div>
                             </div>
                             </div>
@@ -45,16 +32,12 @@
                         <div class="row">
                             <div class="col-md-6">
                               <div class="form-group">
-                                          <label for="">Link para o fornecedor (Aliexpress):</label>
-                                          {{ form.link|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.link }}</strong>
+                                  {% include "provarme_dashboard/components/field.html" with field=form.link %}
                               </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                          <label for="">Whatsapp:</label>
-                                          {{ form.whatsapp|add_class:'form-control' }}
-                                          <strong style="color:red;">{{ form.errors.whatsapp }}</strong>
+                                    {% include "provarme_dashboard/components/field.html" with field=form.whatsapp %}
                                     </div>
                             </div>
                             </div>
@@ -78,17 +61,3 @@
 
     <!-- /.content -->
 {% endblock main %}
-
-<!-- Bloco de scripts js -->
-{% block javascript %}
-<script>
-    // mascaras
-    $("#cpf").mask("999.999.999-99");
-    $("#cnpj").mask("99.999.999/9999-99");
-    $("#id_zipcode").mask("99999-999");
-    $("#phone_number").mask("(99) 99999-9999");
-
-
-
-</script>
-{% endblock javascript %}

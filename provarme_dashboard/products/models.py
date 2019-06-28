@@ -2,7 +2,7 @@ from django.db import models
 
 from provarme_dashboard.core.models import AbstractBaseModel
 from provarme_dashboard.setups.models import Setup
-from provarme_dashboard.providers.models.provider import Provider
+from provarme_dashboard.providers.models import Provider
 
 
 class Product(AbstractBaseModel):

@@ -8,6 +8,8 @@ from provarme_dashboard.views import *
 from provarme_dashboard.financial.views import *
 from provarme_dashboard.store.views import StoreListView, StoreCreateView, StoreUpdateView
 from provarme_dashboard.setups.views import SetupListView, SetupCreateView, SetupUpdateView
+from provarme_dashboard.providers.views import ProviderListView, ProviderCreateView, ProviderUpdateView
+from provarme_dashboard.products.views import ProductListView, ProductCreateView, ProductUpdateView, product_estimate
 from provarme_dashboard.traffic.views import TrafficListView, TrafficCreateView, TrafficUpdateView
 
 

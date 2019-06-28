@@ -29,8 +29,8 @@ from tenant_schemas.utils import schema_exists, schema_context, connection
 # Importação Modelos
 
 
-from provarme_dashboard.providers.models import Provider
-from provarme_dashboard.products.models import Product
+
+
 from provarme_dashboard.traffic.models import Traffic
 from provarme_dashboard.order.models import Order
 from provarme_dashboard.products.models import Devolution
@@ -57,77 +57,12 @@ class CustomerListView(LoginRequiredMixin, ListView):
 
 
 
-# Listagem de fornecedores de cada tenant
-class ProviderListView(LoginRequiredMixin, ListView):
-    model = Provider
-    context_object_name = 'providers'
-    template_name = 'provarme_dashboard/providers/provider_list.html'
 
 
-# Criando um setup
-class ProviderCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Provider
-    fields = '__all__'
-    template_name = 'provarme_dashboard/providers/provider_form.html'
-    success_url = reverse_lazy('dashboard:providers')
-    success_message = "Fornecedor foi criado com sucesso!"
 
 
-# Editando um setup
-class ProviderUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Provider
-    fields = '__all__'
-    template_name = 'provarme_dashboard/providers/provider_form.html'
-    success_url = reverse_lazy('dashboard:providers')
-    success_message = "Fornecedor foi atualizado com sucesso!"
 
 
-# Listagem de produtos de cada tenant
-class ProductListView(LoginRequiredMixin, ListView):
-    model = Product
-    context_object_name = 'products'
-    template_name = 'provarme_dashboard/products/product_list.html'
-
-
-# Criando um product
-class ProductCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Product
-    fields = '__all__'
-    template_name = 'provarme_dashboard/products/product_form.html'
-    success_url = reverse_lazy('dashboard:products')
-    success_message = "Produto foi criado com sucesso!"
-
-
-# Editando um product
-class ProductUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Product
-    fields = '__all__'
-    template_name = 'provarme_dashboard/products/product_form.html'
-    success_url = reverse_lazy('dashboard:products')
-    success_message = "Produto foi atualizado com sucesso!"
-
-
-# Estimativa de lucro de um produto
-def product_estimate(request, pk):
-    setup = Setup.objects.all().first()
-    product = Product.objects.get(pk=pk)
-
-    cost_fix = product.final_cost
-    
-    cost_marketing = round(product.price * product.marketing / 100, 2)
-    profit = round(product.price - cost_fix - cost_marketing, 2)
-    profit_percent = round(profit / product.price * 100, 2)
-
-    context = {
-        'markup': product.markup,
-        'price': product.price,
-        'cost_fix': cost_fix,
-        'cost_marketing': cost_marketing,
-        'profit': profit,
-        'profit_percent': profit_percent,
-    }
-
-    return render(request, 'provarme_dashboard/products/estimate.html', {'product': context})
 
 
 # Listagem de trocas e devoluções de cada tenant
