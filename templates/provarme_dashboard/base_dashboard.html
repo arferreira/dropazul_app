@@ -79,6 +79,8 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
+
+
       <!-- Heading -->
       <div class="sidebar-heading">
         Gerencial
@@ -86,7 +88,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-coins"></i>
           <span>Financeiro</span>
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
@@ -99,36 +101,22 @@
         </div>
       </li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard:providers' %}">
-          <i class="fas fa-fw fa-hands-helping"></i>
-          <span>Fornecedores</span>
-        </a>
-      </li>
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Operacional</span>
+          </a>
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="{% url 'dashboard:providers' %}}"><i class="fas fa-fw fa-hands-helping"></i> Fornecedores</a>
+              <a class="collapse-item" href="{% url 'dashboard:products' %}"><i class="fas fa-fw fa-cart-plus"></i> Produtos</a>
+              <a class="collapse-item" href="{% url 'dashboard:orders' %}"><i class="fas fa-cash-register"></i> Vendas</a>
+              <a class="collapse-item" href="{% url 'dashboard:customers' %}"><i class="fas fa-user-check"></i> Clientes</a>
+            </div>
+          </div>
+        </li>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard:products' %}">
-          <i class="fas fa-fw fa-cart-plus"></i>
-          <span>Produtos</span>
-        </a>
-      </li>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard:orders' %}">
-          <i class="fas fa-cash-register"></i>
-          <span>Vendas</span>
-        </a>
-      </li>
-        <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard:customers' %}">
-          <i class="fas fa-user-check"></i>
-          <span>Clientes</span>
-        </a>
-      </li>
+      
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
