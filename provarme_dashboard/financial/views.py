@@ -73,6 +73,8 @@ class AccountUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "Conta %(name)s foi atualizada com sucesso!"
 
 
+######################## Expense Input ########################
+
 class ExpenseInputListView(LoginRequiredMixin, ListView):
 
     model = Expense
@@ -84,38 +86,54 @@ class ExpenseInputListView(LoginRequiredMixin, ListView):
         context = super(ExpenseInputListView, self).get_context_data()
         context['create_url'] = reverse_lazy('dashboard:new_expense_input')
         context['update_input'] = True
+        context['title'] = 'Receitas'
 
         return context
 
 
-class ExpenseInputBaseView(LoginRequiredMixin, SuccessMessageMixin):
+class ExpenseInputCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     model = Expense
+    form_class = ExpenseForm
     template_name = 'provarme_dashboard/financial/expense_form.html'
     success_url = reverse_lazy('dashboard:expenses_input')
+    success_message = "Receita %(name)s foi criada com sucesso!"
 
-    def get_context_data(self):
-        context = super(ExpenseInputBaseView, self).get_context_data()
+    def get_context_data(self, *args, **kwargs):
+        context = super(ExpenseInputCreateView, self).get_context_data(*args, **kwargs)
         context['success_url'] = self.success_url
-        context['title'] = 'Entrada'
+        context['title'] = 'Receita'
 
         return context
 
-
-class ExpenseInputCreateView(ExpenseInputBaseView, CreateView):
-
-    success_message = "Receita %(name)s foi criada com sucesso!"
-
     def get_form(self):
-        return ExpenseForm(category_type=Category.INPUT)
+        if self.request.method == 'POST':
+            return self.form_class(category_type=Category.INPUT, data=self.request.POST)
+        return self.form_class(category_type=Category.INPUT)
 
 
-class ExpenseInputUpdateView(ExpenseInputBaseView, UpdateView):
+class ExpenseInputUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
+    model = Expense
+    form_class = ExpenseForm
+    template_name = 'provarme_dashboard/financial/expense_form.html'
+    success_url = reverse_lazy('dashboard:expenses_input')
     success_message = "Receita %(name)s foi atualizada com sucesso!"
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ExpenseInputUpdateView, self).get_context_data(*args, **kwargs)
+        context['success_url'] = self.success_url
+        context['title'] = 'Receita'
+
+        return context
+
     def get_form(self):
-        return ExpenseForm(instance=self.get_object(), category_type=Category.INPUT)
+        if self.request.method == 'POST':
+            return self.form_class(instance=self.get_object(), category_type=Category.INPUT, data=self.request.POST)
+        return self.form_class(instance=self.get_object(), category_type=Category.INPUT)
+
+
+######################## Expense Exit ########################
 
 
 class ExpenseExitListView(LoginRequiredMixin, ListView):
@@ -129,35 +147,48 @@ class ExpenseExitListView(LoginRequiredMixin, ListView):
         context = super(ExpenseExitListView, self).get_context_data()
         context['create_url'] = reverse_lazy('dashboard:new_expense_exit')
         context['update_input'] = False
+        context['title'] = 'Despesas'
 
         return context
 
 
-class ExpenseExitBaseView(LoginRequiredMixin, SuccessMessageMixin):
+class ExpenseExitCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     model = Expense
+    form_class = ExpenseForm
     template_name = 'provarme_dashboard/financial/expense_form.html'
     success_url = reverse_lazy('dashboard:expenses_exit')
+    success_message = "Despesa %(name)s foi criada com sucesso!"
 
-    def get_context_data(self):
-        context = super(ExpenseExitBaseView, self).get_context_data()
+    def get_context_data(self, *args, **kwargs):
+        context = super(ExpenseExitCreateView, self).get_context_data(*args, **kwargs)
+        context['success_url'] = self.success_url
+        context['title'] = 'Despesa'
+
+        return context
+
+    def get_form(self):
+        if self.request.method == 'POST':
+            return ExpenseForm(category_type=Category.EXIT, data=self.request.POST)
+        return ExpenseForm(category_type=Category.EXIT)
+
+
+class ExpenseExitUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+
+    model = Expense
+    form_class = ExpenseForm
+    template_name = 'provarme_dashboard/financial/expense_form.html'
+    success_url = reverse_lazy('dashboard:expenses_exit')
+    success_message = "Despesa %(name)s foi atualizada com sucesso!"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ExpenseExitUpdateView, self).get_context_data(*args, **kwargs)
         context['success_url'] = self.success_url
         context['title'] = 'Saída'
 
         return context
 
-
-class ExpenseExitCreateView(ExpenseExitBaseView, CreateView):
-
-    success_message = "Despesa %(name)s foi criada com sucesso!"
-
     def get_form(self):
-        return ExpenseForm(category_type=Category.EXIT)
-
-
-class ExpenseExitUpdateView(ExpenseExitBaseView, UpdateView):
-
-    success_message = "Despesa %(name)s foi atualizada com sucesso!"
-
-    def get_form(self):
+        if self.request.method == 'POST':
+            return ExpenseForm(instance=self.get_object(), category_type=Category.EXIT, data=self.request.POST)
         return ExpenseForm(instance=self.get_object(), category_type=Category.EXIT)
