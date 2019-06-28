@@ -1,7 +1,9 @@
 from django.db import models
 
+from provarme_dashboard.core.models import AbstractBaseModel
 
-class Setup(models.Model):
+
+class Setup(AbstractBaseModel):
 
     STATUS = (
         (True, 'Ativo'),
@@ -15,9 +17,6 @@ class Setup(models.Model):
     tx_iof = models.DecimalField('IOF', max_digits=3, decimal_places=2)
     tx_cashback = models.DecimalField('Cashback', max_digits=3, decimal_places=2)
     status = models.BooleanField(verbose_name='Situação', default=True, choices=STATUS)
-
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Modificado em')
 
     class Meta:
         verbose_name = 'Configuração'

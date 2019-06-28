@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from provarme_dashboard.customer.models import Customer
 from provarme_dashboard.order.models import Order
 from provarme_webhooks.tests.fixtures import ORDER_BODY
-from provarme.tests.helpers import BaseTenantTestCase as TestCase
+from provarme_dashboard.core.tests.helpers import BaseTenantTestCase as TestCase
 
 
 class OrderCreationTestCase(TestCase):

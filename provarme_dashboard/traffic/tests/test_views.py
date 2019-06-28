@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 
 from provarme_dashboard.traffic.models import Traffic
 from provarme_dashboard.products.models import Product
-from provarme.tests.helpers import BaseTenantTestCase as TestCase
+from provarme_dashboard.core.tests.helpers import BaseTenantTestCase as TestCase
 
 
 class TrafficCreateViewTestCase(TestCase):

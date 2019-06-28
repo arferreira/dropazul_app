@@ -1,7 +1,8 @@
 from django.db import models
+from provarme_dashboard.core.models import AbstractBaseModel
 
 
-class Provider(models.Model):
+class Provider(AbstractBaseModel):
 
     STATUS_STORE = (
         (True, 'Ativo'),
@@ -13,9 +14,6 @@ class Provider(models.Model):
     link = models.CharField('Link da Loja', max_length=255)
     whatsapp = models.CharField('Número de Whatsapp', max_length=255)
     status = models.BooleanField(verbose_name='Situação', default=True, choices=STATUS_STORE)
-
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
-    updated_at = models.DateTimeField(auto_now=True, verbose_name='Modificado em')
 
     class Meta:
         verbose_name = 'Fornecedor'

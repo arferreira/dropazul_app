@@ -38,7 +38,7 @@ def index_view(request):
     qt_pending = 0
     total_paid = 0
     total_pending = 0
-    
+
     for order in orders_today:
         total_amount += order.total_price
         if order.financial_status == 'pending':
@@ -47,13 +47,16 @@ def index_view(request):
         elif order.financial_status == 'paid':
             qt_paid += 1
             total_paid += order.total_price
-    
-    conversion_now = round((qt_paid * 100 / qt_orders), 2)
+
+    try:
+        conversion_now = round((qt_paid * 100 / qt_orders), 2)
+    except:
+        conversion_now = 0
 
     # quantidade de clientes
     customers = Customer.objects.all()
     qt_customers = customers.count()
-    
+
     context = {
         'conversion_now': conversion_now,
         'total_paid': total_paid,
