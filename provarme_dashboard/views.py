@@ -269,11 +269,6 @@ def traffic_list(request):
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
 
 
-# class CashFlowListView(LoginRequiredMixin, ListView):
-#
-#     model = CashFlow
-#     template_name = 'provarme_dashboard/cash_flow/cash_flow_list.html'
-
 # View para gerenciar suporte
 def support_index_view(request):
     page = request.GET.get('page')
