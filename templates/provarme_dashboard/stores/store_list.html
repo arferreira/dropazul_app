@@ -43,7 +43,7 @@
           </tbody>
         </table>
 
-        {% if stores.count <= 0 %}
+        {% if not stores %}
           <a href="{% url 'dashboard:new_store' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
         {% endif %}
 
