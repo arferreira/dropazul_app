@@ -39,14 +39,14 @@ urlpatterns = [
     path('conta/editar/<int:pk>', AccountUpdateView.as_view(), name='update_account'),
 
     # Entradas
-    path('financeiro/entrada/', ExpenseInputListView.as_view(), name='expenses_input'),
-    path('financeiro/entrada/nova', ExpenseInputCreateView.as_view(), name='new_expense_input'),
-    path('financeiro/entrada/editar/<int:pk>', ExpenseInputUpdateView.as_view(), name='update_expense_input'),
+    path('financeiro/receitas/', ExpenseInputListView.as_view(), name='expenses_input'),
+    path('financeiro/receita/nova', ExpenseInputCreateView.as_view(), name='new_expense_input'),
+    path('financeiro/receita/editar/<int:pk>', ExpenseInputUpdateView.as_view(), name='update_expense_input'),
 
     # Saídas
-    path('financeiro/saida/', ExpenseExitListView.as_view(), name='expenses_exit'),
-    path('financeiro/saida/nova', ExpenseExitCreateView.as_view(), name='new_expense_exit'),
-    path('financeiro/saida/editar/<int:pk>', ExpenseExitUpdateView.as_view(), name='update_expense_exit'),
+    path('financeiro/despesas/', ExpenseExitListView.as_view(), name='expenses_exit'),
+    path('financeiro/despesa/nova', ExpenseExitCreateView.as_view(), name='new_expense_exit'),
+    path('financeiro/despesa/editar/<int:pk>', ExpenseExitUpdateView.as_view(), name='update_expense_exit'),
 
     path('financeiro/fluxo-de-caixa/', CashFlowListView.as_view(), name='cash-flow'),
 
