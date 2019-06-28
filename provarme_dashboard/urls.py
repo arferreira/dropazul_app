@@ -5,7 +5,10 @@ from django.urls import path, include
 from provarme_dashboard.dashboard.views import index_view as dashboard_index
 
 from provarme_dashboard.views import *
-from provarme_dashboard.financial.views import *
+from provarme_dashboard.financial.views import (CategoryListView, CategoryCreateView, CategoryUpdateView,
+                                                AccountListView, AccountCreateView, AccountUpdateView,
+                                                ExpenseInputListView, ExpenseInputCreateView, ExpenseInputUpdateView,
+                                                ExpenseExitListView, ExpenseExitCreateView, ExpenseExitUpdateView)
 from provarme_dashboard.store.views import StoreListView, StoreCreateView, StoreUpdateView
 from provarme_dashboard.setups.views import SetupListView, SetupCreateView, SetupUpdateView
 from provarme_dashboard.providers.views import ProviderListView, ProviderCreateView, ProviderUpdateView
@@ -35,11 +38,17 @@ urlpatterns = [
     path('conta/nova', AccountCreateView.as_view(), name='new_account'),
     path('conta/editar/<int:pk>', AccountUpdateView.as_view(), name='update_account'),
 
-    # Contas a Pagar
-    path('contas-a-pagar/', ExpenseListView.as_view(), name='expenses'),
-    path('contas-a-pagar/nova', ExpenseCreateView.as_view(), name='new_expense'),
-    path('contas-a-pagar/editar/<int:pk>', ExpenseUpdateView.as_view(), name='update_expense'),
-    path('fluxo-de-caixa/', CashFlowListView.as_view(), name='cash-flow'),
+    # Entradas
+    path('financeiro/entrada/', ExpenseInputListView.as_view(), name='expenses_input'),
+    path('financeiro/entrada/nova', ExpenseInputCreateView.as_view(), name='new_expense_input'),
+    path('financeiro/entrada/editar/<int:pk>', ExpenseInputUpdateView.as_view(), name='update_expense_input'),
+
+    # Saídas
+    path('financeiro/saida/', ExpenseExitListView.as_view(), name='expenses_exit'),
+    path('financeiro/saida/nova', ExpenseExitCreateView.as_view(), name='new_expense_exit'),
+    path('financeiro/saida/editar/<int:pk>', ExpenseExitUpdateView.as_view(), name='update_expense_exit'),
+
+    path('financeiro/fluxo-de-caixa/', CashFlowListView.as_view(), name='cash-flow'),
 
     # Setups
     path('setup/', SetupListView.as_view(), name='setups'),

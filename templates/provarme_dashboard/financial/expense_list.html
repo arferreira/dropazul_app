@@ -26,17 +26,27 @@
           <tbody>
             {% for expense in expenses %}
               <tr>
-                <td><a href="{% url 'dashboard:update_expense' expense.pk %}" class="link-datatable">{{ expense.name }}</a></td>
+                <td>
+                  {% if update_input %}
+                    <a href="{% url 'dashboard:update_expense_input' expense.pk %}" class="link-datatable">{{ expense.name }}</a>
+                  {% else %}
+                    <a href="{% url 'dashboard:update_expense_exit' expense.pk %}" class="link-datatable">{{ expense.name }}</a>
+                  {% endif %}
+                </td>
                 <td>{{ expense.maturity }}</td>
                 <td class="font-weight-bold text-{{ expense.settle|text_color }}">{{ expense.get_settle_display }}</td>
                 <td>
-                  <a href="{% url 'dashboard:update_expense' expense.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                  {% if update_input %}
+                    <a href="{% url 'dashboard:update_expense_input' expense.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                  {% else %}
+                    <a href="{% url 'dashboard:update_expense_exit' expense.pk %}" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
-        <a href="{% url 'dashboard:new_expense' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
+        <a href="{{ create_url }}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
       </div>
     </div>
  </div>

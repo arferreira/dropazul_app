@@ -95,61 +95,53 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{% url 'dashboard:categories' %}"><i class="fas fa-list-ol"></i> Categorias</a>
             <a class="collapse-item" href="{% url 'dashboard:accounts' %}"><i class="fas fa-university"></i> Contas Bancárias</a>
-            <a class="collapse-item" href="{% url 'dashboard:expenses' %}"><i class="fas fa-folder-minus"></i> Despesas</a>
-            <a class="collapse-item" href="{% url 'dashboard:expenses' %}"><i class="fas fa-folder-plus"></i> Receitas</a>
+            <a class="collapse-item" href="{% url 'dashboard:expenses_exit' %}"><i class="fas fa-folder-minus"></i> Despesas</a>
+            <a class="collapse-item" href="{% url 'dashboard:expenses_input' %}"><i class="fas fa-folder-plus"></i> Receitas</a>
             <a class="collapse-item" href="{% url 'dashboard:cash-flow' %}"><i class="fas fa-funnel-dollar"></i> Fluxo de Caixa</a>
           </div>
         </div>
       </li>
 
       <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-              <i class="fas fa-store"></i>
-            <span>Operacional</span>
-          </a>
-          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="{% url 'dashboard:providers' %}}"><i class="fas fa-fw fa-hands-helping"></i> Fornecedores</a>
-              <a class="collapse-item" href="{% url 'dashboard:products' %}"><i class="fas fa-fw fa-cart-plus"></i> Produtos</a>
-              <a class="collapse-item" href="{% url 'dashboard:orders' %}"><i class="fas fa-cash-register"></i> Vendas</a>
-              <a class="collapse-item" href="{% url 'dashboard:customers' %}"><i class="fas fa-user-check"></i> Clientes</a>
-              <a class="collapse-item" href="{% url 'dashboard:devolutions' %}"><i class="fas fa-sync-alt"></i> Trocas e Devoluções</a>
-            </div>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+            <i class="fas fa-store"></i>
+          <span>Operacional</span>
+        </a>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'dashboard:providers' %}}"><i class="fas fa-fw fa-hands-helping"></i> Fornecedores</a>
+            <a class="collapse-item" href="{% url 'dashboard:products' %}"><i class="fas fa-fw fa-cart-plus"></i> Produtos</a>
+            <a class="collapse-item" href="{% url 'dashboard:orders' %}"><i class="fas fa-cash-register"></i> Vendas</a>
+            <a class="collapse-item" href="{% url 'dashboard:customers' %}"><i class="fas fa-user-check"></i> Clientes</a>
+            <a class="collapse-item" href="{% url 'dashboard:devolutions' %}"><i class="fas fa-sync-alt"></i> Trocas e Devoluções</a>
           </div>
-        </li>
+        </div>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+            <i class="fas fa-fw fa-chart-area"></i>
+          <span>Tráfego</span>
+        </a>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="{% url 'dashboard:traffic' %}"><i class="fas fa-book"></i> Diário</a>
+          </div>
+        </div>
+      </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                <i class="fas fa-fw fa-chart-area"></i>
-              <span>Tráfego</span>
-            </a>
-            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                  <a class="collapse-item" href="{% url 'dashboard:traffic' %}"><i class="fas fa-book"></i> Diário</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="nav-item">
-              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                  <i class="fas fa-comments-dollar"></i>
-                <span>Suporte</span>
-              </a>
-              <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                  <a class="collapse-item" href="{% url 'dashboard:support' %}"><i class="fas fa-clipboard-list"></i> Boletos</a>
-                  <a class="collapse-item" href="{% url 'dashboard:support' %}"><i class="fas fa-cart-arrow-down"></i> Abandonos</a>
-                </div>
-              </div>
-            </li>
-
-      
-
-
-      
-
-     
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+            <i class="fas fa-comments-dollar"></i>
+          <span>Suporte</span>
+        </a>
+        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'dashboard:support' %}"><i class="fas fa-clipboard-list"></i> Boletos</a>
+            <a class="collapse-item" href="{% url 'dashboard:support' %}"><i class="fas fa-cart-arrow-down"></i> Abandonos</a>
+          </div>
+        </div>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
