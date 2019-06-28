@@ -7,6 +7,7 @@ import os
 
 from decouple import config
 from dj_database_url import parse as dburl
+from django.urls import reverse_lazy
 
 from provarme_core.applist import *
 from provarme_core.json_settings import get_settings
@@ -99,37 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 TENANT_MODEL = 'provarme_tenant.Client'
 
-# Arquivos estaticos
-
-
-# Static amazon s3
-
-
-# AWS_ACCESS_KEY_ID = 'AKIAJMGGRT5DDWMHA4VQ'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'provarmecore'
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-# }
-# AWS_LOCATION = 'static'
-#
-#
-#
-# # static files
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-# }
-# AWS_LOCATION = 'static'
-#
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
-# STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -211,3 +181,10 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Integração Intercom
 INTERCOM_APPID = "ai7dmi8v"
+
+
+
+# Configurações para redirect login
+LOGIN_URL = reverse_lazy('tenant:login')
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard:index')
+LOGOUT_REDIRECT_URL = reverse_lazy('tenant:login')

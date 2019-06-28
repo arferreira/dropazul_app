@@ -58,20 +58,20 @@
 
 {% endfor %}
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-6 offset-4">
 <div class="pagination">
         <span class="step-links">
-            {% if orders.has_previous %}
-                <a  class="btn btn-primary" href="?page={{ orders.previous_page_number }}">Anterior</a>
-            {% endif %}
+            
+                <a  class="" {% if not orders.has_previous %} disabled {% else %}  href="?page={{ orders.previous_page_number }}" {% endif %}>Anterior</a>
+            
         
             <span class="current">
                 {{ orders.number }} de {{ orders.paginator.num_pages }}
             </span>
         
-            {% if orders.has_next %}
-                <a class="btn btn-primary" href="?page={{ orders.next_page_number }}">Próxima</a>
-            {% endif %}
+            
+                <a class="" {% if not orders.has_next %} disabled {% else %} href="?page={{ orders.next_page_number }}" {% endif %}>Próxima</a>
+            
         </span>
     </div>
 </div>

@@ -232,9 +232,8 @@ def product_estimate(request, pk):
     setup = Setup.objects.all().first()
     product = Product.objects.get(pk=pk)
 
-    cost_fix = (product.cost * setup.tx_iof/100) + (product.price * setup.tx_shopify/100) + (product.price *
-                                                                                             setup.tx_gateway/100) + (product.price * setup.tx_antecipation/100) + (product.price * setup.tx_tax/100) + product.cost
-    cost_fix = round(cost_fix, 2)
+    cost_fix = product.final_cost
+    
     cost_marketing = round(product.price * product.marketing / 100, 2)
     profit = round(product.price - cost_fix - cost_marketing, 2)
     profit_percent = round(profit / product.price * 100, 2)
