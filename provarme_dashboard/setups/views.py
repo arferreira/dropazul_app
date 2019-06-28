@@ -1,3 +1,6 @@
+import json
+from datetime import datetime, timedelta
+
 from tenant_schemas.utils import schema_exists, schema_context, connection
 
 from django.contrib import messages
@@ -16,40 +19,37 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator, InvalidPage
 
-# python
-from datetime import datetime, timedelta
-
-import json
-
-
 
 from provarme_dashboard.setups.models import Setup
 
 
-
-# Listagem de setup de cada tenant
 class SetupListView(LoginRequiredMixin, ListView):
+
     model = Setup
     context_object_name = 'setups'
     template_name = 'provarme_dashboard/setups/setup_list.html'
 
 
-# Criando um setup
 class SetupCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
     model = Setup
     fields = '__all__'
     template_name = 'provarme_dashboard/setups/setup_form.html'
     success_url = reverse_lazy('dashboard:setups')
     success_message = "Configuração foi criada com sucesso!"
 
+    def get(self, request):
+        setup = self.model.objects.first()
+        if setup:
+            return HttpResponseRedirect(reverse_lazy('dashboard:update_setup', args=[setup.pk]))
 
-# Editando um setup
+        return super(SetupCreateView, self).get(request)
+
+
 class SetupUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+
     model = Setup
     fields = '__all__'
     template_name = 'provarme_dashboard/setups/setup_form.html'
     success_url = reverse_lazy('dashboard:setups')
     success_message = "Configuração foi atualizada com sucesso!"
-
-
-

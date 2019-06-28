@@ -14,7 +14,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Configurações Gerais</h6>
       </div>
       <div class="card-body">
-        <table id="datatable" class="table table-bordered table-striped dataTable">
+        <table class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Taxa de Shopify</th>
@@ -28,7 +28,7 @@
           <tbody>
             {% for setup in setups %}
               <tr>
-                <td><a href="{% url 'dashboard:update_setup' setup.pk %}" class="link-datatable">{{ setup.tx_shopify }}%</a></td>
+                <td>{{ setup.tx_shopify }}%</td>
                 <td>{{ setup.tx_gateway }}%</td>
                 <td>{{ setup.created_at }}</td>
                 <td>{{ setup.updated_at }}</td>
@@ -40,7 +40,9 @@
             {% endfor %}
           </tbody>
         </table>
-        <a href="{% url 'dashboard:new_setup' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
+        {% if not setups %}
+          <a href="{% url 'dashboard:new_setup' %}" class="btn btn-primary m-b-10 m-l-5 pull-right">Criar Nova</a>
+        {% endif %}
       </div>
     </div>
   </div>
