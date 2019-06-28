@@ -2,9 +2,7 @@
 {% load i18n static %}
 {% load widget_tweaks %}
 {% block title %}{% trans '[Drop Azul] -  Nova Categoria' %}{% endblock %}
-{% block breadcrumb %}
-<li class="breadcrumb-item active">Novo Aluno</li>
-{% endblock breadcrumb %}
+
 
 {% block main %}
 
@@ -20,19 +18,16 @@
           {% csrf_token %}
 
           {% include "provarme_dashboard/components/form-error.html" with form=form %}
+
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="">Descrição:</label>
-                {{ form.description|add_class:'form-control' }}
-                <strong style="color:red;">{{ form.errors.name }}</strong>
+                  {% include "provarme_dashboard/components/field.html" with field=form.description %}
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="">Tipo</label>
-                {{ form.type_categories|add_class:'form-control' }}
-                <strong style="color:red;">{{ form.errors.slug }}</strong>
+                {% include "provarme_dashboard/components/field.html" with field=form.type_categories %}
               </div>
             </div>
           </div>
@@ -40,8 +35,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="{{ form.is_active.id_for_label }}">{{ form.is_active }} Ativo</label>
-                <strong style="color:red;">{{ form.errors.link }}</strong>
+                  {% include "provarme_dashboard/components/field.html" with field=form.is_active %}
               </div>
             </div>
 

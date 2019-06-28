@@ -5,6 +5,7 @@ from django.urls import path, include
 from provarme_dashboard.dashboard.views import index_view as dashboard_index
 
 from provarme_dashboard.views import *
+from provarme_dashboard.financial.views import *
 from provarme_dashboard.traffic.views import TrafficListView, TrafficCreateView, TrafficUpdateView
 
 
