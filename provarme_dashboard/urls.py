@@ -81,5 +81,6 @@ urlpatterns = [
     path('devolucoes/', DevolutionsListView.as_view(), name='devolutions'),
 
     # Support
-    path('suporte/', support_index_view, name='support'),
+    path('suporte/boletos/', support_pending_view, name='support_pending'),
+    path('suporte/abandonos/', support_checkout_view, name='support_checkout'),
 ]

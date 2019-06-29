@@ -1,6 +1,8 @@
 from provarme_dashboard.core.manager import Manager as CustomManager
 
 
+
+
 class OrderManager(CustomManager):
 
     def get_or_create_order(self, customer, body):

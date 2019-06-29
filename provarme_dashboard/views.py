@@ -35,7 +35,7 @@ from provarme_dashboard.traffic.models import Traffic
 from provarme_dashboard.order.models import Order
 from provarme_dashboard.products.models import Devolution
 from provarme_dashboard.customer.models import Customer
-
+from provarme_dashboard.checkout.models import Checkout
 
 
 
@@ -83,8 +83,8 @@ def traffic_list(request):
     return render(request, 'provarme_dashboard/traffic/traffic_list.html', context)
 
 
-# View para gerenciar suporte
-def support_index_view(request):
+# View para gerenciar suporte de boletos
+def support_pending_view(request):
     page = request.GET.get('page')
     paginator = Paginator(Order.objects.filter(
         financial_status='pending', updated_at__gte=datetime.now()-timedelta(days=7)), 2)
@@ -99,4 +99,26 @@ def support_index_view(request):
         'orders': orders_last_7_days,
         'total': total,
     }
-    return render(request, 'provarme_dashboard/support/support_index.html', context)
+    return render(request, 'provarme_dashboard/support/support_pending.html', context)
+
+
+
+# View para gerenciar suporte
+def support_checkout_view(request):
+    page = request.GET.get('page')
+    checkouts = Checkout.objects.filter(updated_at__gte=datetime.now()-timedelta(days=7), status=False)
+    paginator = Paginator(checkouts, 2)
+    total = paginator.count
+    try:
+        checkouts_last_7_days = paginator.page(page)
+    except InvalidPage:
+        checkouts_last_7_days = paginator.page(1)
+
+    total_line_items_price = 0
+    
+    context = {
+        'checkouts': checkouts_last_7_days,
+        'total': total,
+    }
+
+    return render(request, 'provarme_dashboard/support/support_checkout.html', context)

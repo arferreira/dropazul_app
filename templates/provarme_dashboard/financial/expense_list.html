@@ -19,6 +19,7 @@
             <tr>
               <th>Nome</th>
               <th>Vencimento</th>
+              <th>Valor</th>
               <th>Situação</th>
               <th>Ações</th>
             </tr>
@@ -34,6 +35,7 @@
                   {% endif %}
                 </td>
                 <td>{{ expense.maturity }}</td>
+                <td>R$ {{ expense.total }}</td>
                 <td class="font-weight-bold text-{{ expense.settle|text_color }}">{{ expense.get_settle_display }}</td>
                 <td>
                   {% if update_input %}

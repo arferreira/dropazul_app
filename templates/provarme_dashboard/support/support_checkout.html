@@ -1,0 +1,77 @@
+{% extends "provarme_dashboard/base_dashboard.html" %}
+{% load i18n static %}
+{% block title %}{% trans '[Drop Azul] -  Abandonos de Carrinho' %}{% endblock %}
+
+
+{% block main %}
+
+<h1 class="h3 mb-2 text-gray-800">Checkout Abandonado</h1>
+<p class="mb-4">
+    Aqui você terá acesso aos cards de checkout que foram abandonados, você pode enviar mensagens para o whatsapp do cliente, 
+    utilizando de uma sequência de gatilhos que vão facilitar a sua conversão.
+</p>
+<!--<h1 class="h3 mb-2 text-gray-800">{{ total }} Pedidos para atendimento</h1>-->
+{% for checkout in checkouts %}
+
+<div class="col-lg-12">
+
+    <!-- Dropdown Card Boletos pendentes -->
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Cliente: {{ checkout.body.closed_at  }}
+                {{ checkout.customer.last_name|title  }}</h6>
+            <h6 class="m-0 font-weight-bold text-primary pull-right">Total: R$ {{ checkout.body.total_line_items_price }}</h6>
+            <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                    aria-labelledby="dropdownMenuLink" x-placement="bottom-end"
+                    style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(17px, 19px, 0px);">
+                    <div class="dropdown-header">Operações:</div>
+                    <a class="dropdown-item" href="https://api.whatsapp.com/send?phone={{ checkout.customer.address.first.clean_phone }}&text=Oi%20{{ checkout.customer.first_name }}%2C%20tudo%20bem%3F" target="_blank">Enviar Whatsapp</a>
+                    <a class="dropdown-item" href="{{ checkout.checkout_url }}">URL de checkout</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Abrir Boleto Bancário</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>De: {{ checkout.created_at }}</p>
+                    <p>Atualizado em: {{ checkout.updated_at }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Token: #{{ checkout.token }}</p>
+                    <p>Email: {{ checkout.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+<div class="row">
+<div class="col-md-6 offset-4">
+<div class="pagination">
+        <span class="step-links">
+            
+                <a  class="" {% if not checkouts.has_previous %} disabled {% else %}  href="?page={{ checkouts.previous_page_number }}" {% endif %}>Anterior</a>
+            
+        
+            <span class="current">
+                {{ checkouts.number }} de {{ checkouts.paginator.num_pages }}
+            </span>
+        
+            
+                <a class="" {% if not checkouts.has_next %} disabled {% else %} href="?page={{ checkouts.next_page_number }}" {% endif %}>Próxima</a>
+            
+        </span>
+    </div>
+</div>
+</div>
+{% endblock main %}
