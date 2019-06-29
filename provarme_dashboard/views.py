@@ -106,7 +106,7 @@ def support_pending_view(request):
 # View para gerenciar suporte
 def support_checkout_view(request):
     page = request.GET.get('page')
-    checkouts = Checkout.objects.filter(updated_at__gte=datetime.now()-timedelta(days=7), status=False)
+    checkouts = Checkout.objects.filter(updated_at__gte=datetime.now()-timedelta(days=7), status=False, customer__isnull=False)
     paginator = Paginator(checkouts, 2)
     total = paginator.count
     try:
